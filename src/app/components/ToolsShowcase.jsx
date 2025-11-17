@@ -38,8 +38,8 @@ export default function ToolsShowcase() {
             </div>
           </motion.div>
 
-          <div className="w-full lg:w-1/2 mt-4 sm:mt-6 lg:mt-0">
-            <div className="h-[500px] sm:h-[550px] md:h-[600px] relative w-full">
+          <div className="w-full lg:w-1/2 -mt-72 sm:mt-6 lg:mt-0 -ml-16 sm:ml-0 lg:ml-0">
+            <div className="h-[600px] sm:h-[550px] md:h-[600px] relative w-full">
           <CardSwap cardDistance={60} verticalDistance={70} delay={5000} pauseOnHover={false}>
             <Card className="scale-[1.15] sm:scale-105 lg:scale-110">
               <div className="w-full h-full p-6 sm:p-8 md:p-10 bg-gradient-to-br from-white/[0.02] to-white/[0.06] border border-white/10 rounded-xl flex flex-col justify-between">
