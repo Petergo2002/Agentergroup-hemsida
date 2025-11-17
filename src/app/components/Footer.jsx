@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin } from 'lucide-react'
+import { Mail, MapPin } from 'lucide-react'
 
 export default function Footer() {
   return (
@@ -6,13 +6,16 @@ export default function Footer() {
       <div className="container grid md:grid-cols-3 gap-10 items-start">
         <div>
           <a href="#hero" className="flex items-center gap-2 font-extrabold tracking-tight">
-            <div className="h-8 w-8 rounded-md bg-brand-600 grid place-items-center shadow-soft">
-              <span className="text-white text-sm">BF</span>
+            <div className="h-12 w-12 md:h-14 md:w-14 rounded-lg bg-white border-2 border-white/80 p-1.5 shadow">
+              <img 
+                src="/favicon/favicon-192x192%202.png" 
+                alt="Agenter Group Favicon" 
+                className="h-full w-full object-contain"
+              />
             </div>
-            <span className="text-white/90">Bygg<span className="text-white/70 hover:text-brand-400 transition-colors">Futur</span></span>
           </a>
           <p className="mt-4 text-white/70 max-w-sm">
-            Vi skapar hållbara och vackra byggprojekt – från idé till färdigt resultat.
+            Vi hjälper er att aldrig missa ett samtal. Vår AI‑receptionist bokar möten, svarar på frågor och tar emot kunder 24/7.
           </p>
         </div>
 
@@ -20,37 +23,33 @@ export default function Footer() {
           <div>
             <div className="text-white/80 font-semibold">Navigation</div>
             <ul className="mt-3 space-y-2 text-white/70">
-              <li><a href="#tjanster" className="hover:text-white">Tjänster</a></li>
+              <li><a href="#funktioner" className="hover:text-white">Funktioner</a></li>
               <li><a href="#omoss" className="hover:text-white">Om oss</a></li>
-              <li><a href="#omdomen" className="hover:text-white">Omdömen</a></li>
-              <li><a href="/#offert" className="hover:text-white">Begär offert</a></li>
+              <li><a href="#faq" className="hover:text-white">FAQ</a></li>
+              <li><a href="#process" className="hover:text-white">Process</a></li>
+              <li><a href="/#demo" className="hover:text-white">Boka demo</a></li>
+              <li><a href="/hemsidor" className="hover:text-white">Hemsidor</a></li>
               <li><a href="/blogg" className="hover:text-white">Blogg</a></li>
             </ul>
           </div>
           <div>
             <div className="text-white/80 font-semibold">Kontakt</div>
             <ul className="mt-3 space-y-2 text-white/70">
-              <li className="flex gap-2 items-center"><Phone size={16}/> 012-345 67 89</li>
-              <li className="flex gap-2 items-center"><Mail size={16}/> offert@byggfutur.se</li>
-              <li className="flex gap-2 items-center"><MapPin size={16}/> Stockholm, Sverige</li>
+              <li className="flex gap-2 items-center"><Mail size={16}/> info@agentergroup.com</li>
+              <li className="flex gap-2 items-center"><MapPin size={16}/> Borås, Sverige</li>
             </ul>
           </div>
         </div>
 
         <div className="glass rounded-2xl p-6">
-          <div className="font-semibold">Redo att börja?</div>
-          <p className="mt-2 text-white/70">Skicka en offertförfrågan så hör vi av oss inom 24 timmar.</p>
-          <a href="/#offert" className="btn btn-primary mt-4">Begär offert</a>
+          <div className="font-semibold">Redo att se en demo?</div>
+          <p className="mt-2 text-white/70">Boka en kostnadsfri demo – vi visar hur AI‑receptionisten fungerar för er.</p>
+          <a href="/#demo" className="btn btn-primary mt-4">Boka demo</a>
         </div>
       </div>
 
-      <div className="container mt-12 pt-6 border-t border-white/10 text-sm text-white/50 flex flex-col md:flex-row items-center justify-between gap-4">
-        <div>© {new Date().getFullYear()} ByggFutur AB. Alla rättigheter reserverade.</div>
-        <div className="space-x-4">
-          <a href="#" className="hover:text-white">Integritet</a>
-          <a href="#" className="hover:text-white">Cookies</a>
-          <a href="#" className="hover:text-white">Villkor</a>
-        </div>
+      <div className="container mt-12 pt-6 border-t border-white/10 text-sm text-white/50">
+        <div>© {new Date().getFullYear()} Agenter Group. Alla rättigheter reserverade.</div>
       </div>
     </footer>
   )

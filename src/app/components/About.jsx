@@ -1,7 +1,6 @@
 'use client'
-import React from 'react'
 import { motion } from 'framer-motion'
-import { Hammer, Users, Award, Home } from 'lucide-react'
+import { Cpu, Shield, Settings2, Home } from 'lucide-react'
 
 export default function About() {
   return (
@@ -15,7 +14,7 @@ export default function About() {
       <div className="container px-4 mx-auto relative">
         <div className="text-center mb-16">
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium bg-brand-500/10 text-brand-300 mb-4">
-            VÅRT UPPDRAG
+            OM AGENTER GROUP
           </span>
           <motion.h2 
             className="font-display text-5xl md:text-7xl lg:text-8xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70 mb-6"
@@ -24,7 +23,8 @@ export default function About() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            Bygga drömmar,\n            <span className="block text-brand-400">skapa verklighet</span>
+            AI‑receptionist för modern
+            <span className="block text-brand-400">kundservice</span>
           </motion.h2>
           
           <motion.p 
@@ -34,7 +34,7 @@ export default function About() {
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Sedan 2010 har vi förverkligat tusentals byggprojekt med passion, expertis och en outsinlig strävan efter perfektion.
+            Vi hjälper företag att aldrig missa ett samtal. Med AI, säkerhet och användarvänlighet i fokus automatiserar vi mötesbokning, FAQ och kunddialog – dygnet runt.
           </motion.p>
         </div>
 
@@ -48,10 +48,10 @@ export default function About() {
             transition={{ duration: 0.5 }}
           >
             <div className="w-14 h-14 rounded-xl bg-brand-500/10 flex items-center justify-center mb-6 text-brand-400">
-              <Hammer className="w-6 h-6" />
+              <Cpu className="w-6 h-6" />
             </div>
-            <h3 className="text-2xl font-bold mb-3">Expertis</h3>
-            <p className="text-white/70">Certifierade hantverkare med gedigen erfarenhet och ständig kompetensutveckling.</p>
+            <h3 className="text-2xl font-bold mb-3">AI & automation</h3>
+            <p className="text-white/70">Intelligenta flöden för mötesbokning, FAQ och ärendehantering – utan väntetid.</p>
           </motion.div>
 
           <motion.div 
@@ -63,10 +63,10 @@ export default function About() {
             transition={{ duration: 0.5, delay: 0.1 }}
           >
             <div className="w-14 h-14 rounded-xl bg-brand-500/10 flex items-center justify-center mb-6 text-brand-400">
-              <Users className="w-6 h-6" />
+              <Shield className="w-6 h-6" />
             </div>
-            <h3 className="text-2xl font-bold mb-3">Kundfokus</h3>
-            <p className="text-white/70">Din vision är vår utgångspunkt. Vi lyssnar, rådgör och levererar utefter dina önskemål.</p>
+            <h3 className="text-2xl font-bold mb-3">Säkerhet i fokus</h3>
+            <p className="text-white/70">End‑to‑end‑kryptering, behörighetsstyrning och integritet som standard.</p>
           </motion.div>
 
           <motion.div 
@@ -78,10 +78,10 @@ export default function About() {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <div className="w-14 h-14 rounded-xl bg-brand-500/10 flex items-center justify-center mb-6 text-brand-400">
-              <Award className="w-6 h-6" />
+              <Settings2 className="w-6 h-6" />
             </div>
-            <h3 className="text-2xl font-bold mb-3">Kvalitet</h3>
-            <p className="text-white/70">Endast bästa material och arbetsmetoder för hållbara och vackra resultat.</p>
+            <h3 className="text-2xl font-bold mb-3">Anpassade lösningar</h3>
+            <p className="text-white/70">Vi skräddarsyr flöden, tonläge och regler efter er verksamhet.</p>
           </motion.div>
         </div>
 
@@ -101,17 +101,17 @@ export default function About() {
               <h3 className="text-2xl font-bold">Vår vision</h3>
             </div>
             <p className="text-2xl md:text-3xl font-medium leading-relaxed max-w-4xl">
-              Att vara den självklara byggpartnern som genom innovation, hållbarhet och hög kvalitet skapar mervärde för våra kunder och samhället.
+              Att inget kundsamtal ska gå förlorat – med en säker och professionell AI‑receptionist som arbetar 24/7.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <div className="bg-white/5 px-4 py-2 rounded-full text-sm">
-                <span className="text-brand-300 font-medium">15+</span> års erfarenhet
+                <span className="text-brand-300 font-medium">24/7</span> drift
               </div>
               <div className="bg-white/5 px-4 py-2 rounded-full text-sm">
-                <span className="text-brand-300 font-medium">500+</span> nöjda kunder
+                <span className="text-brand-300 font-medium">Säker</span> datahantering
               </div>
               <div className="bg-white/5 px-4 py-2 rounded-full text-sm">
-                <span className="text-brand-300 font-medium">100%</span> garanti
+                <span className="text-brand-300 font-medium">Snabb</span> implementering
               </div>
             </div>
           </div>

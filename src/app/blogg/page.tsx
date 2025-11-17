@@ -2,22 +2,22 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Blogg – ByggFutur',
+  title: 'Blogg – Agenter Group',
   description:
-    'Inspiration, guider och nyheter inom bygg. Läs vår blogg och lär dig mer om renovering, nyproduktion och smarta bygglösningar.',
+    'Guider och insikter om AI‑receptionister, automatisering, kundservice, säkerhet och implementering. Lär dig hur ni bokar fler möten och ger bättre service – dygnet runt.',
   keywords: [
-    'bygg blogg',
-    'renovering tips',
-    'energieffektiv renovering',
-    'byggföretag Stockholm',
-    'ROT-avdrag 2025',
-    'solceller värmepump',
+    'AI receptionist',
+    'AI kundservice',
+    'mötesbokning automatisk',
+    'GDPR AI',
+    'säker datahantering',
+    'Agenter Group',
   ],
   alternates: { canonical: '/blogg' },
   openGraph: {
-    title: 'Blogg – ByggFutur',
+    title: 'Blogg – Agenter Group',
     description:
-      'Inspiration, guider och nyheter inom bygg. Läs vår blogg och lär dig mer om renovering, nyproduktion och smarta bygglösningar.',
+      'Guider och insikter om AI‑receptionister, automatisering, kundservice, säkerhet och implementering.',
     url: '/blogg',
     type: 'website'
   }
@@ -45,13 +45,13 @@ export default function BlogIndexPage() {
             Blogg
           </h1>
           <p className="mt-4 text-white/80 max-w-2xl">
-            Praktiska guider och tips för dig som vill renovera smart, energieffektivt och hållbart. Utforska{' '}
-            <Link href="/#tjanster" className="underline decoration-white/30 hover:decoration-white">våra tjänster</Link>{' '}
-            och lär dig hur du kan sänka energikostnaderna och höja värdet på din fastighet i Stockholm med rätt åtgärder.
+            Praktiska guider för dig som vill förbättra kundservice och bokningar med AI. Utforska{' '}
+            <Link href="/#funktioner" className="underline decoration-white/30 hover:decoration-white">våra funktioner</Link>{' '}
+            och lär dig hur en AI‑receptionist kan avlasta teamet, boka fler möten och höja kundnöjdheten.
           </p>
           <div className="mt-6 flex gap-3">
             <Link href="/" className="btn btn-secondary">Hem</Link>
-            <Link href="/#offert" className="btn btn-primary">Begär offert</Link>
+            <Link href="/#demo" className="btn btn-primary">Boka demo</Link>
           </div>
         </div>
       </section>
@@ -59,23 +59,43 @@ export default function BlogIndexPage() {
       {/* Posts list */}
       <section className="section">
         <div className="container grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* New article - Missing calls */}
+          <article className="group glass rounded-2xl p-6 hover:bg-white/15 transition-colors border border-white/10">
+            <div className="flex items-center gap-2 text-xs text-brand-300">
+              <span className="px-2 py-1 rounded-full bg-brand-500/10">Insikt</span>
+              <span className="text-white/50">21 jan 2025</span>
+            </div>
+            <h2 className="mt-3 text-xl font-semibold group-hover:text-white">
+              <Link href="/blogg/varfor-foretag-missar-samtal">
+                Varför Företag Missar 34% av Jobbmöjligheter
+              </Link>
+            </h2>
+            <p className="mt-2 text-white/70">
+              Upptäck varför missade samtal kostar företag enorma summor och hur AI-receptionister kan lösa problemet.
+            </p>
+            <div className="mt-4">
+              <Link href="/blogg/varfor-foretag-missar-samtal" className="btn btn-secondary">
+                Läs artikeln
+              </Link>
+            </div>
+          </article>
+
           {/* First article card */}
           <article className="group glass rounded-2xl p-6 hover:bg-white/15 transition-colors border border-white/10">
             <div className="flex items-center gap-2 text-xs text-brand-300">
               <span className="px-2 py-1 rounded-full bg-brand-500/10">Guide</span>
-              <span className="text-white/50">31 aug 2025</span>
+              <span className="text-white/50">3 sep 2025</span>
             </div>
             <h2 className="mt-3 text-xl font-semibold group-hover:text-white">
-              <Link href="/blogg/energieffektiv-renovering-2025-komplett-guide">
-                Energieffektiv renovering 2025 – komplett guide
+              <Link href="/blogg/ai-receptionist-2025-komplett-guide">
+                AI‑receptionist 2025 – komplett guide
               </Link>
             </h2>
             <p className="mt-2 text-white/70">
-              Lär dig hur du sänker energikostnaderna med rätt åtgärder: isolering, fönster, värmepump,
-              solceller och smart styrning – samt vilka bidrag som gäller 2025.
+              Allt du behöver för att komma igång: implementation, systemkopplingar, säkerhet, GDPR och hur du mäter effekt.
             </p>
             <div className="mt-4">
-              <Link href="/blogg/energieffektiv-renovering-2025-komplett-guide" className="btn btn-secondary">
+              <Link href="/blogg/ai-receptionist-2025-komplett-guide" className="btn btn-secondary">
                 Läs artikeln
               </Link>
             </div>

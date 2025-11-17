@@ -1,152 +1,91 @@
 'use client'
 import { motion } from 'framer-motion'
-import { useEffect, useRef } from 'react'
+import Threads from './Threads'
 
 export default function Hero() {
-  const videoRef = useRef(null)
-
-  useEffect(() => {
-    const v = videoRef.current
-    if (!v) return
-
-    const onLoaded = () => {
-      try {
-        // Skip initial black frame and try to play
-        if (v.currentTime < 0.1) v.currentTime = 0.1
-        const p = v.play()
-        if (p && typeof p.then === 'function') {
-          p.catch(() => {/* ignore */})
-        }
-      } catch {}
+  
+  const handleDemoClick = () => {
+    console.log('Demo button clicked!')
+    const element = document.querySelector('#demo')
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
-
-    v.addEventListener('loadedmetadata', onLoaded)
-    return () => v.removeEventListener('loadedmetadata', onLoaded)
-  }, [])
-
+  }
+  
   return (
-    <section id="hero" className="relative min-h-[100svh] w-full overflow-hidden">
-      {/* Video background */}
-      <div className="absolute inset-0 z-0">
-        <video
-          ref={videoRef}
-          className="w-full h-full object-cover pointer-events-none"
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="metadata"
-          disablePictureInPicture
-          controlsList="nodownload noplaybackrate noremoteplayback nofullscreen"
-          style={{ 
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover'
-          }}
-        >
-          <source src="/video/videohero1.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+    <section id="hero" className="relative min-h-[100svh] w-full overflow-hidden bg-[#030303]">
+      <div className="absolute inset-0 z-0" aria-hidden="true">
+        <Threads
+          amplitude={1.15}
+          distance={0.45}
+          enableMouseInteraction={true}
+          color={[0.992, 0.427, 0.294]}
+          className="h-full w-full"
+        />
       </div>
-      {/* Subtle overlays */}
-      <div className="absolute inset-0 pointer-events-none z-10 bg-gradient-to-b from-slate-900/10 via-slate-900/30 to-slate-950/60" />
+
+      <div className="absolute inset-0 z-10 bg-gradient-to-br from-black/70 via-black/40 to-[#FD6D4B]/20 pointer-events-none" />
       <div
-        className="absolute inset-0 pointer-events-none opacity-10 z-10"
+        className="absolute inset-0 pointer-events-none z-10"
         style={{
-          backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px)',
+          backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px)',
           backgroundSize: '24px 24px'
         }}
       />
+      <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/60 via-transparent to-black/50 pointer-events-none" />
 
-      <div className="relative z-20 container h-[calc(100vh-80px)] md:h-[calc(100vh-100px)] flex items-center pt-24 md:pt-32 px-4 text-white">
+      <div className="relative z-20 container min-h-[calc(100vh-80px)] flex flex-col justify-center px-4 text-white pb-20 sm:pb-24">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="w-full text-center md:text-left"
-        >
+          className="w-full text-center max-w-3xl mx-auto pt-36 sm:pt-40 md:pt-32"
+          >
           <motion.span 
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium bg-brand-500/10 text-brand-300 mb-4 mt-8"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium bg-brand-500/10 text-brand-300 mb-6"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
-            BYGGNADSFÖRETAG I VÄRLDSKLASS
+            Aldrig missa ett samtal
           </motion.span>
           
           <motion.h1 
-            className="font-display text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-bold leading-[1.04] tracking-tight"
+            className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-8xl font-bold leading-tight sm:leading-[1.04] tracking-tight"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
           >
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70">
-              Vi bygger
+              Möt er nya
             </span>
-            <span className="block text-brand-400 mt-2">din framtid</span>
+            <span className="block text-brand-400 mt-2">AI‑receptionist</span>
           </motion.h1>
           
-          <motion.p 
-            className="mt-6 text-xl text-white/80 max-w-2xl mx-auto md:mx-0"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-          >
-            Från renovering till nyproduktion – vi levererar kvalitet, precision och trygghet i varje projekt.
-          </motion.p>
           
           <motion.div 
-            className="mt-12 flex flex-wrap justify-center md:justify-start gap-4"
+            className="mt-16 sm:mt-12 md:mt-12 flex flex-wrap justify-center gap-4 sm:gap-5 pt-5 sm:pt-6 md:pt-0"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
           >
-            <a 
-              href="#tjanster" 
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-brand-500 hover:bg-brand-600 text-white font-medium text-lg transition-colors shadow-lg shadow-brand-500/20 hover:shadow-brand-500/30"
+            <button 
+              onClick={handleDemoClick}
+              className="inline-flex items-center gap-2 px-8 sm:px-9 py-4 sm:py-4.5 rounded-full bg-gradient-to-r from-[#FD6D4B] to-[#FF6E00] hover:from-[#ff7b62] hover:to-[#ff8a1a] text-white font-semibold text-lg sm:text-xl transition-colors shadow-lg shadow-[rgba(253,109,75,0.3)] hover:shadow-[rgba(253,109,75,0.45)]"
             >
-              Våra tjänster
-            </a>
+              Boka demo
+            </button>
             <a 
-              href="/#offert" 
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white/10 hover:bg-white/20 text-white font-medium text-lg backdrop-blur-sm transition-colors"
+              href="#funktioner" 
+              className="inline-flex items-center gap-2 px-8 sm:px-9 py-4 sm:py-4.5 rounded-full bg-white/10 hover:bg-white/20 text-white font-semibold text-lg sm:text-xl backdrop-blur-sm transition-colors"
             >
-              Begär offert
+              Se funktioner
             </a>
           </motion.div>
 
-          {/* Stats */}
-          <motion.div 
-            className="mt-16 flex flex-wrap justify-center md:justify-start gap-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
-          >
-            {[
-              { number: "500+", label: "projekt" },
-              { number: "15+", label: "års erfarenhet" },
-              { number: "100%", label: "nöjda kunder" },
-              { number: "5-års", label: "garanti" }
-            ].map((stat, index) => (
-              <div 
-                key={index}
-                className="text-center p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/[0.07] transition-colors group"
-              >
-                <div className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-brand-300 to-brand-500 group-hover:from-brand-200 group-hover:to-brand-400 transition-colors">
-                  {stat.number}
-                </div>
-                <div className="text-sm text-white/70 mt-1">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
-          </motion.div>
+          {/* Stats moved to separate component and placed elsewhere */}
         </motion.div>
       </div>
-
     </section>
   )
 }

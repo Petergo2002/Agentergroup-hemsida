@@ -47,7 +47,7 @@ export const TracingBeam = ({ children, className }) => {
         >
           <motion.div
             transition={{ duration: 0.2, delay: 0.5 }}
-            animate={{ backgroundColor: scrollYProgress.get() > 0 ? 'white' : '#10b981', borderColor: scrollYProgress.get() > 0 ? 'white' : '#059669' }}
+            animate={{ backgroundColor: scrollYProgress.get() > 0 ? 'white' : '#FD6D4B', borderColor: scrollYProgress.get() > 0 ? 'white' : '#FF8A6C' }}
             className="h-2 w-2 rounded-full border border-neutral-300 bg-white"
           />
         </motion.div>
@@ -69,10 +69,10 @@ export const TracingBeam = ({ children, className }) => {
           />
           <defs>
             <motion.linearGradient id="gradient" gradientUnits="userSpaceOnUse" x1="0" x2="0" y1={y1} y2={y2}>
-              <stop stopColor="#1BA758" stopOpacity="0" />
-              <stop stopColor="#1BA758" />
-              <stop offset="0.35" stopColor="#15834B" />
-              <stop offset="1" stopColor="#15834B" stopOpacity="0" />
+              <stop stopColor="#FD6D4B" stopOpacity="0" />
+              <stop stopColor="#FD6D4B" />
+              <stop offset="0.35" stopColor="#FF8A6C" />
+              <stop offset="1" stopColor="#FF8A6C" stopOpacity="0" />
             </motion.linearGradient>
           </defs>
         </svg>

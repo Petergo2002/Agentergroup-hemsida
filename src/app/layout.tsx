@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
+import StructuredData from "./components/StructuredData";
+
+const brandFavicon = '/favicon/favicon-192x192%202.png';
 
 const inter = Inter({
   variable: "--font-inter",
@@ -15,30 +18,66 @@ const poppins = Poppins({
   display: "swap",
 });
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
+
 export const metadata: Metadata = {
   title: {
-    default: 'ByggFutur – Byggföretag i Stockholm',
-    template: '%s | ByggFutur',
+    default: 'AI-Receptionist Sverige | Missa Aldrig Ett Samtal | Agenter Group',
+    template: '%s | Agenter Group',
+  },
+  icons: {
+    icon: brandFavicon,
+    apple: brandFavicon,
   },
   description:
-    'ByggFutur hjälper dig med renovering, nyproduktion och energieffektiva lösningar i Stockholm. Fast pris, certifierade hantverkare och hög kvalitet.',
+    'AI-receptionist som aldrig missar ett samtal. Intelligenta AI-agenter för automatisk telefonhantering, mötesbokning 24/7 och kundservice. Perfekt för företag som vill öka tillgängligheten och aldrig missa viktiga samtal.',
   keywords: [
-    'byggföretag Stockholm',
-    'renovering',
-    'nyproduktion',
-    'energieffektiv renovering',
-    'hantverkare',
-    'ROT-avdrag',
+    'AI-receptionist',
+    'AI-receptionist Sverige',
+    'AI agenter',
+    'missa aldrig ett samtal',
+    'aldrig missa samtal',
+    'automatisk telefonhantering',
+    'AI telefonist',
+    'virtuell receptionist',
+    'intelligent receptionist',
+    'mötesbokning AI',
+    'kundservice 24/7',
+    'företagsautomation',
+    'AI-assistent företag',
+    'automatisk kundservice',
+    'AI samtalshantering',
+    'digital receptionist',
+    'smart telefonhantering',
   ],
   alternates: { canonical: '/' },
   openGraph: {
-    title: 'ByggFutur – Byggföretag i Stockholm',
+    title: 'AI-Receptionist Sverige | Missa Aldrig Ett Samtal | Agenter Group',
     description:
-      'ByggFutur hjälper dig med renovering, nyproduktion och energieffektiva lösningar i Stockholm. Fast pris, certifierade hantverkare och hög kvalitet.',
+      'AI-receptionist som aldrig missar ett samtal. Intelligenta AI-agenter för automatisk telefonhantering, mötesbokning 24/7 och kundservice. Perfekt för företag som vill öka tillgängligheten.',
     url: '/',
-    siteName: 'ByggFutur',
+    siteName: 'Agenter Group',
     locale: 'sv_SE',
     type: 'website',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    google: 'your-google-verification-code', // Replace with actual verification code
   },
 };
 
@@ -48,7 +87,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="sv" className="scroll-smooth" suppressHydrationWarning>
+    <html lang="sv" className="scroll-smooth" data-scroll-behavior="smooth" suppressHydrationWarning>
+      <head>
+        <StructuredData />
+      </head>
       <body className={`${inter.variable} ${poppins.variable} antialiased font-sans`} suppressHydrationWarning>
         {children}
       </body>
