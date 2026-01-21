@@ -9,7 +9,6 @@ import FAQ from './components/FAQ'
 import Process from './components/Process'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
-import VapiWidget from './components/VapiWidget'
 
 export default function Home() {
   return (
@@ -43,7 +42,6 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
-      <VapiWidget />
     </div>
   )
 }

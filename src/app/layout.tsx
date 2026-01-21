@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import StructuredData from "./components/StructuredData";
+import Script from "next/script";
 
 const brandFavicon = '/favicon/favicon-192x192%202.png';
 
@@ -93,6 +94,11 @@ export default function RootLayout({
       </head>
       <body className={`${inter.variable} ${poppins.variable} antialiased font-sans`} suppressHydrationWarning>
         {children}
+        <Script
+          src="https://widget.agentergroup.com/loader.js"
+          data-id="d94aefb4-c203-4391-a673-3392e3a285fe"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );

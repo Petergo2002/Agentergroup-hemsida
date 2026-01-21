@@ -51,7 +51,7 @@ const features = [
 export default function Services() {
   const [isOpen, setIsOpen] = useState(false)
   const [activeFeature, setActiveFeature] = useState(null)
-  
+
   // Close modal on scroll when open (mobile-friendly behavior)
   useEffect(() => {
     if (!isOpen) return
@@ -76,7 +76,7 @@ export default function Services() {
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium bg-brand-500/10 text-brand-300 mb-4">
             VÅRA NYCKELFUNKTIONER
           </span>
-          <motion.h2 
+          <motion.h2
             className="font-display text-5xl md:text-7xl lg:text-8xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70 mb-6"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -86,8 +86,8 @@ export default function Services() {
             Kraftfulla funktioner för
             <span className="block text-brand-400">modern kundservice</span>
           </motion.h2>
-          
-          <motion.p 
+
+          <motion.p
             className="text-xl text-white/80 max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -97,13 +97,13 @@ export default function Services() {
             Upptäck hur vår AI-receptionist revolutionerar er kundservice med intelligenta lösningar som arbetar dygnet runt.
           </motion.p>
         </div>
-        
+
         {/* Features Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {features.map((feature, index) => {
             const Icon = feature.icon
             return (
-              <motion.div 
+              <motion.div
                 key={index}
                 className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:bg-white/[0.07] transition-colors duration-300 group"
                 initial={{ opacity: 0, y: 30 }}
@@ -136,7 +136,7 @@ export default function Services() {
         </div>
 
         {/* Call to Action */}
-        <motion.div 
+        <motion.div
           className="mt-20 bg-gradient-to-r from-brand-500/10 to-brand-500/5 rounded-2xl p-8 md:p-12 relative overflow-hidden text-center"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -152,18 +152,9 @@ export default function Services() {
               Testa vår demo för att se hur vår AI-assistent låter.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <button 
-                onClick={() => {
-                  // Trigger the Vapi widget
-                  const event = new CustomEvent('openVapiWidget')
-                  window.dispatchEvent(event)
-                }}
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-[#FD6D4B] to-[#FF6E00] hover:from-[#ff7b62] hover:to-[#ff8a1a] text-white font-medium text-lg transition-colors shadow-lg shadow-[rgba(253,109,75,0.3)] hover:shadow-[rgba(253,109,75,0.45)]"
-              >
-                Testa
-              </button>
-              <a 
-                href="#demo" 
+
+              <a
+                href="#demo"
                 className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white/10 hover:bg-white/20 text-white font-medium text-lg backdrop-blur-sm transition-colors"
               >
                 Kontakta oss
