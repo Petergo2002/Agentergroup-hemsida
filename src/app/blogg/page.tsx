@@ -59,7 +59,91 @@ export default function BlogIndexPage() {
       {/* Posts list */}
       <section className="section">
         <div className="container grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {/* New article - Missing calls */}
+          {/* Article: Hemsida med AI-integration */}
+          <article className="group glass rounded-2xl p-6 hover:bg-white/15 transition-colors border border-white/10">
+            <div className="flex items-center gap-2 text-xs text-brand-300">
+              <span className="px-2 py-1 rounded-full bg-brand-500/10">Trend</span>
+              <span className="text-white/50">22 jan 2025</span>
+            </div>
+            <h2 className="mt-3 text-xl font-semibold group-hover:text-white">
+              <Link href="/blogg/hemsida-med-ai-integration">
+                Hemsida med AI-integration: Framtidens kundservice
+              </Link>
+            </h2>
+            <p className="mt-2 text-white/70">
+              Din hemsida är ditt digitala skyltfönster. Lär dig hur du förvandlar den till en säljande assistent med AI.
+            </p>
+            <div className="mt-4">
+              <Link href="/blogg/hemsida-med-ai-integration" className="btn btn-secondary">
+                Läs artikeln
+              </Link>
+            </div>
+          </article>
+
+          {/* Article: Mötesbokning 24/7 */}
+          <article className="group glass rounded-2xl p-6 hover:bg-white/15 transition-colors border border-white/10">
+            <div className="flex items-center gap-2 text-xs text-brand-300">
+              <span className="px-2 py-1 rounded-full bg-brand-500/10">Guide</span>
+              <span className="text-white/50">22 jan 2025</span>
+            </div>
+            <h2 className="mt-3 text-xl font-semibold group-hover:text-white">
+              <Link href="/blogg/motesbokning-24-7-guide-till-ai-driven-schemalaggning">
+                Mötesbokning 24/7: Guide till AI-driven schemaläggning
+              </Link>
+            </h2>
+            <p className="mt-2 text-white/70">
+              Låt kunderna boka möten när det passar dem. En guide till automatisk schemaläggning.
+            </p>
+            <div className="mt-4">
+              <Link href="/blogg/motesbokning-24-7-guide-till-ai-driven-schemalaggning" className="btn btn-secondary">
+                Läs artikeln
+              </Link>
+            </div>
+          </article>
+
+          {/* Article: Så automatiserar du telefonhantering */}
+          <article className="group glass rounded-2xl p-6 hover:bg-white/15 transition-colors border border-white/10">
+            <div className="flex items-center gap-2 text-xs text-brand-300">
+              <span className="px-2 py-1 rounded-full bg-brand-500/10">Guide</span>
+              <span className="text-white/50">22 jan 2025</span>
+            </div>
+            <h2 className="mt-3 text-xl font-semibold group-hover:text-white">
+              <Link href="/blogg/sa-automatiserar-du-telefonhantering-med-ai-agenter">
+                Så automatiserar du telefonhantering med AI-agenter
+              </Link>
+            </h2>
+            <p className="mt-2 text-white/70">
+              Steg för steg-guide: Från val av lösning till implementation och optimering.
+            </p>
+            <div className="mt-4">
+              <Link href="/blogg/sa-automatiserar-du-telefonhantering-med-ai-agenter" className="btn btn-secondary">
+                Läs artikeln
+              </Link>
+            </div>
+          </article>
+
+          {/* Article: AI vs Traditionell */}
+          <article className="group glass rounded-2xl p-6 hover:bg-white/15 transition-colors border border-white/10">
+            <div className="flex items-center gap-2 text-xs text-brand-300">
+              <span className="px-2 py-1 rounded-full bg-brand-500/10">Jämförelse</span>
+              <span className="text-white/50">22 jan 2025</span>
+            </div>
+            <h2 className="mt-3 text-xl font-semibold group-hover:text-white">
+              <Link href="/blogg/ai-receptionist-vs-traditionell-receptionist">
+                AI-receptionist vs Traditionell receptionist
+              </Link>
+            </h2>
+            <p className="mt-2 text-white/70">
+              Vi jämför kostnader, tillgänglighet och funktioner för att hjälpa dig välja rätt.
+            </p>
+            <div className="mt-4">
+              <Link href="/blogg/ai-receptionist-vs-traditionell-receptionist" className="btn btn-secondary">
+                Läs artikeln
+              </Link>
+            </div>
+          </article>
+
+          {/* Existing Article: Missa aldrig ett samtal */}
           <article className="group glass rounded-2xl p-6 hover:bg-white/15 transition-colors border border-white/10">
             <div className="flex items-center gap-2 text-xs text-brand-300">
               <span className="px-2 py-1 rounded-full bg-brand-500/10">Insikt</span>
@@ -80,7 +164,7 @@ export default function BlogIndexPage() {
             </div>
           </article>
 
-          {/* First article card */}
+          {/* Existing Article: AI-receptionist 2025 guide */}
           <article className="group glass rounded-2xl p-6 hover:bg-white/15 transition-colors border border-white/10">
             <div className="flex items-center gap-2 text-xs text-brand-300">
               <span className="px-2 py-1 rounded-full bg-brand-500/10">Guide</span>
