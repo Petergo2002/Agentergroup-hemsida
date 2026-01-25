@@ -59,6 +59,27 @@ export default function BlogIndexPage() {
       {/* Posts list */}
       <section className="section">
         <div className="container grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Article: Telefonpassning för hantverkare */}
+          <article className="group glass rounded-2xl p-6 hover:bg-white/15 transition-colors border border-white/10">
+            <div className="flex items-center gap-2 text-xs text-brand-300">
+              <span className="px-2 py-1 rounded-full bg-brand-500/10">Hantverkare</span>
+              <span className="text-white/50">23 jan 2025</span>
+            </div>
+            <h2 className="mt-3 text-xl font-semibold group-hover:text-white">
+              <Link href="/blogg/telefonpassning-for-hantverkare">
+                Telefonpassning för hantverkare: Missa aldrig ett jobb
+              </Link>
+            </h2>
+            <p className="mt-2 text-white/70">
+              Är du hantverkare? Lär dig varför en AI-receptionist är en bättre och mer kostnadseffektiv lösning än traditionell telefonpassning.
+            </p>
+            <div className="mt-4">
+              <Link href="/blogg/telefonpassning-for-hantverkare" className="btn btn-secondary">
+                Läs artikeln
+              </Link>
+            </div>
+          </article>
+
           {/* Article: Hemsida med AI-integration */}
           <article className="group glass rounded-2xl p-6 hover:bg-white/15 transition-colors border border-white/10">
             <div className="flex items-center gap-2 text-xs text-brand-300">
