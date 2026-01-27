@@ -53,8 +53,11 @@ vapi-widget {
 
 /* Global layout helpers */
 html, body {
-  height: 100%;
   overflow-x: hidden; /* Prevent horizontal scrolling on mobile */
+}
+
+body {
+  min-height: 100vh;
 }
 
 /* Custom utilities ported from Vite project */

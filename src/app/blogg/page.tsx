@@ -37,11 +37,11 @@ export default function BlogIndexPage() {
             backgroundSize: '24px 24px'
           }}
         />
-        <div className="container py-24 md:py-32 relative">
+        <div className="container py-16 md:py-32 relative">
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium bg-brand-500/10 text-brand-300">
             Vår kunskapsbank
           </span>
-          <h1 className="mt-4 font-display text-5xl md:text-7xl font-bold leading-[1.04] tracking-tight">
+          <h1 className="mt-4 font-display text-4xl md:text-7xl font-bold leading-[1.04] tracking-tight">
             Blogg
           </h1>
           <p className="mt-4 text-white/80 max-w-2xl">
