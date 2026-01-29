@@ -59,6 +59,27 @@ export default function BlogIndexPage() {
       {/* Posts list */}
       <section className="section">
         <div className="container grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Article: AI-receptionist för fastighetsmäklare */}
+          <article className="group glass rounded-2xl p-6 hover:bg-white/15 transition-colors border border-white/10">
+            <div className="flex items-center gap-2 text-xs text-brand-300">
+              <span className="px-2 py-1 rounded-full bg-brand-500/10">Fastighet</span>
+              <span className="text-white/50">15 maj 2025</span>
+            </div>
+            <h2 className="mt-3 text-xl font-semibold group-hover:text-white">
+              <Link href="/blogg/ai-receptionist-for-fastighetsmaklare">
+                AI-receptionist för fastighetsmäklare: Boka fler visningar
+              </Link>
+            </h2>
+            <p className="mt-2 text-white/70">
+              Missa aldrig en potentiell köpare. Låt en AI-receptionist svara på frågor om objekt och boka visningar dygnet runt.
+            </p>
+            <div className="mt-4">
+              <Link href="/blogg/ai-receptionist-for-fastighetsmaklare" className="btn btn-secondary">
+                Läs artikeln
+              </Link>
+            </div>
+          </article>
+
           {/* Article: AI-receptionist för kliniker */}
           <article className="group glass rounded-2xl p-6 hover:bg-white/15 transition-colors border border-white/10">
             <div className="flex items-center gap-2 text-xs text-brand-300">
