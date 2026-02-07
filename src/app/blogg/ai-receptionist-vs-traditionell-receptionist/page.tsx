@@ -1,10 +1,14 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import BlogCTA from '../../components/BlogCTA'
+
+
+import { Calendar, Clock, ArrowLeft } from 'lucide-react'
 
 const title = 'AI-receptionist vs Traditionell receptionist: Komplett guide 2025 | Agenter Group'
 const description =
   'Står du i valet mellan en AI-receptionist och en traditionell receptionist? Vi jämför kostnader, tillgänglighet och funktioner för att hjälpa dig ta rätt beslut för ditt företag.'
-const url = '/blogg/ai-receptionist-vs-traditionell-receptionist'
+const url = '/blogg/ai-receptionist-vs-traditionell-receptionist/'
 
 export const metadata: Metadata = {
   title,
@@ -28,7 +32,7 @@ export const metadata: Metadata = {
   }
 }
 
-const PUBLISHED = '2025-01-22' // Assuming today or near future
+const PUBLISHED = '2025-01-22'
 const UPDATED = '2025-01-22'
 
 function JsonLd() {
@@ -63,292 +67,204 @@ function JsonLd() {
 
 export default function BlogPost() {
   return (
-    <>
+    <div className="min-h-screen bg-black text-white">
       <JsonLd />
-      <div className="min-h-screen bg-black text-white">
-        {/* Header */}
-        <header className="border-b border-white/10 bg-black/50 backdrop-blur-sm sticky top-0 z-40">
-          <div className="container mx-auto px-4 py-4">
-            <Link
-              href="/"
-              className="inline-flex items-center gap-2 text-white/70 hover:text-white transition-colors"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-              </svg>
-              Tillbaka till startsidan
-            </Link>
-          </div>
-        </header>
 
-        {/* Article */}
+      <main>
+        {/* Hero Header Section */}
+        <section className="relative h-[40vh] min-h-[400px] flex items-end overflow-hidden">
+          <div className="absolute inset-0 z-0">
+
+          </div>
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black z-10" />
+
+          <div className="container relative px-4 mx-auto z-20 pb-12">
+            <div>
+              <Link
+                href="/blogg"
+                className="inline-flex items-center gap-2 text-[#FF5D00] hover:text-white transition-colors mb-6 text-sm font-mono uppercase tracking-widest"
+              >
+                <ArrowLeft size={16} />
+                Tillbaka till bloggen
+              </Link>
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tighter max-w-4xl">
+                AI-receptionist <span className="text-[#FF5D00]">vs</span> Mänsklig service.
+              </h1>
+            </div>
+          </div>
+        </section>
+
+        {/* Article Content */}
         <article className="container mx-auto px-4 py-12 md:py-20 max-w-4xl">
-          {/* Meta info */}
           <div className="mb-8">
-            <Link
-              href="/blogg"
-              className="inline-block text-sm text-brand-400 hover:text-brand-300 mb-4 transition-colors"
-            >
-              ← Alla artiklar
-            </Link>
             <div className="flex flex-wrap gap-2 mb-4">
-              <span className="px-3 py-1 text-xs font-medium bg-brand-500/10 text-brand-300 rounded-full border border-brand-500/20">
-                AI-Receptionist
+              <span className="px-3 py-1 text-xs font-medium bg-[#FF5D00]/10 text-[#FF5D00] rounded-full border border-[#FF5D00]/20">
+                AI Frontdesk
               </span>
-              <span className="px-3 py-1 text-xs font-medium bg-brand-500/10 text-brand-300 rounded-full border border-brand-500/20">
+              <span className="px-3 py-1 text-xs font-medium bg-[#FF5D00]/10 text-[#FF5D00] rounded-full border border-[#FF5D00]/20">
                 Jämförelse
               </span>
             </div>
-            <time className="text-sm text-white/50" dateTime={PUBLISHED}>
-              Publicerad: {new Date(PUBLISHED).toLocaleDateString('sv-SE', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-              })}
-            </time>
+            <div className="flex items-center gap-4 text-sm text-white/40 font-mono">
+              <div className="flex items-center gap-1.5">
+                <Calendar size={14} className="text-[#FF5D00]" />
+                {PUBLISHED}
+              </div>
+              <div className="flex items-center gap-1.5">
+                <Clock size={14} className="text-[#FF5D00]" />
+                8 min läsning
+              </div>
+            </div>
           </div>
 
-          {/* Title */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+          <h1 className="text-4xl md:text-5xl font-bold mb-8 leading-tight tracking-tight">
             AI-receptionist vs Traditionell receptionist: Komplett guide 2025
           </h1>
 
-          {/* Lead */}
-          <p className="text-xl md:text-2xl text-white/80 mb-12 leading-relaxed border-l-4 border-brand-500 pl-6">
+          <p className="text-xl md:text-2xl text-white/60 mb-12 leading-relaxed border-l-4 border-[#FF5D00] pl-6">
             Ska du anställa en receptionist eller investera i en AI-lösning? Svaret är inte alltid självklart.
             I denna guide går vi igenom allt du behöver veta för att fatta rätt beslut för ditt företag.
           </p>
 
-          {/* Content */}
-          <div className="prose prose-invert prose-lg max-w-none">
-
-            <p className="text-white/80 leading-relaxed mb-6">
+          <div className="prose prose-invert prose-orange max-w-none">
+            <p className="text-lg text-white/80 leading-relaxed mb-8">
               Rollerna på arbetsplatsen förändras i takt med teknologin. Receptionisten har länge varit företagets ansikte utåt – den första rösten en kund hör. Men med framväxten av avancerad AI, står många företagsledare inför ett vägskäl: Ska man hålla fast vid det traditionella eller omfamna det nya?
             </p>
 
-            <h2 className="text-3xl font-bold mt-12 mb-6 text-white">Kostnadsjämförelse: Vad skiljer sig?</h2>
+            <h2 className="text-3xl font-bold mt-16 mb-8 text-white">Kostnadsjämförelse: Vad skiljer sig?</h2>
 
-            <p className="text-white/80 leading-relaxed mb-6">
-              En av de mest påtagliga skillnaderna är kostnaden. Låt oss bryta ner siffrorna.
+            <p className="text-white/70 mb-8">
+              En av de mest påtagliga skillnaderna är kostnaden. Låt oss bryta ner siffrorna för en genomsnittlig receptionist jämfört med en AI Frontdesk-lösning.
             </p>
 
-            <div className="grid md:grid-cols-2 gap-8 my-8">
-              <div className="bg-white/5 border border-white/10 rounded-xl p-6">
-                <h3 className="text-xl font-bold mb-4 text-white border-b border-white/10 pb-2">Traditionell Receptionist</h3>
-                <ul className="space-y-3 text-white/80">
-                  <li className="flex justify-between">
-                    <span>Månadslön (snitt):</span>
-                    <span className="font-semibold">28 000 kr</span>
+            <div className="grid md:grid-cols-2 gap-8 my-12">
+              <div className="p-8 rounded-[32px] bg-[#0F0F0F] border border-white/5 relative group hover:border-white/10 transition-colors">
+                <h3 className="text-xl font-bold mb-6 text-white flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-white/20" />
+                  Mänsklig Receptionist
+                </h3>
+                <ul className="space-y-4 text-white/60">
+                  <li className="flex justify-between border-b border-white/5 pb-2">
+                    <span>Månadslön:</span>
+                    <span className="text-white font-mono">28 000 kr</span>
                   </li>
-                  <li className="flex justify-between">
-                    <span>Arbetsgivaravgifter:</span>
-                    <span className="font-semibold">~8 800 kr</span>
+                  <li className="flex justify-between border-b border-white/5 pb-2">
+                    <span>Sociala avgifter:</span>
+                    <span className="text-white font-mono">~8 800 kr</span>
                   </li>
-                  <li className="flex justify-between">
-                    <span>Semesterersättning:</span>
-                    <span className="font-semibold">~3 300 kr</span>
+                  <li className="flex justify-between border-b border-white/5 pb-2">
+                    <span>Övriga admin:</span>
+                    <span className="text-white font-mono">~3 300 kr</span>
                   </li>
-                  <li className="flex justify-between border-t border-white/10 pt-2 text-white">
-                    <span><strong>Total månadskostnad:</strong></span>
-                    <span className="font-bold text-brand-300">~40 100 kr</span>
+                  <li className="flex justify-between pt-4">
+                    <span className="font-bold text-white">Totalt per mån:</span>
+                    <span className="text-xl font-bold text-white font-mono">~40 100 kr</span>
                   </li>
                 </ul>
-                <p className="mt-4 text-sm text-white/50 italic">
-                  Tillkommer kostnader för sjukfrånvaro, utrustning, utbildning och personalförmåner.
-                </p>
+                <div className="mt-6 p-4 rounded-2xl bg-white/5 text-xs text-white/40 italic">
+                  * Exklusive semester, sjuklön, utbildning och kontorsplats.
+                </div>
               </div>
 
-              <div className="bg-white/5 border border-white/10 rounded-xl p-6 relative overflow-hidden">
-                <div className="absolute top-0 right-0 p-2 bg-brand-500 text-white text-xs font-bold rounded-bl-lg">
-                  Kostnadseffektivt
+              <div className="p-8 rounded-[32px] bg-[#0F0F0F] border border-[#FF5D00]/20 relative group overflow-hidden">
+                <div className="absolute top-0 right-0 px-4 py-1.5 bg-[#FF5D00] text-black text-[10px] font-bold uppercase tracking-widest rounded-bl-2xl">
+                  Rekommenderas
                 </div>
-                <h3 className="text-xl font-bold mb-4 text-white border-b border-white/10 pb-2">AI-Receptionist</h3>
-                 <ul className="space-y-3 text-white/80">
-                  <li className="flex justify-between">
-                    <span>Månadsavgift:</span>
-                    <span className="font-semibold">Från 1 500 kr</span>
+                <h3 className="text-xl font-bold mb-6 text-white flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-[#FF5D00]" />
+                  AI Frontdesk Maja
+                </h3>
+                <ul className="space-y-4 text-white/60">
+                  <li className="flex justify-between border-b border-white/5 pb-2">
+                    <span>Månadslicens:</span>
+                    <span className="text-white font-mono">Från 1 500 kr</span>
                   </li>
-                  <li className="flex justify-between">
+                  <li className="flex justify-between border-b border-white/5 pb-2">
                     <span>Startavgift:</span>
-                    <span className="font-semibold">Engångskostnad</span>
+                    <span className="text-white font-mono">Engångskostnad</span>
                   </li>
-                  <li className="flex justify-between">
-                    <span>Underhåll:</span>
-                    <span className="font-semibold">Ingår</span>
+                  <li className="flex justify-between border-b border-white/5 pb-2">
+                    <span>Uppdateringar:</span>
+                    <span className="text-white font-mono">Ingår alltid</span>
                   </li>
-                  <li className="flex justify-between border-t border-white/10 pt-2 text-white">
-                    <span><strong>Total månadskostnad:</strong></span>
-                    <span className="font-bold text-brand-300">~1 500 - 5 000 kr</span>
+                  <li className="flex justify-between pt-4">
+                    <span className="font-bold text-[#FF5D00]">Totalt per mån:</span>
+                    <span className="text-xl font-bold text-[#FF5D00] font-mono">~1 500 kr</span>
                   </li>
                 </ul>
-                <p className="mt-4 text-sm text-white/50 italic">
-                  Inga dolda kostnader, ingen semester, ingen sjuklön.
-                </p>
+                <div className="mt-6 p-4 rounded-2xl bg-[#FF5D00]/5 text-xs text-[#FF5D00]/60 italic">
+                  * Inkluderar drift 24/7, inga dolda avgifter.
+                </div>
               </div>
             </div>
 
-            <h2 className="text-3xl font-bold mt-12 mb-6 text-white">Tillgänglighet: När svarar ni?</h2>
+            <h2 className="text-3xl font-bold mt-16 mb-8 text-white">Tillgänglighet: När svarar ni?</h2>
 
-            <p className="text-white/80 leading-relaxed mb-6">
-              Kunder förväntar sig service dygnet runt. Här blir skillnaden mellan människa och maskin tydligast.
-            </p>
-
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-white/80 border-collapse">
+            <div className="overflow-x-auto my-12">
+              <table className="w-full text-left border-collapse border border-white/5 rounded-2xl overflow-hidden">
                 <thead>
-                  <tr className="border-b border-white/20">
-                    <th className="py-4 font-semibold text-white">Egenskap</th>
-                    <th className="py-4 font-semibold text-white">Mänsklig Receptionist</th>
-                    <th className="py-4 font-semibold text-brand-300">AI-Receptionist</th>
+                  <tr className="bg-[#0F0F0F]">
+                    <th className="p-6 font-bold text-white/40 uppercase text-xs tracking-widest">Egenskap</th>
+                    <th className="p-6 font-bold text-white/40 uppercase text-xs tracking-widest">Människa</th>
+                    <th className="p-6 font-bold text-[#FF5D00] uppercase text-xs tracking-widest">AI Frontdesk</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-white/10">
+                <tbody className="divide-y divide-white/5">
                   <tr>
-                    <td className="py-4 font-medium">Öppettider</td>
-                    <td className="py-4">Vanligtvis 08-17 (40h/vecka)</td>
-                    <td className="py-4 text-brand-200">24/7 (168h/vecka)</td>
+                    <td className="p-6 font-medium text-white">Öppettider</td>
+                    <td className="p-6 text-white/50">Vardagar 08-17</td>
+                    <td className="p-6 text-[#FF5D00] font-bold">24/7/365</td>
                   </tr>
                   <tr>
-                    <td className="py-4 font-medium">Svarstid</td>
-                    <td className="py-4">Beror på belastning</td>
-                    <td className="py-4 text-brand-200">Omedelbart</td>
+                    <td className="p-6 font-medium text-white">Svarstid</td>
+                    <td className="p-6 text-white/50">Beror på belastning</td>
+                    <td className="p-6 text-[#FF5D00] font-bold">Direkt (0 sek)</td>
                   </tr>
                   <tr>
-                    <td className="py-4 font-medium">Kapacitet</td>
-                    <td className="py-4">1 samtal åt gången</td>
-                    <td className="py-4 text-brand-200">Obegränsat antal samtidiga samtal</td>
+                    <td className="p-6 font-medium text-white">Samtida samtal</td>
+                    <td className="p-6 text-white/50">Ett i taget</td>
+                    <td className="p-6 text-[#FF5D00] font-bold">Obegränsat</td>
                   </tr>
                   <tr>
-                    <td className="py-4 font-medium">Frånvaro</td>
-                    <td className="py-4">Semester, sjukdom, raster</td>
-                    <td className="py-4 text-brand-200">Aldrig (99.9% upptid)</td>
+                    <td className="p-6 font-medium text-white">Raster/Sjukdom</td>
+                    <td className="p-6 text-white/50">Ja, kräver backup</td>
+                    <td className="p-6 text-[#FF5D00] font-bold">Aldrig borta</td>
                   </tr>
                 </tbody>
               </table>
             </div>
 
-            <h3 className="text-2xl font-semibold mt-8 mb-4 text-white">Funktionalitet och &quot;Den mänskliga touchen&quot;</h3>
-
-            <p className="text-white/80 leading-relaxed mb-6">
-              Många oroar sig för att en AI ska kännas robotaktig och opersonlig. Det var sant för några år sedan, men dagens AI-röster är nästintill omöjliga att skilja från en människa. De kan intonera, pausa naturligt och till och med visa empati.
+            <h2 className="text-3xl font-bold mt-16 mb-8 text-white">Slutsats</h2>
+            <p className="text-lg text-white/70 leading-relaxed mb-8">
+              För moderna företag som vill sänka sina fasta kostnader utan att tumma på kvaliteten är valet ofta enkelt. Maja ger dina kunder service på högsta nivå, dygnet runt, till en bråkdel av kostnaden för en traditionell lösning.
             </p>
 
-            <h3 className="text-2xl font-semibold mt-8 mb-4 text-white">Där AI vinner:</h3>
-            <ul className="list-disc pl-6 space-y-2 text-white/80 mb-6">
-              <li><strong>Precision:</strong> Glömmer aldrig att ställa en fråga eller ta ett namn.</li>
-              <li><strong>Integration:</strong> Bokar möten direkt i kalendern och uppdaterar CRM-systemet i realtid.</li>
-              <li><strong>Språk:</strong> Kan växla mellan svenska, engelska och andra språk omedelbart.</li>
-            </ul>
-
-            <h3 className="text-2xl font-semibold mt-8 mb-4 text-white">Där människan vinner:</h3>
-            <ul className="list-disc pl-6 space-y-2 text-white/80 mb-6">
-              <li><strong>Komplex problemlösning:</strong> Situationer som kräver kreativitet eller &quot;utanför boxen&quot;-tänkande.</li>
-              <li><strong>Fysisk närvaro:</strong> Att ta emot gäster på kontoret, bjuda på kaffe och hantera post.</li>
-            </ul>
-
-            <h2 className="text-3xl font-bold mt-12 mb-6 text-white">Vem bör välja vad?</h2>
-
-            <div className="grid md:grid-cols-2 gap-6 my-8">
-              <div className="bg-white/5 p-6 rounded-xl">
-                <h4 className="text-lg font-bold text-white mb-2">Välj Traditionell Receptionist om:</h4>
-                <ul className="list-disc pl-5 space-y-2 text-white/70 text-sm">
-                  <li>Du har mycket fysiska besök på kontoret.</li>
-                  <li>Dina samtal kräver komplex emotionell hantering (t.ex. krissamtal).</li>
-                  <li>Du behöver hjälp med diverse kontorssysslor utöver telefonen.</li>
-                </ul>
-              </div>
-
-              <div className="bg-brand-500/10 border border-brand-500/20 p-6 rounded-xl">
-                <h4 className="text-lg font-bold text-white mb-2">Välj AI-Receptionist om:</h4>
-                <ul className="list-disc pl-5 space-y-2 text-white/70 text-sm">
-                  <li>Du missar samtal på grund av hög belastning eller utanför kontorstid.</li>
-                  <li>Du vill sänka dina fasta kostnader drastiskt.</li>
-                  <li>Ditt primära behov är att boka möten, svara på vanliga frågor och koppla samtal.</li>
-                  <li>Du är ett tillväxtbolag som behöver skala upp snabbt.</li>
-                </ul>
-              </div>
-            </div>
-
-            <h2 className="text-3xl font-bold mt-12 mb-6 text-white">Slutsats: Hybriden kan vara framtiden</h2>
-
-            <p className="text-white/80 leading-relaxed mb-6">
-              Det behöver inte vara antingen eller. Många företag väljer en hybridlösning: En AI-receptionist hanterar &quot;overflow&quot; (samtal när linjen är upptagen), kvällar och helger, medan den ordinarie personalen tar hand om samtal under kontorstid. På så sätt maximerar man tillgängligheten utan att tappa den personliga kontakten på kontoret.
-            </p>
-
-            <p className="text-white/80 leading-relaxed mb-6">
-              Men för företag som opererar helt digitalt eller har stram budget, är AI-receptionisten år 2025 en &quot;no-brainer&quot;. Tekniken är nu så pass mogen att den inte bara ersätter, utan i många fall överträffar, den traditionella upplevelsen över telefon.
-            </p>
-
-            <div className="bg-gradient-to-r from-brand-500/10 to-brand-600/10 border border-brand-500/20 rounded-2xl p-8 my-12 text-center">
-              <h3 className="text-2xl font-bold mb-4 text-white">Testa en AI-receptionist själv</h3>
-              <p className="text-white/80 mb-6 max-w-2xl mx-auto">
-                Är du nyfiken på hur det låter? Boka en demo med oss på Agenter Group så visar vi hur naturligt och effektivt det kan vara.
-              </p>
-              <Link
-                href="/#demo"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-brand-500 hover:bg-brand-600 text-white font-semibold rounded-lg transition-colors duration-200"
-              >
-                Boka Demo Nu
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </Link>
-            </div>
-
-          </div>
-
-          {/* Author & Date */}
-          <div className="mt-16 pt-8 border-t border-white/10">
-            <div className="flex items-center justify-between flex-wrap gap-4">
-              <div>
-                <p className="text-sm text-white/50">Författare</p>
-                <p className="text-white font-medium">Agenter Group AB</p>
-              </div>
-              <div className="text-right">
-                <p className="text-sm text-white/50">Senast uppdaterad</p>
-                <time className="text-white font-medium" dateTime={UPDATED}>
-                  {new Date(UPDATED).toLocaleDateString('sv-SE', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                  })}
-                </time>
-              </div>
-            </div>
-          </div>
-
-          {/* Related Articles */}
-          <div className="mt-16">
-            <h3 className="text-2xl font-bold mb-6 text-white">Läs mer</h3>
-            <div className="grid md:grid-cols-2 gap-6">
-              <Link
-                href="/blogg/varfor-foretag-missar-samtal"
-                className="group p-6 bg-white/5 border border-white/10 rounded-xl hover:border-brand-500/30 transition-all duration-300"
-              >
-                <h4 className="text-xl font-semibold mb-2 text-white group-hover:text-brand-300 transition-colors">
-                   Varför Företag Missar 34% av Jobbmöjligheter
-                </h4>
-                <p className="text-white/70 text-sm">
-                  Om kostnaden av missade samtal och hur du undviker dem.
+            <div className="bg-[#0F0F0F] border border-white/5 rounded-[32px] p-8 md:p-12 my-16 text-center relative overflow-hidden group">
+              <div className="absolute inset-0 bg-[#FF5D00]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative z-10">
+                <span className="text-[#FF5D00] font-mono text-xs uppercase tracking-[0.2em] mb-4 block">Interactive Demo</span>
+                <h3 className="text-3xl md:text-4xl font-bold mb-6 text-white tracking-tight">Testa Maja live nu</h3>
+                <p className="text-white/50 mb-10 max-w-2xl mx-auto leading-relaxed">
+                  Är du nyfiken på hur framtidens kundservice låter? Prata med Maja direkt här på sidan genom chatten. Hon kan svara på dina frågor och boka in en live-demo för ditt team.
                 </p>
-              </Link>
-
-               <Link
-                href="/blogg/ai-receptionist-2025-komplett-guide"
-                className="group p-6 bg-white/5 border border-white/10 rounded-xl hover:border-brand-500/30 transition-all duration-300"
-              >
-                <h4 className="text-xl font-semibold mb-2 text-white group-hover:text-brand-300 transition-colors">
-                  AI‑receptionist 2025 – komplett guide
-                </h4>
-                <p className="text-white/70 text-sm">
-                  Allt du behöver för att komma igång med implementationen.
-                </p>
-              </Link>
+                <BlogCTA />
+              </div>
             </div>
           </div>
 
+          <footer className="mt-20 pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between gap-8 items-center">
+            <div className="flex flex-col gap-1">
+              <span className="text-white/40 text-xs font-mono uppercase tracking-widest">Publicerad av</span>
+              <span className="text-white font-bold tracking-tight text-lg">Agenter Group Editorial Team</span>
+            </div>
+            <div className="flex gap-4">
+              <Link href="/blogg" className="text-white/40 hover:text-[#FF5D00] transition-colors text-sm font-mono uppercase tracking-widest">
+                Se fler insikter
+              </Link>
+            </div>
+          </footer>
         </article>
-      </div>
-    </>
+      </main>
+    </div>
   )
 }

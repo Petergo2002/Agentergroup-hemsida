@@ -1,233 +1,174 @@
-import type { Metadata } from 'next'
+'use client'
+
 import Link from 'next/link'
 
-export const metadata: Metadata = {
-  title: 'Blogg – Agenter Group',
-  description:
-    'Guider och insikter om AI‑receptionister, automatisering, kundservice, säkerhet och implementering. Lär dig hur ni bokar fler möten och ger bättre service – dygnet runt.',
-  keywords: [
-    'AI receptionist',
-    'AI kundservice',
-    'mötesbokning automatisk',
-    'GDPR AI',
-    'säker datahantering',
-    'Agenter Group',
-  ],
-  alternates: { canonical: '/blogg' },
-  openGraph: {
-    title: 'Blogg – Agenter Group',
-    description:
-      'Guider och insikter om AI‑receptionister, automatisering, kundservice, säkerhet och implementering.',
-    url: '/blogg',
-    type: 'website'
+import { motion } from 'framer-motion'
+import { Calendar, ArrowRight } from 'lucide-react'
+
+const posts = [
+  {
+    title: 'AI-receptionist för kliniker: Maximera patienttid',
+    slug: 'ai-receptionist-for-kliniker',
+    date: '24 jan 2025',
+    category: 'Klinik',
+    excerpt: 'Driver du klinik? Lär dig hur en AI-receptionist kan avlasta teamet och öka tillgängligheten för dina patienter.'
+  },
+  {
+    title: 'Telefonpassning för hantverkare: Missa aldrig ett jobb',
+    slug: 'telefonpassning-for-hantverkare',
+    date: '23 jan 2025',
+    category: 'Hantverkare',
+    excerpt: 'Är du hantverkare? Lär dig varför en AI-receptionist är en bättre och mer kostnadseffektiv lösning än traditionell telefonpassning.'
+  },
+  {
+    title: 'Hemsida med AI-integration: Framtidens kundservice',
+    slug: 'hemsida-med-ai-integration',
+    date: '22 jan 2025',
+    category: 'Trend',
+    excerpt: 'Din hemsida är ditt digitala skyltfönster. Lär dig hur du förvandlar den till en säljande assistent med AI.'
+  },
+  {
+    title: 'Mötesbokning 24/7: Guide till AI-driven schemaläggning',
+    slug: 'motesbokning-24-7-guide-till-ai-driven-schemalaggning',
+    date: '22 jan 2025',
+    category: 'Guide',
+    excerpt: 'Låt kunderna boka möten när det passar dem. En guide till automatisk schemaläggning.'
+  },
+  {
+    title: 'Så automatiserar du telefonhantering med AI-agenter',
+    slug: 'sa-automatiserar-du-telefonhantering-med-ai-agenter',
+    date: '22 jan 2025',
+    category: 'Guide',
+    excerpt: 'Steg för steg-guide: Från val av lösning till implementation och optimering.'
+  },
+  {
+    title: 'AI-receptionist vs Traditionell receptionist',
+    slug: 'ai-receptionist-vs-traditionell-receptionist',
+    date: '22 jan 2025',
+    category: 'Jämförelse',
+    excerpt: 'Vi jämför kostnader, tillgänglighet och funktioner för att hjälpa dig välja rätt.'
+  },
+  {
+    title: 'Varför Företag Missar 34% av Jobbmöjligheter',
+    slug: 'varfor-foretag-missar-samtal',
+    date: '21 jan 2025',
+    category: 'Insikt',
+    excerpt: 'Upptäck varför missade samtal kostar företag enorma summor och hur AI-receptionister kan lösa problemet.'
+  },
+  {
+    title: 'AI‑receptionist 2025 – komplett guide',
+    slug: 'ai-receptionist-2025-komplett-guide',
+    date: '3 jan 2026',
+    category: 'Guide',
+    excerpt: 'Allt du behöver för att komma igång: implementation, systemkopplingar, säkerhet, GDPR och hur du mäter effekt.'
   }
-}
+]
 
 export default function BlogIndexPage() {
   return (
-    <main>
-      {/* Header */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-900/20 via-slate-900/40 to-slate-950/70" />
-        <div
-          className="absolute inset-0 pointer-events-none opacity-10"
-          style={{
-            backgroundImage:
-              'radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px)',
-            backgroundSize: '24px 24px'
-          }}
-        />
-        <div className="container py-24 md:py-32 relative">
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium bg-brand-500/10 text-brand-300">
-            Vår kunskapsbank
-          </span>
-          <h1 className="mt-4 font-display text-5xl md:text-7xl font-bold leading-[1.04] tracking-tight">
-            Blogg
-          </h1>
-          <p className="mt-4 text-white/80 max-w-2xl">
-            Praktiska guider för dig som vill förbättra kundservice och bokningar med AI. Utforska{' '}
-            <Link href="/#funktioner" className="underline decoration-white/30 hover:decoration-white">våra funktioner</Link>{' '}
-            och lär dig hur en AI‑receptionist kan avlasta teamet, boka fler möten och höja kundnöjdheten.
-          </p>
-          <div className="mt-6 flex gap-3">
-            <Link href="/" className="btn btn-secondary">Hem</Link>
-            <Link href="/#demo" className="btn btn-primary">Boka demo</Link>
+    <div className="min-h-screen bg-black text-white">
+      <main>
+        {/* Header - Matching Hemsidor Style */}
+        <section className="relative h-[60vh] flex items-center overflow-hidden">
+          <div className="absolute inset-0 z-0">
+
           </div>
-        </div>
-      </section>
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/80 z-10" />
 
-      {/* Posts list */}
-      <section className="section">
-        <div className="container grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {/* Article: AI-receptionist för kliniker */}
-          <article className="group glass rounded-2xl p-6 hover:bg-white/15 transition-colors border border-white/10">
-            <div className="flex items-center gap-2 text-xs text-brand-300">
-              <span className="px-2 py-1 rounded-full bg-brand-500/10">Klinik</span>
-              <span className="text-white/50">24 jan 2025</span>
-            </div>
-            <h2 className="mt-3 text-xl font-semibold group-hover:text-white">
-              <Link href="/blogg/ai-receptionist-for-kliniker">
-                AI-receptionist för kliniker: Maximera patienttid
-              </Link>
-            </h2>
-            <p className="mt-2 text-white/70">
-              Driver du klinik? Lär dig hur en AI-receptionist kan avlasta teamet och öka tillgängligheten för dina patienter.
-            </p>
-            <div className="mt-4">
-              <Link href="/blogg/ai-receptionist-for-kliniker" className="btn btn-secondary">
-                Läs artikeln
-              </Link>
-            </div>
-          </article>
+          <div className="container relative px-4 mx-auto z-20 pt-20">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="max-w-4xl"
+            >
+              <span className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-medium bg-[#FF5D00]/10 text-[#FF5D00] rounded-full border border-[#FF5D00]/20 mb-6 uppercase tracking-widest">
+                Kunskapsbank
+              </span>
+              <h1 className="text-5xl md:text-8xl font-bold mb-6 tracking-tighter">
+                Våra <span className="text-[#FF5D00]">Insikter.</span>
+              </h1>
+              <p className="text-xl text-white/60 max-w-2xl leading-relaxed">
+                Håll dig uppdaterad om framtidens kundservice, AI-automation och hur du skalar ditt företag med smart teknik.
+              </p>
+            </motion.div>
+          </div>
+        </section>
 
-          {/* Article: Telefonpassning för hantverkare */}
-          <article className="group glass rounded-2xl p-6 hover:bg-white/15 transition-colors border border-white/10">
-            <div className="flex items-center gap-2 text-xs text-brand-300">
-              <span className="px-2 py-1 rounded-full bg-brand-500/10">Hantverkare</span>
-              <span className="text-white/50">23 jan 2025</span>
-            </div>
-            <h2 className="mt-3 text-xl font-semibold group-hover:text-white">
-              <Link href="/blogg/telefonpassning-for-hantverkare">
-                Telefonpassning för hantverkare: Missa aldrig ett jobb
-              </Link>
-            </h2>
-            <p className="mt-2 text-white/70">
-              Är du hantverkare? Lär dig varför en AI-receptionist är en bättre och mer kostnadseffektiv lösning än traditionell telefonpassning.
-            </p>
-            <div className="mt-4">
-              <Link href="/blogg/telefonpassning-for-hantverkare" className="btn btn-secondary">
-                Läs artikeln
-              </Link>
-            </div>
-          </article>
+        {/* Blog Grid */}
+        <section className="py-24 relative overflow-hidden">
+          <div className="container px-4 mx-auto">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {posts.map((post, i) => (
+                <motion.article
+                  key={post.slug}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="group relative h-full flex flex-col p-8 rounded-[32px] bg-[#0F0F0F] border border-white/5 hover:border-[#FF5D00]/30 transition-all duration-300"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#FF5D00]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-[32px]" />
 
-          {/* Article: Hemsida med AI-integration */}
-          <article className="group glass rounded-2xl p-6 hover:bg-white/15 transition-colors border border-white/10">
-            <div className="flex items-center gap-2 text-xs text-brand-300">
-              <span className="px-2 py-1 rounded-full bg-brand-500/10">Trend</span>
-              <span className="text-white/50">22 jan 2025</span>
-            </div>
-            <h2 className="mt-3 text-xl font-semibold group-hover:text-white">
-              <Link href="/blogg/hemsida-med-ai-integration">
-                Hemsida med AI-integration: Framtidens kundservice
-              </Link>
-            </h2>
-            <p className="mt-2 text-white/70">
-              Din hemsida är ditt digitala skyltfönster. Lär dig hur du förvandlar den till en säljande assistent med AI.
-            </p>
-            <div className="mt-4">
-              <Link href="/blogg/hemsida-med-ai-integration" className="btn btn-secondary">
-                Läs artikeln
-              </Link>
-            </div>
-          </article>
+                  <div className="relative z-10 flex flex-col h-full">
+                    <div className="flex items-center justify-between mb-6">
+                      <span className="text-xs font-mono text-[#FF5D00] uppercase tracking-wider">{post.category}</span>
+                      <div className="flex items-center gap-2 text-white/40 text-xs">
+                        <Calendar size={14} />
+                        {post.date}
+                      </div>
+                    </div>
 
-          {/* Article: Mötesbokning 24/7 */}
-          <article className="group glass rounded-2xl p-6 hover:bg-white/15 transition-colors border border-white/10">
-            <div className="flex items-center gap-2 text-xs text-brand-300">
-              <span className="px-2 py-1 rounded-full bg-brand-500/10">Guide</span>
-              <span className="text-white/50">22 jan 2025</span>
-            </div>
-            <h2 className="mt-3 text-xl font-semibold group-hover:text-white">
-              <Link href="/blogg/motesbokning-24-7-guide-till-ai-driven-schemalaggning">
-                Mötesbokning 24/7: Guide till AI-driven schemaläggning
-              </Link>
-            </h2>
-            <p className="mt-2 text-white/70">
-              Låt kunderna boka möten när det passar dem. En guide till automatisk schemaläggning.
-            </p>
-            <div className="mt-4">
-              <Link href="/blogg/motesbokning-24-7-guide-till-ai-driven-schemalaggning" className="btn btn-secondary">
-                Läs artikeln
-              </Link>
-            </div>
-          </article>
+                    <h2 className="text-2xl font-bold text-white mb-4 group-hover:text-[#FF5D00] transition-colors leading-snug">
+                      <Link href={`/blogg/${post.slug}`}>
+                        {post.title}
+                      </Link>
+                    </h2>
 
-          {/* Article: Så automatiserar du telefonhantering */}
-          <article className="group glass rounded-2xl p-6 hover:bg-white/15 transition-colors border border-white/10">
-            <div className="flex items-center gap-2 text-xs text-brand-300">
-              <span className="px-2 py-1 rounded-full bg-brand-500/10">Guide</span>
-              <span className="text-white/50">22 jan 2025</span>
-            </div>
-            <h2 className="mt-3 text-xl font-semibold group-hover:text-white">
-              <Link href="/blogg/sa-automatiserar-du-telefonhantering-med-ai-agenter">
-                Så automatiserar du telefonhantering med AI-agenter
-              </Link>
-            </h2>
-            <p className="mt-2 text-white/70">
-              Steg för steg-guide: Från val av lösning till implementation och optimering.
-            </p>
-            <div className="mt-4">
-              <Link href="/blogg/sa-automatiserar-du-telefonhantering-med-ai-agenter" className="btn btn-secondary">
-                Läs artikeln
-              </Link>
-            </div>
-          </article>
+                    <p className="text-white/50 mb-8 flex-grow leading-relaxed">
+                      {post.excerpt}
+                    </p>
 
-          {/* Article: AI vs Traditionell */}
-          <article className="group glass rounded-2xl p-6 hover:bg-white/15 transition-colors border border-white/10">
-            <div className="flex items-center gap-2 text-xs text-brand-300">
-              <span className="px-2 py-1 rounded-full bg-brand-500/10">Jämförelse</span>
-              <span className="text-white/50">22 jan 2025</span>
+                    <Link
+                      href={`/blogg/${post.slug}`}
+                      className="inline-flex items-center gap-2 text-white font-bold group/link"
+                    >
+                      Läs mer
+                      <ArrowRight size={18} className="transform group-hover/link:translate-x-1 transition-transform text-[#FF5D00]" />
+                    </Link>
+                  </div>
+                </motion.article>
+              ))}
             </div>
-            <h2 className="mt-3 text-xl font-semibold group-hover:text-white">
-              <Link href="/blogg/ai-receptionist-vs-traditionell-receptionist">
-                AI-receptionist vs Traditionell receptionist
-              </Link>
-            </h2>
-            <p className="mt-2 text-white/70">
-              Vi jämför kostnader, tillgänglighet och funktioner för att hjälpa dig välja rätt.
-            </p>
-            <div className="mt-4">
-              <Link href="/blogg/ai-receptionist-vs-traditionell-receptionist" className="btn btn-secondary">
-                Läs artikeln
-              </Link>
-            </div>
-          </article>
+          </div>
+        </section>
 
-          {/* Existing Article: Missa aldrig ett samtal */}
-          <article className="group glass rounded-2xl p-6 hover:bg-white/15 transition-colors border border-white/10">
-            <div className="flex items-center gap-2 text-xs text-brand-300">
-              <span className="px-2 py-1 rounded-full bg-brand-500/10">Insikt</span>
-              <span className="text-white/50">21 jan 2025</span>
-            </div>
-            <h2 className="mt-3 text-xl font-semibold group-hover:text-white">
-              <Link href="/blogg/varfor-foretag-missar-samtal">
-                Varför Företag Missar 34% av Jobbmöjligheter
-              </Link>
+        {/* Unified Booking CTA */}
+        <section id="booking-cta" className="py-24 md:py-32 bg-black relative overflow-hidden border-t border-white/5">
+          <div className="absolute inset-0 bg-[#FF5D00]/5 opacity-20" />
+          <div className="container relative px-4 mx-auto text-center max-w-4xl">
+            <h2 className="text-5xl md:text-7xl font-bold text-white mb-8 tracking-tighter">
+              Redo för <span className="text-[#FF5D00]">AI-revolutionen?</span>
             </h2>
-            <p className="mt-2 text-white/70">
-              Upptäck varför missade samtal kostar företag enorma summor och hur AI-receptionister kan lösa problemet.
+            <p className="text-xl text-white/60 mb-12">
+              Prata med Maja så hjälper hon dig att boka in ett möte med oss.
             </p>
-            <div className="mt-4">
-              <Link href="/blogg/varfor-foretag-missar-samtal" className="btn btn-secondary">
-                Läs artikeln
-              </Link>
-            </div>
-          </article>
 
-          {/* Existing Article: AI-receptionist 2025 guide */}
-          <article className="group glass rounded-2xl p-6 hover:bg-white/15 transition-colors border border-white/10">
-            <div className="flex items-center gap-2 text-xs text-brand-300">
-              <span className="px-2 py-1 rounded-full bg-brand-500/10">Guide</span>
-              <span className="text-white/50">3 sep 2025</span>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <button
+                onClick={() => {
+                  if (typeof window !== 'undefined' && (window as any).majaWidget) {
+                    (window as any).majaWidget.open();
+                  }
+                }}
+                className="px-10 py-5 bg-[#FF5D00] hover:bg-[#FF7A33] text-black text-xl font-bold rounded-full transition-all hover:scale-105 shadow-[0_0_30px_rgba(255,93,0,0.4)]"
+              >
+                Starta chatten med Maja
+              </button>
             </div>
-            <h2 className="mt-3 text-xl font-semibold group-hover:text-white">
-              <Link href="/blogg/ai-receptionist-2025-komplett-guide">
-                AI‑receptionist 2025 – komplett guide
-              </Link>
-            </h2>
-            <p className="mt-2 text-white/70">
-              Allt du behöver för att komma igång: implementation, systemkopplingar, säkerhet, GDPR och hur du mäter effekt.
-            </p>
-            <div className="mt-4">
-              <Link href="/blogg/ai-receptionist-2025-komplett-guide" className="btn btn-secondary">
-                Läs artikeln
-              </Link>
-            </div>
-          </article>
-        </div>
-      </section>
-    </main>
+          </div>
+        </section>
+      </main>
+    </div>
   )
 }

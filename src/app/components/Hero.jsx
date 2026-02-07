@@ -5,7 +5,6 @@ import Threads from './Threads'
 export default function Hero() {
   
   const handleDemoClick = () => {
-    console.log('Demo button clicked!')
     const element = document.querySelector('#demo')
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' })

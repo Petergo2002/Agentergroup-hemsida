@@ -22,14 +22,32 @@ export default function FAQ() {
     }
   ]
 
+  const faqStructuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((item) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.a,
+      },
+    })),
+  }
+
   return (
-    <section id="faq" className="section">
+    <section id="faq" className="section" aria-labelledby="faq-heading">
+      <script
+        id="ld-json-faq"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}
+      />
       <div className="container">
         <div className="max-w-3xl mx-auto text-center">
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium bg-brand-500/10 text-brand-300 mb-4">
             VANLIGA FRÅGOR
           </span>
-          <h2 className="font-display text-4xl md:text-5xl font-bold">Vanliga frågor om AI‑receptionist</h2>
+          <h2 id="faq-heading" className="font-display text-4xl md:text-5xl font-bold">Vanliga frågor om AI‑receptionist</h2>
           <p className="mt-4 text-white/70">
             Svar på de vanligaste frågorna om hur vår AI‑receptionist fungerar.
           </p>
@@ -40,7 +58,7 @@ export default function FAQ() {
             <details key={i} className="glass rounded-xl p-6 group">
               <summary className="list-none cursor-pointer text-left flex items-start justify-between gap-4">
                 <span className="text-lg font-semibold">{item.q}</span>
-                <span className="shrink-0 text-white/50 group-open:rotate-45 transition-transform">+</span>
+                <span className="shrink-0 text-white/50 group-open:rotate-45 transition-transform" aria-hidden="true">+</span>
               </summary>
               <p className="mt-3 text-white/70">{item.a}</p>
             </details>

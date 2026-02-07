@@ -3,8 +3,10 @@ import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import StructuredData from "./components/StructuredData";
 import Script from "next/script";
+import SmoothScrollWrapper from "./components/SmoothScrollWrapper";
 
-const brandFavicon = '/favicon/favicon-192x192%202.png';
+const brandFavicon = '/favicon/favicon-192x192.png';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -22,11 +24,10 @@ const poppins = Poppins({
 export const viewport = {
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
     default: 'AI-Receptionist Sverige | Missa Aldrig Ett Samtal | Agenter Group',
     template: '%s | Agenter Group',
@@ -93,10 +94,12 @@ export default function RootLayout({
         <StructuredData />
       </head>
       <body className={`${inter.variable} ${poppins.variable} antialiased font-sans`} suppressHydrationWarning>
-        {children}
+        <SmoothScrollWrapper>
+          {children}
+        </SmoothScrollWrapper>
         <Script
           src="https://widget.agentergroup.com/loader.js"
-          data-id="d94aefb4-c203-4391-a673-3392e3a285fe"
+          data-id="c6cfe1ca-a018-4b03-86f7-c06093b9614d"
           strategy="afterInteractive"
         />
       </body>

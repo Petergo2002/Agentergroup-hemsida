@@ -1,34 +1,22 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import NavBarSimple from '../components/NavBarSimple'
+import NavBar from '../components/NavBar'
 import Footer from '../components/Footer'
-import DarkVeil from '../components/DarkVeil'
+import OrangeVeil from '../components/OrangeVeil'
 import { Sparkles, ArrowRight, CheckCircle2, Globe, Zap, Calendar } from 'lucide-react'
 
 export default function HemsidorClient() {
   return (
     <div className="min-h-screen bg-black text-white">
-      <NavBarSimple />
+      <NavBar />
 
       <main>
-        {/* Hero Section - Med DarkVeil effekt */}
+        {/* Hero Section - Med OrangeVeil effekt */}
         <section className="relative min-h-screen flex items-center overflow-hidden">
-          {/* DarkVeil Background - Properly centered */}
-          <div className="absolute top-0 left-0 w-full h-full z-0" style={{ position: 'absolute' }}>
-            <DarkVeil
-              hueShift={222}
-              noiseIntensity={0}
-              scanlineIntensity={0.05}
-              speed={0.4}
-              scanlineFrequency={0.3}
-              warpAmount={0.4}
-              resolutionScale={1}
-            />
-          </div>
-
+          <OrangeVeil />
           {/* Gradient overlay för bättre läsbarhet */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/80 pointer-events-none z-10" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black pointer-events-none z-10" />
 
           <div className="container relative px-6 sm:px-4 mx-auto z-20 py-20">
             <motion.div
@@ -37,27 +25,27 @@ export default function HemsidorClient() {
               transition={{ duration: 0.6 }}
               className="max-w-4xl mx-auto text-center"
             >
-              <span className="inline-flex items-center gap-2 px-3 py-1.5 text-xs sm:text-sm font-medium bg-brand-500/10 text-brand-300 rounded-full border border-brand-500/20 mb-6">
+              <span className="inline-flex items-center gap-2 px-3 py-1.5 text-xs sm:text-sm font-medium bg-[#FF5D00]/10 text-[#FF5D00] rounded-full border border-[#FF5D00]/20 mb-6">
                 <Sparkles className="w-4 h-4" />
-                Tillägstjänst
+                Tilläggstjänst
               </span>
 
               <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
                 <span className="block bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70">
                   Moderna Hemsidor
                 </span>
-                <span className="text-brand-400">med AI-Integration</span>
+                <span className="text-[#FF5D00]">med AI-Integration</span>
               </h1>
 
               <p className="text-lg sm:text-xl md:text-2xl text-white/80 mb-10 max-w-2xl mx-auto">
-                Skräddarsydda hemsidor som integreras sömlöst med vår AI-receptionist.
-                Färdiga på <span className="text-brand-400 font-semibold">1 vecka</span>.
+                Skräddarsydda hemsidor som integreras sömlöst med vår AI Frontdesk Maja.
+                Färdiga på <span className="text-[#FF5D00] font-semibold">1 vecka</span>.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center px-4 sm:px-0">
                 <button
-                  onClick={() => window.location.href = '/#demo'}
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-brand-500 hover:bg-brand-600 text-white font-semibold rounded-lg transition-colors duration-200"
+                  onClick={() => document.getElementById('booking-cta')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#FF5D00] hover:bg-[#FF7A33] text-black font-semibold rounded-lg transition-colors duration-200"
                 >
                   Boka Konsultation
                   <ArrowRight className="w-5 h-5" />
@@ -71,330 +59,236 @@ export default function HemsidorClient() {
               </div>
             </motion.div>
           </div>
-        </section>
+        </section >
 
-        {/* Vad Vi Erbjuder - Professional Design */}
-        <section className="py-16 md:py-24 relative">
-          <div className="container px-4 mx-auto">
+        {/* Feature Section - Premium Glassmorphism */}
+        < section className="py-24 md:py-32 relative overflow-hidden" >
+          {/* Background Elements */}
+          < div className="absolute top-1/2 left-1/4 w-[500px] h-[500px] bg-[#FF5D00]/5 blur-[120px] rounded-full pointer-events-none" />
+
+          <div className="container px-4 mx-auto relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-16"
+              className="text-center mb-20"
             >
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-                Vad Ingår?
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white tracking-tight">
+                Allt du behöver. <span className="text-[#FF5D00]">Ingenting annat.</span>
               </h2>
-              <p className="text-lg md:text-xl text-white/70 max-w-2xl mx-auto">
-                Allt du behöver för en professionell digital närvaro
+              <p className="text-xl text-white/60 max-w-2xl mx-auto">
+                En modern hemsida handlar inte bara om kod. Det handlar om resultat.
               </p>
             </motion.div>
 
-            <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className="group relative"
-              >
-                {/* Decorative background element */}
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-brand-500/20 to-brand-600/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition duration-500" />
-
-                <div className="relative p-8 rounded-2xl bg-white/[0.02] border border-white/10 hover:border-brand-500/30 transition-all duration-300 h-full">
-                  {/* Icon with subtle background */}
-                  <div className="relative mb-6">
-                    <div className="absolute inset-0 bg-brand-500/10 rounded-2xl blur-xl" />
-                    <div className="relative w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-500/10 to-brand-600/10 border border-brand-500/20 flex items-center justify-center">
-                      <Globe className="w-8 h-8 text-brand-400" />
-                    </div>
-                  </div>
-
-                  <h3 className="text-2xl font-bold mb-3 text-white">Modern Design</h3>
-                  <p className="text-white/60 leading-relaxed">
-                    Ren, professionell design som speglar ditt varumärke och engagerar besökare.
-                    Vi skapar hemsidor som både ser bra ut och fungerar perfekt.
-                  </p>
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="group relative"
-              >
-                {/* Decorative background element */}
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-brand-500/20 to-brand-600/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition duration-500" />
-
-                <div className="relative p-8 rounded-2xl bg-white/[0.02] border border-white/10 hover:border-brand-500/30 transition-all duration-300 h-full">
-                  {/* Icon with subtle background */}
-                  <div className="relative mb-6">
-                    <div className="absolute inset-0 bg-brand-500/10 rounded-2xl blur-xl" />
-                    <div className="relative w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-500/10 to-brand-600/10 border border-brand-500/20 flex items-center justify-center">
-                      <Zap className="w-8 h-8 text-brand-400" />
-                    </div>
-                  </div>
-
-                  <h3 className="text-2xl font-bold mb-3 text-white">AI-Integration</h3>
-                  <p className="text-white/60 leading-relaxed">
-                    Sömlös koppling med AI-receptionist för automatisk kundservice direkt från hemsidan.
-                    Besökare kan boka möten och få svar omedelbart.
-                  </p>
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                className="group relative"
-              >
-                {/* Decorative background element */}
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-brand-500/20 to-brand-600/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition duration-500" />
-
-                <div className="relative p-8 rounded-2xl bg-white/[0.02] border border-white/10 hover:border-brand-500/30 transition-all duration-300 h-full">
-                  {/* Icon with subtle background */}
-                  <div className="relative mb-6">
-                    <div className="absolute inset-0 bg-brand-500/10 rounded-2xl blur-xl" />
-                    <div className="relative w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-500/10 to-brand-600/10 border border-brand-500/20 flex items-center justify-center">
-                      <Calendar className="w-8 h-8 text-brand-400" />
-                    </div>
-                  </div>
-
-                  <h3 className="text-2xl font-bold mb-3 text-white">Snabb Leverans</h3>
-                  <p className="text-white/60 leading-relaxed">
-                    Din hemsida är klar på 1 vecka. Från idé till färdig webbplats på rekordtid.
-                    Vi jobbar effektivt utan att kompromissa på kvalitet.
-                  </p>
-                </div>
-              </motion.div>
-            </div>
-          </div>
-        </section>
-
-        {/* Komplett Paket - Professional Design */}
-        <section id="paket" className="py-16 md:py-24 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-brand-500/5 to-transparent pointer-events-none" />
-
-          <div className="container relative px-4 mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="max-w-6xl mx-auto"
-            >
-              <div className="text-center mb-16">
-                <span className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium bg-brand-500/10 text-brand-300 rounded-full border border-brand-500/20 mb-6">
-                  Rekommenderat
-                </span>
-                <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-                  Komplett Paketlösning
-                </h2>
-                <p className="text-lg md:text-xl text-white/70 max-w-2xl mx-auto">
-                  Hemsida + AI-receptionist i ett paket
-                </p>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-8 mb-12">
-                {/* Hemsida */}
+            <div className="grid md:grid-cols-3 gap-6 lg:gap-8 max-w-7xl mx-auto">
+              {[
+                {
+                  icon: <Globe className="w-8 h-8 text-[#FF5D00]" />,
+                  title: "Modern Design",
+                  desc: "Pixelperfekt design som fångar ditt varumärke och konverterar besökare till kunder."
+                },
+                {
+                  icon: <Zap className="w-8 h-8 text-[#FF5D00]" />,
+                  title: "AI-Driven",
+                  desc: "Inbyggd intelligens. Förberedd för framtiden med sömlös integration av AI-tjänster."
+                },
+                {
+                  icon: <Calendar className="w-8 h-8 text-[#FF5D00]" />,
+                  title: "Blixtsnabb Leverans",
+                  desc: "Från startmöte till lansering på 1 vecka. Vi slösar inte med din tid."
+                }
+              ].map((item, i) => (
                 <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.1 }}
-                  className="group relative"
+                  transition={{ delay: i * 0.1 }}
+                  className="group relative p-8 h-full rounded-3xl bg-[#0F0F0F] border border-white/5 hover:border-[#FF5D00]/30 transition-all duration-300"
                 >
-                  <div className="absolute -inset-0.5 bg-gradient-to-br from-brand-500/20 to-brand-600/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl" />
 
-                  <div className="relative p-8 rounded-2xl bg-white/[0.02] border border-white/10 hover:border-brand-500/30 transition-all duration-300 h-full">
-                    <div className="flex items-center gap-3 mb-6">
-                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-500/10 to-brand-600/10 border border-brand-500/20 flex items-center justify-center">
-                        <Globe className="w-6 h-6 text-brand-400" />
-                      </div>
-                      <h3 className="text-2xl font-bold text-white">Hemsida</h3>
+                  <div className="relative z-10">
+                    <div className="w-14 h-14 rounded-2xl bg-[#FF5D00]/10 flex items-center justify-center mb-6 border border-[#FF5D00]/20 group-hover:scale-110 transition-transform duration-300">
+                      {item.icon}
                     </div>
-
-                    <ul className="space-y-3">
-                      {[
-                        'Modern, responsiv design',
-                        'Upp till 10 sidor',
-                        'SEO-optimering',
-                        'Kontaktformulär',
-                        'Google Analytics',
-                        'Hosting första året',
-                        'Färdig på 1 vecka'
-                      ].map((item, i) => (
-                        <li key={i} className="flex items-start gap-3">
-                          <CheckCircle2 className="w-5 h-5 text-brand-400 flex-shrink-0 mt-0.5" />
-                          <span className="text-white/70">{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </motion.div>
-
-                {/* AI-Receptionist */}
-                <motion.div
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                  className="group relative"
-                >
-                  <div className="absolute -inset-0.5 bg-gradient-to-br from-brand-500/20 to-brand-600/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition duration-500" />
-
-                  <div className="relative p-8 rounded-2xl bg-white/[0.02] border border-white/10 hover:border-brand-500/30 transition-all duration-300 h-full">
-                    <div className="flex items-center gap-3 mb-6">
-                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-500/10 to-brand-600/10 border border-brand-500/20 flex items-center justify-center">
-                        <Sparkles className="w-6 h-6 text-brand-400" />
-                      </div>
-                      <h3 className="text-2xl font-bold text-white">AI-Receptionist</h3>
-                    </div>
-
-                    <ul className="space-y-3">
-                      {[
-                        '24/7 telefonhantering',
-                        'Automatisk mötesbokning',
-                        'Integration med hemsidan',
-                        'Anpassad röst',
-                        'Dashboard med statistik',
-                        'Obegränsade samtal',
-                        'Svensk support'
-                      ].map((item, i) => (
-                        <li key={i} className="flex items-start gap-3">
-                          <CheckCircle2 className="w-5 h-5 text-brand-400 flex-shrink-0 mt-0.5" />
-                          <span className="text-white/70">{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </motion.div>
-              </div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                className="max-w-3xl mx-auto"
-              >
-                <div className="p-8 md:p-10 rounded-2xl bg-white/[0.02] border border-white/10">
-                  <div className="text-center mb-6">
-                    <p className="text-sm text-white/60 mb-2">Komplett paket från</p>
-                    <p className="text-3xl md:text-4xl font-bold text-brand-400 mb-2">
-                      Kontakta oss
+                    <h3 className="text-2xl font-bold text-white mb-4">{item.title}</h3>
+                    <p className="text-white/50 leading-relaxed group-hover:text-white/70 transition-colors">
+                      {item.desc}
                     </p>
-                    <p className="text-white/60">för skräddarsydd offert</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section >
+
+        {/* Package Section - Bento Grid Style */}
+        < section id="paket" className="py-24 md:py-32 bg-[#050505] relative overflow-hidden" >
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/5 via-transparent to-transparent opacity-20" />
+
+          <div className="container relative px-4 mx-auto max-w-7xl">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+
+              {/* Left Content */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+              >
+                <span className="text-[#FF5D00] font-mono text-sm tracking-widest uppercase mb-4 block">
+                  Det kompletta paketet
+                </span>
+                <h2 className="text-4xl md:text-6xl font-bold text-white mb-8 leading-tight">
+                  Hemsida + AI.<br />
+                  <span className="text-white/40">Den nya standarden.</span>
+                </h2>
+
+                <div className="space-y-6">
+                  <div className="flex gap-4 items-start p-4 rounded-xl hover:bg-white/5 transition-colors border border-transparent hover:border-white/5">
+                    <div className="p-3 rounded-lg bg-[#FF5D00]/10 shrink-0">
+                      <Globe className="text-[#FF5D00]" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-white mb-2">Premium Hemsida</h3>
+                      <p className="text-white/50">Responsiv, SEO-optimerad och byggd för konvertering. Allt ingår: hosting, domänkoppling och design.</p>
+                    </div>
                   </div>
 
-                  <div className="flex justify-center">
-                    <button
-                      onClick={() => window.location.href = '/#demo'}
-                      className="inline-flex items-center gap-2 px-8 py-4 bg-brand-500 hover:bg-brand-600 text-white font-semibold rounded-lg transition-colors duration-200 group"
-                    >
-                      Boka Konsultation
-                      <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" />
-                    </button>
+                  <div className="flex gap-4 items-start p-4 rounded-xl hover:bg-white/5 transition-colors border border-transparent hover:border-white/5">
+                    <div className="p-3 rounded-lg bg-[#FF5D00]/10 shrink-0">
+                      <Sparkles className="text-[#FF5D00]" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-white mb-2">AI Frontdesk Maja</h3>
+                      <p className="text-white/50">Maja tar hand om dina besökare dygnet runt. Bokar möten, svarar på frågor och guidar rätt.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-10 flex flex-wrap gap-4">
+                  <a href="#demo" className="px-8 py-4 bg-[#FF5D00] hover:bg-[#FF7A33] text-black font-bold rounded-full transition-all hover:scale-105">
+                    Få Offert
+                  </a>
+                </div>
+              </motion.div>
+
+              {/* Right Visual - Abstract Representation */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                className="relative h-[500px] w-full bg-[#0F0F0F] rounded-[40px] border border-white/10 overflow-hidden group"
+              >
+                {/* Decorative Gradient */}
+                <div className="absolute inset-0 bg-gradient-to-br from-[#FF5D00]/20 via-transparent to-transparent opacity-50" />
+
+                {/* Floating Cards Mockup */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 aspect-video bg-[#1A1A1A] rounded-xl border border-white/10 shadow-2xl overflow-hidden group-hover:scale-105 transition-transform duration-700">
+                  <div className="h-8 bg-[#222] border-b border-white/5 flex items-center px-4 gap-2">
+                    <div className="w-2 h-2 rounded-full bg-red-500/50" />
+                    <div className="w-2 h-2 rounded-full bg-yellow-500/50" />
+                    <div className="w-2 h-2 rounded-full bg-green-500/50" />
+                  </div>
+                  {/* Abstract UI Lines */}
+                  <div className="p-6 space-y-4">
+                    <div className="h-8 w-1/3 bg-white/10 rounded-lg animate-pulse" />
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="h-24 bg-white/5 rounded-lg" />
+                      <div className="h-24 bg-white/5 rounded-lg" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Connection Lines */}
+                <div className="absolute bottom-10 right-10 flex items-center gap-3 backdrop-blur-md bg-black/40 p-4 rounded-2xl border border-white/10">
+                  <div className="flex -space-x-3">
+                    <div className="w-10 h-10 rounded-full bg-[#FF5D00] flex items-center justify-center border-2 border-[#0F0F0F] z-10">
+                      <Sparkles size={16} className="text-black" />
+                    </div>
+                    <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center border-2 border-[#0F0F0F]">
+                      <Globe size={16} className="text-black" />
+                    </div>
+                  </div>
+                  <div className="text-xs font-mono">
+                    <span className="text-white block">System</span>
+                    <span className="text-[#00C455]">Connected</span>
                   </div>
                 </div>
               </motion.div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* Process - Förenklad till 3 steg */}
-        <section className="py-16 md:py-24">
-          <div className="container px-4 mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-12 md:mb-16"
-            >
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-                Så Fungerar Det
-              </h2>
-              <p className="text-lg md:text-xl text-white/70 max-w-2xl mx-auto">
-                Från idé till färdig hemsida på 1 vecka
-              </p>
-            </motion.div>
-
-            <div className="max-w-5xl mx-auto">
-              <div className="grid md:grid-cols-3 gap-8">
-                {[
-                  {
-                    step: '01',
-                    title: 'Konsultation',
-                    description: 'Vi diskuterar dina behov, målgrupp och önskemål för hemsidan.'
-                  },
-                  {
-                    step: '02',
-                    title: 'Design & Utveckling',
-                    description: 'Vi skapar en skräddarsydd hemsida med modern design och AI-integration.'
-                  },
-                  {
-                    step: '03',
-                    title: 'Lansering',
-                    description: 'Din hemsida går live med full support och AI-receptionist redo att ta emot besökare.'
-                  }
-                ].map((step, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                    className="relative"
-                  >
-                    <div className="text-center">
-                      <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-500/10 border border-brand-500/20 mb-6">
-                        <span className="text-2xl font-bold text-brand-400">{step.step}</span>
-                      </div>
-                      <h3 className="text-xl md:text-2xl font-semibold mb-2">{step.title}</h3>
-                      <p className="text-white/70 leading-relaxed">{step.description}</p>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
             </div>
           </div>
-        </section>
+        </section >
 
-        {/* CTA Section - Enklare */}
-        <section className="py-16 md:py-24">
-          <div className="container px-4 mx-auto">
+        {/* Process Section - Timeline */}
+        < section className="py-24 md:py-32 relative" >
+          <div className="container px-4 mx-auto max-w-7xl">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="max-w-4xl mx-auto text-center p-10 md:p-16 rounded-3xl bg-gradient-to-br from-brand-500/10 to-brand-600/10 border border-brand-500/20"
+              className="text-center mb-20"
             >
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
-                Redo att Komma Igång?
+              <h2 className="text-3xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-white/50">
+                Från idé till verklighet
               </h2>
-              <p className="text-lg md:text-xl text-white/80 mb-8 max-w-2xl mx-auto">
-                Boka en kostnadsfri konsultation så diskuterar vi hur vi kan hjälpa ditt företag.
-              </p>
-              <button
-                onClick={() => window.location.href = '/#demo'}
-                className="inline-flex items-center gap-2 px-8 py-4 bg-brand-500 hover:bg-brand-600 text-white font-semibold rounded-lg transition-colors duration-200 text-lg"
-              >
-                Boka Konsultation Nu
-                <ArrowRight className="w-5 h-5" />
-              </button>
             </motion.div>
+
+            <div className="grid md:grid-cols-3 gap-8 relative">
+              {/* Connecting Line (Desktop) */}
+              <div className="hidden md:block absolute top-12 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#FF5D00]/30 to-transparent" />
+
+              {[
+                { step: "01", title: "Vision", text: "Vi kartlägger dina behov och sätter strategin." },
+                { step: "02", title: "Bygge", text: "Vi utvecklar design och integrerar AI-systemen." },
+                { step: "03", title: "Launch", text: "Lansering, optimering och överlämning." }
+              ].map((item, i) => (
+                <div key={i} className="relative pt-8 text-center group">
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-4 h-4 bg-black border-2 border-[#FF5D00] rounded-full z-10 group-hover:scale-150 transition-transform duration-300 shadow-[0_0_20px_rgba(255,93,0,0.5)]" />
+                  <div className="text-8xl font-bold text-white/[0.03] absolute -top-10 left-1/2 -translate-x-1/2 select-none pointer-events-none">
+                    {item.step}
+                  </div>
+                  <h3 className="text-2xl font-bold text-white mb-2 relative z-10">{item.title}</h3>
+                  <p className="text-white/50 max-w-xs mx-auto relative z-10">{item.text}</p>
+                </div>
+              ))}
+            </div>
           </div>
-        </section>
-      </main>
+        </section >
+
+        {/* New Booking CTA - Matching Maja Style */}
+        < section id="booking-cta" className="py-24 md:py-32 bg-black relative overflow-hidden border-t border-white/5" >
+          <div className="absolute inset-0 bg-[#FF5D00]/5 opacity-20" />
+          <div className="container relative px-4 mx-auto text-center max-w-4xl">
+            <h2 className="text-5xl md:text-7xl font-bold text-white mb-8 tracking-tighter">
+              Redo att levla upp?
+            </h2>
+            <p className="text-xl text-white/60 mb-12">
+              Prata med Maja nere i hörnet så bokar hon in ett möte åt oss direkt.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <button
+                onClick={() => {
+                  // Försök trigga widgeten om den har ett API
+                  if (typeof window !== 'undefined' && (window as any).majaWidget) {
+                    (window as any).majaWidget.open();
+                  }
+                }}
+                className="px-10 py-5 bg-[#FF5D00] hover:bg-[#FF7A33] text-black text-xl font-bold rounded-full transition-all hover:scale-105 shadow-[0_0_30px_rgba(255,93,0,0.4)]"
+              >
+                Prata med Maja
+              </button>
+              <span className="text-white/30 text-sm font-mono mt-4 sm:mt-0">
+                        // Maja sköter bokningen.
+              </span>
+            </div>
+          </div>
+        </section >
+      </main >
 
       <Footer />
-    </div>
+    </div >
   )
 }

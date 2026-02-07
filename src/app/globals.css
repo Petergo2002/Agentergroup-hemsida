@@ -3,129 +3,82 @@
 @tailwind utilities;
 
 :root {
-  --background: #000000; /* pure black for minimal look */
-  --foreground: #ededed;
+  --background: #000000;
+  --foreground: #ffffff;
+  --brand-primary: #FF5D00;
+  --brand-primary-dim: #E04F00;
   --font-inter: 'Inter', system-ui, sans-serif;
   --font-poppins: 'Poppins', system-ui, sans-serif;
+  --font-sans: var(--font-inter);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #000000;
+    --foreground: #ffffff;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Protect site styles from external widgets */
-body > *:not(vapi-widget) {
-  font-family: var(--font-sans) !important;
+/* Lenis Smooth Scroll */
+html.lenis,
+html.lenis body {
+  height: auto;
 }
 
-/* Ensure Vapi widget doesn't interfere with page layout */
-vapi-widget {
-  position: fixed !important;
-  z-index: 9999 !important;
-  bottom: 20px !important;
-  right: 20px !important;
-  isolation: isolate !important;
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
 }
 
-/* Reset any global style pollution */
-* {
-  box-sizing: border-box;
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
 }
 
-/* Preserve Tailwind and custom styles */
-.container,
-.max-w-7xl,
-.max-w-6xl,
-.max-w-5xl,
-.max-w-4xl,
-.max-w-3xl,
-.max-w-2xl {
-  font-family: var(--font-sans) !important;
+.lenis.lenis-stopped {
+  overflow: hidden;
 }
 
-/* Global layout helpers */
-html, body {
-  height: 100%;
-  overflow-x: hidden; /* Prevent horizontal scrolling on mobile */
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
 }
 
-/* Custom utilities ported from Vite project */
-.glass {
-  @apply bg-white/10 backdrop-blur-md border border-white/10;
-}
-
-.section {
-  @apply py-24 md:py-32;
-}
-
+/* Typography & Layout */
 .container {
   @apply max-w-7xl mx-auto px-6;
 }
 
-.btn {
-  @apply inline-flex items-center justify-center gap-2 rounded-lg px-5 py-3 font-semibold transition-all;
+/* Custom Effects */
+.text-glow {
+  text-shadow: 0 0 20px rgba(0, 234, 100, 0.3);
 }
 
-.btn-primary {
-  @apply bg-brand-600 hover:bg-brand-500 text-white;
-  box-shadow: var(--shadow-soft);
+.bg-glow-green {
+  background-image: radial-gradient(circle at center, rgba(0, 234, 100, 0.15) 0%, transparent 70%);
 }
 
-.btn-secondary {
-  @apply border border-brand-400 text-brand-400 hover:bg-brand-400/10;
+.glass-panel {
+  @apply bg-white/5 backdrop-blur-xl border border-white/10;
 }
 
-/* Background helpers that replaced Tailwind v3 backgroundImage tokens */
-.bg-grid {
-  background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.06) 1px, transparent 0);
-}
+/* Animations */
+@keyframes pulse-green {
 
-.bg-glow {
-  /* subtle dual-color glow using the new palette (orange + soft coral) */
-  background-image: radial-gradient(1000px 500px at 0% 0%, rgba(253,109,75,0.18), transparent),
-    radial-gradient(1000px 500px at 100% 0%, rgba(255,138,108,0.18), transparent);
-}
+  0%,
+  100% {
+    box-shadow: 0 0 10px rgba(0, 234, 100, 0.2);
+  }
 
-/* CardSwap global styles */
-.card-swap-container {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  transform: translate(5%, 20%);
-  transform-origin: bottom right;
-  perspective: 900px;
-  overflow: visible;
-}
-
-.card {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.14);
-  background: #000;
-  transform-style: preserve-3d;
-  will-change: transform;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-
-@media (max-width: 768px) {
-  .card-swap-container {
-    transform: scale(0.75) translate(25%, 25%);
+  50% {
+    box-shadow: 0 0 25px rgba(0, 234, 100, 0.4);
   }
 }
 
-@media (max-width: 480px) {
-  .card-swap-container {
-    transform: scale(0.55) translate(25%, 25%);
-  }
+.animate-pulse-green {
+  animation: pulse-green 3s infinite;
 }

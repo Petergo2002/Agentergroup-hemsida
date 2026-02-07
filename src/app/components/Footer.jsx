@@ -8,7 +8,7 @@ export default function Footer() {
           <a href="#hero" className="flex items-center gap-2 font-extrabold tracking-tight">
             <div className="h-12 w-12 md:h-14 md:w-14 rounded-lg bg-white border-2 border-white/80 p-1.5 shadow">
               <img 
-                src="/favicon/favicon-192x192%202.png" 
+                src="/favicon/favicon-192x192.png" 
                 alt="Agenter Group Favicon" 
                 className="h-full w-full object-contain"
               />

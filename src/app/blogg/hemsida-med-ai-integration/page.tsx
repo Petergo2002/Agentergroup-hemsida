@@ -1,10 +1,14 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import BlogCTA from '../../components/BlogCTA'
+
+
+import { Calendar, Clock, ArrowLeft, Layout, Sparkles, Target, Globe } from 'lucide-react'
 
 const title = 'Hemsida med AI-integration: Framtidens kundservice | Agenter Group'
 const description =
   'Din hemsida är ditt digitala skyltfönster. Med AI-integration kan den också bli din bästa säljare och kundtjänstmedarbetare. Lär dig hur.'
-const url = '/blogg/hemsida-med-ai-integration'
+const url = '/blogg/hemsida-med-ai-integration/'
 
 export const metadata: Metadata = {
   title,
@@ -13,18 +17,15 @@ export const metadata: Metadata = {
     'AI integration hemsida',
     'smart kundservice',
     'chattbot AI',
-    'konverteringsoptimering',
     'hemsida med ai',
-    'Agenter Group',
-    'webbutveckling AI'
+    'Agenter Group'
   ],
   alternates: { canonical: url },
   openGraph: {
     title,
     description,
     type: 'article',
-    url,
-    tags: ['Webbutveckling', 'AI-integration', 'Kundservice', 'Konvertering']
+    url
   }
 }
 
@@ -63,202 +64,120 @@ function JsonLd() {
 
 export default function BlogPost() {
   return (
-    <>
+    <div className="min-h-screen bg-black text-white font-sans">
       <JsonLd />
-      <div className="min-h-screen bg-black text-white">
-        {/* Header */}
-        <header className="border-b border-white/10 bg-black/50 backdrop-blur-sm sticky top-0 z-40">
-          <div className="container mx-auto px-4 py-4">
-            <Link
-              href="/"
-              className="inline-flex items-center gap-2 text-white/70 hover:text-white transition-colors"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-              </svg>
-              Tillbaka till startsidan
-            </Link>
-          </div>
-        </header>
 
-        {/* Article */}
+      <main>
+        {/* Hero Header Section */}
+        <section className="relative h-[40vh] min-h-[400px] flex items-end overflow-hidden">
+          <div className="absolute inset-0 z-0">
+
+          </div>
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black z-10" />
+
+          <div className="container relative px-4 mx-auto z-20 pb-12">
+            <div>
+              <Link
+                href="/blogg"
+                className="inline-flex items-center gap-2 text-[#FF5D00] hover:text-white transition-colors mb-6 text-sm font-mono uppercase tracking-widest"
+              >
+                <ArrowLeft size={16} />
+                Tillbaka till bloggen
+              </Link>
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tighter max-w-4xl">
+                Din hemsida <span className="text-[#FF5D00]">är</span> din frontdesk.
+              </h1>
+            </div>
+          </div>
+        </section>
+
+        {/* Article Content */}
         <article className="container mx-auto px-4 py-12 md:py-20 max-w-4xl">
-          {/* Meta info */}
           <div className="mb-8">
-            <Link
-              href="/blogg"
-              className="inline-block text-sm text-brand-400 hover:text-brand-300 mb-4 transition-colors"
-            >
-              ← Alla artiklar
-            </Link>
             <div className="flex flex-wrap gap-2 mb-4">
-              <span className="px-3 py-1 text-xs font-medium bg-brand-500/10 text-brand-300 rounded-full border border-brand-500/20">
+              <span className="px-3 py-1 text-xs font-medium bg-[#FF5D00]/10 text-[#FF5D00] rounded-full border border-[#FF5D00]/20">
                 Webbutveckling
               </span>
-              <span className="px-3 py-1 text-xs font-medium bg-brand-500/10 text-brand-300 rounded-full border border-brand-500/20">
-                AI-Integration
+              <span className="px-3 py-1 text-xs font-medium bg-[#FF5D00]/10 text-[#FF5D00] rounded-full border border-[#FF5D00]/20">
+                Integration
               </span>
             </div>
-            <time className="text-sm text-white/50" dateTime={PUBLISHED}>
-              Publicerad: {new Date(PUBLISHED).toLocaleDateString('sv-SE', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-              })}
-            </time>
+            <div className="flex items-center gap-4 text-sm text-white/40 font-mono">
+              <div className="flex items-center gap-1.5">
+                <Calendar size={14} className="text-[#FF5D00]" />
+                {PUBLISHED}
+              </div>
+              <div className="flex items-center gap-1.5">
+                <Clock size={14} className="text-[#FF5D00]" />
+                7 min läsning
+              </div>
+            </div>
           </div>
 
-          {/* Title */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+          <h1 className="text-4xl md:text-5xl font-bold mb-8 leading-tight tracking-tight">
             Hemsida med AI-integration: Framtidens kundservice
           </h1>
 
-          {/* Lead */}
-          <p className="text-xl md:text-2xl text-white/80 mb-12 leading-relaxed border-l-4 border-brand-500 pl-6">
+          <p className="text-xl md:text-2xl text-white/60 mb-12 leading-relaxed border-l-4 border-[#FF5D00] pl-6">
             Din hemsida är öppen dygnet runt, men är din kundservice det?
             Med AI-integration förvandlar du din webbplats från en statisk broschyr till en interaktiv, säljande assistent.
           </p>
 
-          {/* Content */}
-          <div className="prose prose-invert prose-lg max-w-none">
-
-            <p className="text-white/80 leading-relaxed mb-6">
-              Besökare stannar i genomsnitt mindre än 15 sekunder på en hemsida. Om de inte hittar vad de söker, lämnar de. En statisk FAQ-sida räcker inte längre. Dagens konsumenter vill ha svar nu, och de vill ha det enkelt.
+          <div className="prose prose-invert prose-orange max-w-none">
+            <h2 className="text-3xl font-bold mt-16 mb-8 text-white tracking-tight">Mer än bara en chattbot</h2>
+            <p className="text-lg text-white/80 leading-relaxed mb-8">
+              När vi pratar om AI-integration på hemsidor menar vi inte de gamla, dumma chattbotarna som bara kunde svara "Jag förstår inte". Vi pratar om avancerade modeller som tränats på just din företagsdata för att ge korrekta, mänskliga svar.
             </p>
 
-            <h2 className="text-3xl font-bold mt-12 mb-6 text-white">Mer än bara en chattbot</h2>
-
-            <p className="text-white/80 leading-relaxed mb-6">
-              När vi pratar om AI-integration på hemsidor menar vi inte de gamla, dumma chattbotarna som bara kunde svara &quot;Jag förstår inte&quot;. Vi pratar om avancerade LLM:er (Large Language Models) som tränats på just din företagsdata.
-            </p>
-
-            <div className="bg-white/5 border border-white/10 rounded-xl p-6 my-8">
-              <h3 className="text-xl font-bold mb-4 text-white">Vad kan en modern AI-assistent på hemsidan göra?</h3>
-              <ul className="space-y-3 text-white/80">
-                <li className="flex gap-3">
-                  <span className="text-brand-400 font-bold">1.</span>
-                  <span><strong>Produktrekommendationer:</strong> &quot;Jag letar efter en present till min pappa som gillar golf.&quot; -&gt; AI:n föreslår relevanta produkter från er katalog.</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-brand-400 font-bold">2.</span>
-                  <span><strong>Support dygnet runt:</strong> &quot;Hur returnerar jag en vara?&quot; -&gt; AI:n ger instruktioner och länkar till returformuläret.</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-brand-400 font-bold">3.</span>
-                  <span><strong>Leadgenerering:</strong> &quot;Vill du boka en demo för att se hur det funkar?&quot; -&gt; AI:n samlar in kontaktuppgifter direkt i chatten.</span>
-                </li>
-                 <li className="flex gap-3">
-                  <span className="text-brand-400 font-bold">4.</span>
-                  <span><strong>Flerspråkighet:</strong> Besökaren skriver på spanska? AI:n svarar på spanska, även om din hemsida är på svenska.</span>
-                </li>
-              </ul>
+            <div className="grid sm:grid-cols-2 gap-6 my-12">
+              {[
+                { icon: Sparkles, title: "Produktval", text: "Hjälp kunder att hitta rätt produkt genom smart guidning." },
+                { icon: Globe, title: "Flerspråkig", text: "Kommunicera på över 50 språk helt sömlöst." },
+                { icon: Target, title: "Leadgen", text: "Samla in prospekt direkt genom konversationer." },
+                { icon: Layout, title: "Anpassning", text: "Design som smälter in i er varumärkesprofil." }
+              ].map((item, i) => {
+                const Icon = item.icon;
+                return (
+                  <div key={i} className="p-8 rounded-[32px] bg-[#0F0F0F] border border-white/5 hover:border-[#FF5D00]/20 transition-all group">
+                    <Icon className="text-[#FF5D00] mb-4 opacity-40 group-hover:opacity-100 transition-opacity" size={28} />
+                    <h4 className="text-white font-bold mb-2">{item.title}</h4>
+                    <p className="text-sm text-white/50 leading-relaxed">{item.text}</p>
+                  </div>
+                );
+              })}
             </div>
 
-            <h2 className="text-3xl font-bold mt-12 mb-6 text-white">Varför konverteringen ökar</h2>
-
-            <p className="text-white/80 leading-relaxed mb-6">
-              Det handlar om att minska friktionen. Varje klick en användare måste göra ökar risken att de hoppar av. Med en AI-assistent kan besökaren ställa sin fråga direkt och få svaret serverat, istället för att leta igenom menyer.
-            </p>
-            <p className="text-white/80 leading-relaxed mb-6">
-              Dessutom är AI:n proaktiv. Den kan &quot;poppa upp&quot; med ett erbjudande baserat på vilken sida besökaren tittar på, precis som en butikssäljare som frågar &quot;Kan jag hjälpa till med något?&quot; när du står och funderar.
+            <h2 className="text-3xl font-bold mt-16 mb-8 text-white tracking-tight">Varför konverteringen ökar</h2>
+            <p className="text-white/70 mb-8 leading-relaxed text-lg">
+              Det handlar om att minska friktionen. Varje klick en användare måste göra ökar risken att de hoppar av. Med en AI-assistent kan besökaren ställa sin fråga direkt och få svaret serverat, istället för att leta igenom menyer eller FAQ-sidor.
             </p>
 
-            <h2 className="text-3xl font-bold mt-12 mb-6 text-white">Integrationen: Enklare än du tror</h2>
-
-            <p className="text-white/80 leading-relaxed mb-6">
-              Att lägga till intelligens på din hemsida kräver inte att du bygger om den från grunden. Oftast handlar det om att lägga till ett litet script (några rader kod) som aktiverar AI-widgeten.
-            </p>
-
-            <h3 className="text-2xl font-semibold mt-8 mb-4 text-white">Datan är nyckeln</h3>
-            <p className="text-white/80 leading-relaxed mb-6">
-              För att AI:n ska vara smart måste den veta allt om ditt företag. Vi &quot;matar&quot; den med:
-            </p>
-            <ul className="list-disc pl-6 space-y-2 text-white/80 mb-6">
-              <li>Er befintliga hemsida (den läser in alla sidor).</li>
-              <li>Produktkataloger och prislistor.</li>
-              <li>Tidigare supportärenden och FAQ.</li>
-              <li>PDF-dokument och manualer.</li>
-            </ul>
-            <p className="text-white/80 leading-relaxed mb-6">
-              När detta är gjort har du en expert som kan allt om företaget, aldrig sover och kan prata med tusentals kunder samtidigt.
-            </p>
-
-            <h2 className="text-3xl font-bold mt-12 mb-6 text-white">Framtidens kundservice är proaktiv</h2>
-
-            <p className="text-white/80 leading-relaxed mb-6">
-              Vi går mot en framtid där hemsidor inte längre är statiska dokument, utan dynamiska konversationer. Företag som anammar detta tidigt får en enorm konkurrensfördel. Det handlar om att möta kunden där den är, på det sätt den vill bli bemött.
-            </p>
-
-            <div className="bg-gradient-to-r from-brand-500/10 to-brand-600/10 border border-brand-500/20 rounded-2xl p-8 my-12 text-center">
-              <h3 className="text-2xl font-bold mb-4 text-white">Gör din hemsida intelligent</h3>
-              <p className="text-white/80 mb-6 max-w-2xl mx-auto">
-                Vill du uppgradera din hemsida med en AI-assistent? Vi hjälper dig med integrationen från start till mål.
-              </p>
-              <Link
-                href="/#demo"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-brand-500 hover:bg-brand-600 text-white font-semibold rounded-lg transition-colors duration-200"
-              >
-                Kontakta oss för demo
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </Link>
-            </div>
-
-          </div>
-
-          {/* Author & Date */}
-          <div className="mt-16 pt-8 border-t border-white/10">
-            <div className="flex items-center justify-between flex-wrap gap-4">
-              <div>
-                <p className="text-sm text-white/50">Författare</p>
-                <p className="text-white font-medium">Agenter Group AB</p>
-              </div>
-              <div className="text-right">
-                <p className="text-sm text-white/50">Senast uppdaterad</p>
-                <time className="text-white font-medium" dateTime={UPDATED}>
-                  {new Date(UPDATED).toLocaleDateString('sv-SE', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                  })}
-                </time>
+            <div className="bg-[#0F0F0F] border border-white/5 rounded-[32px] p-8 md:p-12 my-16 text-center relative overflow-hidden group">
+              <div className="absolute inset-0 bg-[#FF5D00]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative z-10">
+                <span className="text-[#FF5D00] font-mono text-xs uppercase tracking-[0.2em] mb-4 block">Hemsidor 2.0</span>
+                <h3 className="text-3xl md:text-4xl font-bold mb-6 text-white tracking-tight">Gör din hemsida intelligent</h3>
+                <p className="text-white/50 mb-10 max-w-2xl mx-auto leading-relaxed">
+                  Vill du uppgradera din hemsida med Maja? Vi hjälper dig med integrationen från start till mål så att du kan börja konvertera fler besökare idag.
+                </p>
+                <BlogCTA />
               </div>
             </div>
           </div>
 
-          {/* Related Articles */}
-          <div className="mt-16">
-            <h3 className="text-2xl font-bold mb-6 text-white">Läs mer</h3>
-            <div className="grid md:grid-cols-2 gap-6">
-              <Link
-                href="/blogg/motesbokning-24-7-guide-till-ai-driven-schemalaggning"
-                className="group p-6 bg-white/5 border border-white/10 rounded-xl hover:border-brand-500/30 transition-all duration-300"
-              >
-                <h4 className="text-xl font-semibold mb-2 text-white group-hover:text-brand-300 transition-colors">
-                   Mötesbokning 24/7 med AI
-                </h4>
-                <p className="text-white/70 text-sm">
-                  Så fyller du kalendern automatiskt.
-                </p>
-              </Link>
-
-               <Link
-                href="/blogg/sa-automatiserar-du-telefonhantering-med-ai-agenter"
-                className="group p-6 bg-white/5 border border-white/10 rounded-xl hover:border-brand-500/30 transition-all duration-300"
-              >
-                <h4 className="text-xl font-semibold mb-2 text-white group-hover:text-brand-300 transition-colors">
-                   Automatisera telefonhantering
-                </h4>
-                <p className="text-white/70 text-sm">
-                  Guide till röststyrd AI för telefon.
-                </p>
+          <footer className="mt-20 pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between gap-8 items-center">
+            <div className="flex flex-col gap-1 text-center md:text-left">
+              <span className="text-white/40 text-xs font-mono uppercase tracking-widest">Skriven av</span>
+              <span className="text-white font-bold tracking-tight text-lg">Agenter Group Digital Design</span>
+            </div>
+            <div className="flex gap-4">
+              <Link href="/blogg" className="text-white/40 hover:text-[#FF5D00] transition-colors text-sm font-mono uppercase tracking-widest">
+                Tillbaka till insikter
               </Link>
             </div>
-          </div>
-
+          </footer>
         </article>
-      </div>
-    </>
+      </main>
+    </div>
   )
 }

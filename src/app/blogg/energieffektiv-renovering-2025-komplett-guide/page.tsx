@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation'
 const title = 'Energieffektiv renovering 2025 – komplett guide | ByggFutur'
 const description =
   'En praktisk guide till hur du renoverar energieffektivt 2025: isolering, fönster, värmepump, solceller och smart styrning – plus hur du planerar, budgeterar och maximerar avkastningen.'
-const url = '/blogg/energieffektiv-renovering-2025-komplett-guide'
+const url = '/blogg/energieffektiv-renovering-2025-komplett-guide/'
 
 export const metadata: Metadata = {
   title,

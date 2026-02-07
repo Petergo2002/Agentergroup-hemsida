@@ -21,16 +21,16 @@ export const metadata: Metadata = {
     'hemsida paketlösning',
     'Agenter Group hemsidor'
   ],
-  alternates: { canonical: '/hemsidor' },
+  alternates: { canonical: '/hemsidor/' },
   openGraph: {
     title: 'Hemsidor med AI-Integration | Moderna Webbplatser – Agenter Group',
     description:
       'Professionella hemsidor med sömlös AI-receptionist integration. Modern design, SEO-optimering och snabb leverans på 1 vecka.',
-    url: '/hemsidor',
+    url: '/hemsidor/',
     type: 'website',
     images: [
       {
-        url: '/logo/Purple and Orange Modern Letter A Initial Logo copy.png',
+        url: '/logo/logo.png',
         width: 1200,
         height: 630,
         alt: 'Agenter Group - Hemsidor med AI-Integration'
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     title: 'Hemsidor med AI-Integration | Moderna Webbplatser',
     description:
       'Professionella hemsidor med sömlös AI-receptionist integration. Modern design och snabb leverans.',
-    images: ['/logo/Purple and Orange Modern Letter A Initial Logo copy.png']
+    images: ['/logo/logo.png']
   }
 }
 

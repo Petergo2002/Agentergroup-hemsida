@@ -57,11 +57,11 @@ export default function NavBarSimple() {
           <a href="/" className="flex-shrink-0 z-20">
             <div className="relative h-11 w-11 md:h-16 md:w-16">
               <img 
-                src="/logo/ChatGPT%20Image%20Nov%2017%2C%202025%2C%2001_29_34%20PM.png" 
+                src="/logo/logo.png" 
                 alt="Agenter Group" 
                 className="h-full w-full object-contain transform scale-[1.1] md:scale-[1.15]"
                 style={{ transformOrigin: 'center' }}
-                onError={(e) => { e.currentTarget.src = '/favicon/favicon-192x192%202.png' }}
+                onError={(e) => { e.currentTarget.src = '/favicon/favicon-192x192.png' }}
               />
             </div>
           </a>

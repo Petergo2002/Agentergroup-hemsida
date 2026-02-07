@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-require-imports */
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -10,16 +9,16 @@ module.exports = {
     extend: {
       colors: {
         brand: {
-          50: '#FFF0EC',
-          100: '#FFE1D9',
-          200: '#FFC3B4',
-          300: '#FFA28A',
-          400: '#FF6E00',
-          500: '#FD6D4B',
-          600: '#E85F40',
-          700: '#C94F35',
-          800: '#A3422D',
-          900: '#7A3121',
+          50: '#E6FDF0',
+          100: '#C0F9D9',
+          200: '#95F2BB',
+          300: '#67E99A',
+          400: '#3BD976',
+          500: '#00EA64',
+          600: '#00C455',
+          700: '#009E44',
+          800: '#007A35',
+          900: '#005927',
         },
       },
       fontFamily: {
