@@ -2,6 +2,7 @@
 
 import React, { ReactNode, useLayoutEffect, useRef, useCallback } from 'react';
 import Lenis from 'lenis';
+import { useLenis } from 'lenis/react';
 
 export interface ScrollStackItemProps {
   itemClassName?: string;
@@ -213,31 +214,21 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
     updateCardTransforms();
   }, [updateCardTransforms]);
 
-  const setupLenis = useCallback(() => {
+  /* 
+   * FIX: Use global Lenis instance via useLenis hook when useWindowScroll is true.
+   * This prevents creating a duplicate Lenis instance which causes scroll locking on mobile.
+   */
+
+  // Hook into global lenis scroll events
+  useLenis(({ scroll }) => {
     if (useWindowScroll) {
-      const lenis = new Lenis({
-        duration: 1.2,
-        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        smoothWheel: true,
-        touchMultiplier: 2,
-        infinite: false,
-        wheelMultiplier: 1,
-        lerp: 0.1,
-        syncTouch: true,
-        syncTouchLerp: 0.075
-      });
+      handleScroll();
+    }
+  }, [handleScroll, useWindowScroll]);
 
-      lenis.on('scroll', handleScroll);
-
-      const raf = (time: number) => {
-        lenis.raf(time);
-        animationFrameRef.current = requestAnimationFrame(raf);
-      };
-      animationFrameRef.current = requestAnimationFrame(raf);
-
-      lenisRef.current = lenis;
-      return lenis;
-    } else {
+  const setupLenis = useCallback(() => {
+    // Only setup local Lenis if NOT using window scroll
+    if (!useWindowScroll) {
       const scroller = scrollerRef.current;
       if (!scroller) return;
 
@@ -290,7 +281,10 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
       (card as HTMLElement).style.perspective = '1000px';
     });
 
-    setupLenis();
+    // Only setup local lenis if we are NOT using window scroll
+    if (!useWindowScroll) {
+      setupLenis();
+    }
 
     updateCardTransforms();
 
@@ -324,19 +318,19 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
 
   const containerStyles = useWindowScroll
     ? {
-        overscrollBehavior: 'contain' as const,
-        WebkitOverflowScrolling: 'touch' as const,
-        WebkitTransform: 'translateZ(0)',
-        transform: 'translateZ(0)'
-      }
+      overscrollBehavior: 'contain' as const,
+      WebkitOverflowScrolling: 'touch' as const,
+      WebkitTransform: 'translateZ(0)',
+      transform: 'translateZ(0)'
+    }
     : {
-        overscrollBehavior: 'contain' as const,
-        WebkitOverflowScrolling: 'touch' as const,
-        scrollBehavior: 'smooth' as const,
-        WebkitTransform: 'translateZ(0)',
-        transform: 'translateZ(0)',
-        willChange: 'scroll-position'
-      };
+      overscrollBehavior: 'contain' as const,
+      WebkitOverflowScrolling: 'touch' as const,
+      scrollBehavior: 'smooth' as const,
+      WebkitTransform: 'translateZ(0)',
+      transform: 'translateZ(0)',
+      willChange: 'scroll-position'
+    };
 
   const containerClassName = useWindowScroll
     ? `relative w-full ${className}`.trim()
