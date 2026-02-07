@@ -110,6 +110,7 @@ export default function HeroMaja({ startAnimation }: HeroMajaProps) {
                                     alt="Agenter Group Dashboard"
                                     width={1400}
                                     height={900}
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1400px"
                                     className="w-full h-auto object-cover opacity-90 transition-opacity duration-500 group-hover:opacity-100"
                                     priority
                                 />

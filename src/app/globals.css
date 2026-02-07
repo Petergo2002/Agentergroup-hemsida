@@ -66,6 +66,24 @@ html.lenis body {
   @apply bg-white/5 backdrop-blur-xl border border-white/10;
 }
 
+/* Mobile Performance Optimizations */
+@media (max-width: 768px) {
+  .glass-panel {
+    @apply backdrop-blur-none bg-[#0a0a0a]/90;
+  }
+  
+  * {
+    text-shadow: none !important;
+    box-shadow: none !important;
+  }
+  
+  /* Restore critical shadows if needed, but keep them simple */
+  .shadow-2xl {
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5) !important;
+  }
+
+}
+
 /* Animations */
 @keyframes pulse-green {
 

@@ -59,6 +59,7 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
   const cardsRef = useRef<HTMLElement[]>([]);
   const lastTransformsRef = useRef(new Map<number, { translateY: number; scale: number; rotation: number; blur: number }>());
   const isUpdatingRef = useRef(false);
+  const resizeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const calculateProgress = useCallback((scrollTop: number, start: number, end: number) => {
     if (scrollTop < start) return 0;
@@ -288,7 +289,21 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
 
     updateCardTransforms();
 
+    // Handle resize events to recalculate positions (important for mobile address bar)
+    const handleResize = () => {
+      // Small debounce
+      if (resizeTimeoutRef.current) clearTimeout(resizeTimeoutRef.current);
+      resizeTimeoutRef.current = setTimeout(() => {
+        setupLenis();
+        updateCardTransforms();
+      }, 100);
+    };
+
+    window.addEventListener('resize', handleResize);
+
     return () => {
+      window.removeEventListener('resize', handleResize);
+      if (resizeTimeoutRef.current) clearTimeout(resizeTimeoutRef.current);
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
       }
