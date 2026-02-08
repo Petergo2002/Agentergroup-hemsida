@@ -14,7 +14,7 @@ const initialSources = [
 ]
 
 export default function KnowledgeBaseShowcase() {
-    const shouldReduceMotion = useShouldReduceMotion()
+    const shouldReduceMotion = useShouldReduceMotion(true)
     const isPageVisible = usePageVisibility()
     const [sources, setSources] = useState(initialSources)
     const [typingText, setTypingText] = useState('')
@@ -24,11 +24,24 @@ export default function KnowledgeBaseShowcase() {
     // Performance
     const containerRef = useRef(null)
     const isInView = useInView(containerRef, { margin: "0px 0px -200px 0px" })
+    const shouldRunAnimation = !shouldReduceMotion && isInView && isPageVisible
+    const displaySources = shouldRunAnimation ? sources : initialSources
+    const displayTypingText = shouldRunAnimation ? typingText : ''
+    const displayIsScraping = shouldRunAnimation ? isScraping : false
+
+    useEffect(() => {
+        if (shouldRunAnimation) return
+        try {
+            cursorControls.stop()
+            cursorControls.set({ opacity: 0, x: 200, y: 300, scale: 1 })
+        } catch {
+            // Ignore if controls are not mounted yet.
+        }
+    }, [cursorControls, shouldRunAnimation])
 
     // Animation Loop
     useEffect(() => {
-        if (shouldReduceMotion) return;
-        if (!isInView || !isPageVisible) return;
+        if (!shouldRunAnimation) return;
 
         let isMounted = true
         const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
@@ -125,12 +138,12 @@ export default function KnowledgeBaseShowcase() {
         return () => {
             isMounted = false
         }
-    }, [cursorControls, isInView, isPageVisible, shouldReduceMotion])
+    }, [cursorControls, shouldRunAnimation])
 
     return (
-        <div ref={containerRef} className="w-full h-full flex items-center justify-center p-4 font-inter text-white">
+        <div ref={containerRef} className="w-full min-h-[620px] md:min-h-[760px] flex items-center justify-center p-4 font-inter text-white">
             {/* The Dashboard Container */}
-            <div className="relative w-full h-full max-h-[800px] bg-[#090909] rounded-2xl border border-white/10 shadow-2xl overflow-hidden flex flex-col font-sans">
+            <div className="relative w-full bg-[#090909] rounded-2xl border border-white/10 shadow-2xl overflow-hidden flex flex-col font-sans min-h-[620px] md:min-h-[760px]">
 
                 {/* Top Nav (Mock) */}
                 <div className="flex items-center justify-between px-6 py-4 border-b border-white/5 bg-[#0C0C0C]">
@@ -205,7 +218,7 @@ export default function KnowledgeBaseShowcase() {
                             <div className="relative w-full bg-[#1A1A1A] rounded-lg border border-white/10 h-10 px-3 flex items-center overflow-hidden">
                                 <LinkIcon size={14} className="text-white/20 mr-2 flex-shrink-0" />
                                 <span className="text-xs text-white/90 whitespace-nowrap">
-                                    {typingText}<span className="animate-pulse">|</span>
+                                    {displayTypingText}<span className="animate-pulse">|</span>
                                 </span>
                                 {/* Cursor Simulation Anchor */}
                                 <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#1A1A1A] to-transparent pointer-events-none" />
@@ -214,9 +227,9 @@ export default function KnowledgeBaseShowcase() {
                             {/* Button */}
                             <button className={`
                                 mt-auto self-start px-4 py-2 rounded-lg text-xs font-medium flex items-center gap-2 transition-all
-                                ${isScraping ? 'bg-white/10 text-white/50' : 'bg-[#FF5D00] text-black hover:bg-[#FF7A33]'}
+                                ${displayIsScraping ? 'bg-white/10 text-white/50' : 'bg-[#FF5D00] text-black hover:bg-[#FF7A33]'}
                             `}>
-                                {isScraping ? (
+                                {displayIsScraping ? (
                                     <>Läser in...</>
                                 ) : (
                                     <>Läs in</>
@@ -240,7 +253,7 @@ export default function KnowledgeBaseShowcase() {
                     <div className="flex-1 flex flex-col gap-4">
                         <div className="flex items-center justify-between">
                             <h4 className="text-xs font-medium text-white/60 uppercase tracking-wider">Inlärda källor</h4>
-                            <span className="text-xs text-white/30">{sources.length} källor</span>
+                            <span className="text-xs text-white/30">{displaySources.length} källor</span>
                         </div>
 
                         {/* List Header */}
@@ -254,7 +267,7 @@ export default function KnowledgeBaseShowcase() {
                         {/* Rows */}
                         <div className="space-y-1">
                             <AnimatePresence>
-                                {sources.map((source, i) => (
+                                {displaySources.map((source, i) => (
                                     <motion.div
                                         key={source.name + i}
                                         initial={{ opacity: 0, y: -10, height: 0 }}

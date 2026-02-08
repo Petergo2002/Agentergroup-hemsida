@@ -16,7 +16,7 @@ const apps = [
 ]
 
 export default function AppConnectShowcase() {
-    const shouldReduceMotion = useShouldReduceMotion()
+    const shouldReduceMotion = useShouldReduceMotion(true)
     const isPageVisible = usePageVisibility()
     const [step, setStep] = useState<0 | 1 | 2>(0)
     const [connected, setConnected] = useState(false)
@@ -27,11 +27,24 @@ export default function AppConnectShowcase() {
     const containerRef = useRef(null)
     const cursorRef = useRef<HTMLDivElement | null>(null)
     const isInView = useInView(containerRef, { margin: "0px 0px -200px 0px" })
+    const shouldRunAnimation = !shouldReduceMotion && isInView && isPageVisible
+    const displayStep = shouldRunAnimation ? step : 0
+    const displayConnected = shouldRunAnimation ? connected : false
+    const displayActiveApp = shouldRunAnimation ? activeApp : null
+
+    useEffect(() => {
+        if (shouldRunAnimation) return
+        try {
+            cursorControls.stop()
+            cursorControls.set({ opacity: 0, x: 100, y: 100, scale: 1 })
+        } catch {
+            // Ignore if controls are not mounted yet.
+        }
+    }, [cursorControls, shouldRunAnimation])
 
     // Simulation loop
     useEffect(() => {
-        if (shouldReduceMotion) return;
-        if (!isInView || !isPageVisible) return;
+        if (!shouldRunAnimation) return;
 
         let isMounted = true
         const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
@@ -135,12 +148,12 @@ export default function AppConnectShowcase() {
         return () => {
             isMounted = false
         }
-    }, [cursorControls, isInView, isPageVisible, shouldReduceMotion])
+    }, [cursorControls, shouldRunAnimation])
 
     return (
-        <div ref={containerRef} className="w-full h-full flex items-center justify-center p-4">
+        <div ref={containerRef} className="w-full min-h-[440px] md:min-h-[520px] flex items-center justify-center p-4">
             {/* Main Container - The "Dashboard" */}
-            <div className="relative w-full bg-[#0F0F0F] rounded-2xl border border-white/10 shadow-2xl overflow-hidden flex flex-col">
+            <div className="relative w-full bg-[#0F0F0F] rounded-2xl border border-white/10 shadow-2xl overflow-hidden flex flex-col min-h-[420px]">
 
                 {/* Header */}
                 <div className="flex items-center justify-between px-6 py-4 border-b border-white/5 bg-[#141414]">
@@ -186,7 +199,7 @@ export default function AppConnectShowcase() {
 
                     {/* --- THE FLOATING DIALOG (Main Actor) --- */}
                     <AnimatePresence mode="wait">
-                        {step >= 1 && (
+                        {!shouldReduceMotion && displayStep >= 1 && (
                             <motion.div
                                 initial={{ opacity: 0, scale: 0.9, y: 20 }}
                                 animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -204,7 +217,7 @@ export default function AppConnectShowcase() {
                                     <div className="p-6 grid grid-cols-3 gap-4">
                                         {apps.map((app) => {
                                             const isTarget = app.name === 'HubSpot';
-                                            const isSelected = activeApp === 'HubSpot' && isTarget;
+                                            const isSelected = displayActiveApp === 'HubSpot' && isTarget;
 
                                             return (
                                                 <div
@@ -241,15 +254,15 @@ export default function AppConnectShowcase() {
                                     {/* Modal Footer */}
                                     <div className="px-6 py-4 border-t border-white/5 bg-[#141414] flex justify-end">
                                         <motion.button
-                                            animate={activeApp ? { opacity: 1, scale: 1 } : { opacity: 0.5, scale: 0.95 }}
+                                            animate={displayActiveApp ? { opacity: 1, scale: 1 } : { opacity: 0.5, scale: 0.95 }}
                                             className={`
                           px-4 py-2 rounded-lg font-medium text-sm flex items-center gap-2 transition-colors
-                          ${connected
+                          ${displayConnected
                                                     ? 'bg-green-500 text-black'
                                                     : 'bg-[#FF5D00] text-black hover:bg-[#FF7A33]'}
                         `}
                                         >
-                                            {connected ? (
+                                            {displayConnected ? (
                                                 <>
                                                     <Check size={16} /> Ansluten
                                                 </>

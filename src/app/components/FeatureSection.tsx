@@ -22,7 +22,7 @@ export default function FeatureSection({
     component,
     align = 'center'
 }: FeatureSectionProps) {
-    const shouldReduceMotion = useShouldReduceMotion()
+    const shouldReduceMotion = useShouldReduceMotion(true)
 
     return (
         <section className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
@@ -31,7 +31,7 @@ export default function FeatureSection({
                 {/* Text Content */}
                 <div className={`max-w-3xl ${align === 'center' ? 'mx-auto text-center' : ''} mb-12 md:mb-16 lg:mb-24`}>
                     <motion.div
-                        initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+                        initial={false}
                         whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.5 }}
@@ -66,7 +66,7 @@ export default function FeatureSection({
 
                 {/* Visual Component */}
                 <motion.div
-                    initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.95 }}
+                    initial={false}
                     whileInView={shouldReduceMotion ? undefined : { opacity: 1, scale: 1 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.7, ease: "easeOut" }}
