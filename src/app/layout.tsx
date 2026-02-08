@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
 import { Inter, Poppins } from 'next/font/google'
-import Script from 'next/script'
 
 import './globals.css'
 import StructuredData from './components/StructuredData'
 import SmoothScrollWrapper from './components/SmoothScrollWrapper'
+import MajaWidgetLoader from './components/MajaWidgetLoader'
 import { getSiteUrl } from '@/lib/seo'
 
 const brandFavicon = '/favicon/favicon-192x192.png'
@@ -109,11 +109,7 @@ export default function RootLayout({
       </head>
       <body className={`${inter.variable} ${poppins.variable} antialiased font-sans`} suppressHydrationWarning>
         <SmoothScrollWrapper>{children}</SmoothScrollWrapper>
-        <Script
-          src="https://widget.agentergroup.com/loader.js"
-          data-id="c6cfe1ca-a018-4b03-86f7-c06093b9614d"
-          strategy="lazyOnload"
-        />
+        <MajaWidgetLoader />
       </body>
     </html>
   )
