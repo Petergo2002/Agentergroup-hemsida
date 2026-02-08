@@ -1,14 +1,17 @@
 'use client'
 
 import { motion, useMotionTemplate, useMotionValue } from 'framer-motion'
-import { MessageCircle, Globe, Instagram, Facebook, ArrowRight, Link as LinkIcon, Sparkles, Linkedin, Twitter, Ghost } from 'lucide-react'
+import { MessageCircle, Globe, Instagram, Facebook, Link as LinkIcon, Sparkles, Linkedin, Twitter, Ghost } from 'lucide-react'
 import { MouseEvent } from 'react'
+import useShouldReduceMotion from './useShouldReduceMotion'
 
 export default function UseCaseShowcase() {
+    const shouldReduceMotion = useShouldReduceMotion()
+
     return (
         <section className="py-32 bg-black relative overflow-hidden">
             {/* Ambient Background */}
-            <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+            <div className={`absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none ${shouldReduceMotion ? 'hidden' : ''}`}>
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-[#FF5D00]/5 rounded-full blur-[120px]" />
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[100px]" />
             </div>
@@ -50,7 +53,7 @@ export default function UseCaseShowcase() {
 
                 {/* Showcases Grid */}
                 <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
-                    <SpotlightCard delay={0.3}>
+                    <SpotlightCard delay={0.3} shouldReduceMotion={shouldReduceMotion}>
                         <div className="mb-10">
                             <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#FF5D00] to-[#FF9D00] flex items-center justify-center mb-6 shadow-2xl shadow-orange-500/20 group-hover:scale-110 transition-transform duration-500">
                                 <Globe className="text-white" size={28} />
@@ -111,7 +114,7 @@ export default function UseCaseShowcase() {
                         </div>
                     </SpotlightCard>
 
-                    <SpotlightCard delay={0.4}>
+                    <SpotlightCard delay={0.4} shouldReduceMotion={shouldReduceMotion}>
                         <div className="mb-10">
                             <div className="flex gap-4 mb-8 flex-wrap">
                                 <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center shadow-lg transition-transform hover:scale-105 duration-300">
@@ -183,12 +186,13 @@ export default function UseCaseShowcase() {
     )
 }
 
-function SpotlightCard({ children, delay = 0 }: { children: React.ReactNode, delay?: number }) {
-    let mouseX = useMotionValue(0);
-    let mouseY = useMotionValue(0);
+function SpotlightCard({ children, delay = 0, shouldReduceMotion = false }: { children: React.ReactNode, delay?: number, shouldReduceMotion?: boolean }) {
+    const mouseX = useMotionValue(0);
+    const mouseY = useMotionValue(0);
 
     function handleMouseMove({ currentTarget, clientX, clientY }: MouseEvent) {
-        let { left, top } = currentTarget.getBoundingClientRect();
+        if (shouldReduceMotion) return
+        const { left, top } = currentTarget.getBoundingClientRect();
         mouseX.set(clientX - left);
         mouseY.set(clientY - top);
     }
@@ -200,33 +204,37 @@ function SpotlightCard({ children, delay = 0 }: { children: React.ReactNode, del
             viewport={{ once: true }}
             transition={{ delay }}
             className="group relative bg-white/[0.02] border border-white/10 rounded-[2.5rem] overflow-hidden"
-            onMouseMove={handleMouseMove}
+            onMouseMove={shouldReduceMotion ? undefined : handleMouseMove}
         >
             {/* Spotlight Effect */}
-            <motion.div
-                className="pointer-events-none absolute -inset-px rounded-[2.5rem] opacity-0 transition duration-300 group-hover:opacity-100"
-                style={{
-                    background: useMotionTemplate`
+            {!shouldReduceMotion && (
+                <motion.div
+                    className="pointer-events-none absolute -inset-px rounded-[2.5rem] opacity-0 transition duration-300 group-hover:opacity-100"
+                    style={{
+                        background: useMotionTemplate`
                         radial-gradient(
                             650px circle at ${mouseX}px ${mouseY}px,
                             rgba(255, 93, 0, 0.1),
                             transparent 80%
                         )
                     `,
-                }}
-            />
-            <motion.div
-                className="pointer-events-none absolute -inset-px rounded-[2.5rem] opacity-0 transition duration-300 group-hover:opacity-100"
-                style={{
-                    background: useMotionTemplate`
+                    }}
+                />
+            )}
+            {!shouldReduceMotion && (
+                <motion.div
+                    className="pointer-events-none absolute -inset-px rounded-[2.5rem] opacity-0 transition duration-300 group-hover:opacity-100"
+                    style={{
+                        background: useMotionTemplate`
                         radial-gradient(
                             650px circle at ${mouseX}px ${mouseY}px,
                             rgba(255, 255, 255, 0.1),
                             transparent 80%
                         )
                     `,
-                }}
-            />
+                    }}
+                />
+            )}
 
             <div className="relative z-10 h-full flex flex-col p-8 md:p-12">
                 {children}
@@ -234,5 +242,3 @@ function SpotlightCard({ children, delay = 0 }: { children: React.ReactNode, del
         </motion.div>
     );
 }
-
-

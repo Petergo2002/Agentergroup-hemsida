@@ -2,11 +2,12 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
+import Link from 'next/link'
 
 const links = [
   { href: '/', label: 'AI-Receptionist' },
   { href: '/blogg', label: 'Blogg' },
-  { href: '/#demo', label: 'Boka demo' },
+  { href: '/#booking-cta', label: 'Starta chatten' },
 ]
 
 export default function NavBarSimple() {
@@ -54,17 +55,21 @@ export default function NavBarSimple() {
     >
       <div className="container mx-auto h-20 px-5 max-w-7xl flex items-center justify-center">
         <div className="relative flex items-center justify-between w-full md:w-auto gap-3 md:gap-5 bg-white/95 backdrop-blur-md rounded-full border border-black/5 shadow-sm px-4 md:px-6 py-2 md:min-w-[520px]">
-          <a href="/" className="flex-shrink-0 z-20">
+          <Link href="/" className="flex-shrink-0 z-20">
             <div className="relative h-11 w-11 md:h-16 md:w-16">
               <img 
                 src="/logo/logo.png" 
                 alt="Agenter Group" 
                 className="h-full w-full object-contain transform scale-[1.1] md:scale-[1.15]"
+                loading="eager"
+                decoding="async"
+                width="64"
+                height="64"
                 style={{ transformOrigin: 'center' }}
                 onError={(e) => { e.currentTarget.src = '/favicon/favicon-192x192.png' }}
               />
             </div>
-          </a>
+          </Link>
 
           {/* Desktop side menu toggle with attached dropdown */}
           <div className="hidden md:block relative">
@@ -95,14 +100,14 @@ export default function NavBarSimple() {
                 >
                   <div className="p-2">
                     {links.map((l) => (
-                      <a
+                      <Link
                         key={l.href}
                         href={l.href}
                         onClick={() => setTimeout(() => setDesktopOpen(false), 250)}
                         className="block w-full text-left px-4 py-3 rounded-lg text-gray-800 hover:bg-gray-100 transition-colors font-medium font-sans tracking-normal"
                       >
                         {l.label}
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 </motion.aside>
@@ -136,14 +141,14 @@ export default function NavBarSimple() {
               >
                 <div className="p-2 flex flex-col">
                   {links.map(l => (
-                    <a
+                    <Link
                       key={l.href}
                       href={l.href}
                       onClick={() => setOpen(false)}
                       className="px-4 py-3 text-left text-gray-800 hover:bg-gray-100 transition-colors w-full text-base font-medium rounded-lg font-sans tracking-normal"
                     >
                       {l.label}
-                    </a>
+                    </Link>
                   ))}
                 </div>
               </motion.div>

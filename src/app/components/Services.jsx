@@ -154,7 +154,7 @@ export default function Services() {
             <div className="flex flex-wrap justify-center gap-4">
 
               <a
-                href="#demo"
+                href="#booking-cta"
                 className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white/10 hover:bg-white/20 text-white font-medium text-lg backdrop-blur-sm transition-colors"
               >
                 Kontakta oss

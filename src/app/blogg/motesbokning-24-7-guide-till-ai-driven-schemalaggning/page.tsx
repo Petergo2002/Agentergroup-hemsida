@@ -1,63 +1,16 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import BlogCTA from '../../components/BlogCTA'
-
-
 import { Calendar, Clock, ArrowLeft, CalendarDays, MousePointer2, Timer } from 'lucide-react'
+import BlogCTA from '../../components/BlogCTA'
+import { blogPostsBySlug } from '@/content/blog-posts'
+import { createArticleJsonLd, createArticleMetadata } from '@/lib/seo'
 
-const title = 'Mötesbokning 24/7: Guide till AI-driven schemaläggning | Agenter Group'
-const description =
-  'Låt kunderna boka möten när det passar dem, dygnet runt. En guide till hur AI-driven schemaläggning fyller din kalender automatiskt.'
-const url = '/blogg/motesbokning-24-7-guide-till-ai-driven-schemalaggning/'
-
-export const metadata: Metadata = {
-  title,
-  description,
-  keywords: [
-    'mötesbokning AI',
-    'automatisk mötesbokning',
-    'schemaläggning online',
-    'Agenter Group'
-  ],
-  alternates: { canonical: url },
-  openGraph: {
-    title,
-    description,
-    type: 'article',
-    url
-  }
-}
-
-const PUBLISHED = '2025-01-22'
-const UPDATED = '2025-01-22'
+const post = blogPostsBySlug['motesbokning-24-7-guide-till-ai-driven-schemalaggning']
+export const metadata: Metadata = createArticleMetadata(post)
 
 function JsonLd() {
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: title,
-    description,
-    datePublished: PUBLISHED,
-    dateModified: UPDATED,
-    author: {
-      '@type': 'Organization',
-      name: 'Agenter Group AB'
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'Agenter Group AB'
-    },
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': `https://www.agentergroup.se${url}`
-    }
-  }
-
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-    />
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(createArticleJsonLd(post)) }} />
   )
 }
 
@@ -83,9 +36,9 @@ export default function BlogPost() {
                 <ArrowLeft size={16} />
                 Tillbaka till bloggen
               </Link>
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tighter max-w-4xl">
+              <p className="text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tighter max-w-4xl">
                 Boka möten <span className="text-[#FF5D00]">medan</span> du sover.
-              </h1>
+              </p>
             </div>
           </div>
         </section>
@@ -104,7 +57,7 @@ export default function BlogPost() {
             <div className="flex items-center gap-4 text-sm text-white/40 font-mono">
               <div className="flex items-center gap-1.5">
                 <Calendar size={14} className="text-[#FF5D00]" />
-                {PUBLISHED}
+                {post.published}
               </div>
               <div className="flex items-center gap-1.5">
                 <Clock size={14} className="text-[#FF5D00]" />
@@ -114,7 +67,7 @@ export default function BlogPost() {
           </div>
 
           <h1 className="text-4xl md:text-5xl font-bold mb-8 leading-tight tracking-tight">
-            Mötesbokning 24/7: Guide till AI-driven schemaläggning
+            {post.title}
           </h1>
 
           <p className="text-xl md:text-2xl text-white/60 mb-12 leading-relaxed border-l-4 border-[#FF5D00] pl-6 italic">

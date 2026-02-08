@@ -2,18 +2,21 @@
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import Image from 'next/image'
+import useShouldReduceMotion from './useShouldReduceMotion'
+import { openMajaWidget } from '@/lib/maja-widget'
 
 interface HeroMajaProps {
     startAnimation: boolean
 }
 
 export default function HeroMaja({ startAnimation }: HeroMajaProps) {
+    const shouldReduceMotion = useShouldReduceMotion()
 
     return (
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-32 md:pt-44">
             {/* Background Ambient Glow */}
             {/* Background Ambient Glow - Optimized for Safari */}
-            <div className="absolute inset-0 bg-glow-green opacity-40 pointer-events-none translate-z-0 will-change-transform" />
+            <div className={`absolute inset-0 bg-glow-green pointer-events-none translate-z-0 will-change-transform ${shouldReduceMotion ? 'opacity-20' : 'opacity-40'}`} />
 
             <div className="container relative z-10 flex flex-col items-center text-center px-4">
 
@@ -66,16 +69,20 @@ export default function HeroMaja({ startAnimation }: HeroMajaProps) {
                 >
                     <a
                         href="https://widget.agentergroup.com/"
+                        onClick={(event) => {
+                            event.preventDefault()
+                            openMajaWidget()
+                        }}
                         className="px-8 py-4 rounded-full bg-[#FF5D00] text-black font-bold text-lg hover:bg-[#00C455] transition-all transform hover:scale-105 flex items-center justify-center gap-2"
                     >
-                        Prova Maja Gratis
+                        Starta chatten
                         <ArrowRight size={20} />
                     </a>
                     <a
-                        href="#demo"
+                        href="#booking-cta"
                         className="px-8 py-4 rounded-full glass-panel text-white font-medium text-lg hover:bg-white/10 transition-all flex items-center justify-center"
                     >
-                        Boka Demo
+                        Se nästa steg
                     </a>
                 </motion.div>
 
@@ -89,12 +96,12 @@ export default function HeroMaja({ startAnimation }: HeroMajaProps) {
                 >
                     <motion.div
                         className="relative group transition-all duration-700 ease-out will-change-transform"
-                        whileHover={{ scale: 1.02 }}
+                        whileHover={shouldReduceMotion ? undefined : { scale: 1.02 }}
                         style={{ transformStyle: 'preserve-3d' }}
                     >
                         {/* Ambient Bloom - Breathing Orange Aura */}
                         {/* Ambient Bloom - Reduced blur for perf */}
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[80%] bg-[#FF5D00] blur-[60px] opacity-20 rounded-full -z-10 animate-pulse-slow translate-z-0" />
+                        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[80%] bg-[#FF5D00] opacity-20 rounded-full -z-10 translate-z-0 ${shouldReduceMotion ? 'blur-[20px]' : 'blur-[60px] animate-pulse-slow'}`} />
 
                         {/* High-End Luminous Glass Border */}
                         <div className="relative p-[1px] rounded-2xl bg-gradient-to-b from-white/40 via-white/10 to-transparent shadow-2xl shadow-black/50">

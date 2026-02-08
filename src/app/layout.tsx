@@ -1,71 +1,85 @@
-import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google";
-import "./globals.css";
-import StructuredData from "./components/StructuredData";
-import Script from "next/script";
-import SmoothScrollWrapper from "./components/SmoothScrollWrapper";
+import type { Metadata } from 'next'
+import { Inter, Poppins } from 'next/font/google'
+import Script from 'next/script'
 
-const brandFavicon = '/favicon/favicon-192x192.png';
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+import './globals.css'
+import StructuredData from './components/StructuredData'
+import SmoothScrollWrapper from './components/SmoothScrollWrapper'
+import { getSiteUrl } from '@/lib/seo'
+
+const brandFavicon = '/favicon/favicon-192x192.png'
+const siteUrl = getSiteUrl()
+const ogImage = '/logo/logo.png'
 
 const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  display: "swap",
-});
+  variable: '--font-inter',
+  subsets: ['latin'],
+  display: 'swap',
+})
 
 const poppins = Poppins({
-  variable: "--font-poppins",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
+  variable: '--font-poppins',
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  display: 'swap',
+})
 
 export const viewport = {
   width: 'device-width',
   initialScale: 1,
-};
+}
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'AI-Receptionist Sverige | Missa Aldrig Ett Samtal | Agenter Group',
+    default: 'AI Chat Frontdesk för företag | Maja svarar 24/7 | Agenter Group',
     template: '%s | Agenter Group',
   },
+  applicationName: 'Agenter Group',
   icons: {
     icon: brandFavicon,
     apple: brandFavicon,
   },
   description:
-    'AI-receptionist som aldrig missar ett samtal. Intelligenta AI-agenter för automatisk telefonhantering, mötesbokning 24/7 och kundservice. Perfekt för företag som vill öka tillgängligheten och aldrig missa viktiga samtal.',
+    'Maja är en AI chat frontdesk som svarar direkt, bokar möten och kvalificerar leads dygnet runt. Starta chatten och boka en kostnadsfri demo.',
   keywords: [
-    'AI-receptionist',
-    'AI-receptionist Sverige',
-    'AI agenter',
-    'missa aldrig ett samtal',
-    'aldrig missa samtal',
-    'automatisk telefonhantering',
-    'AI telefonist',
-    'virtuell receptionist',
-    'intelligent receptionist',
-    'mötesbokning AI',
-    'kundservice 24/7',
-    'företagsautomation',
-    'AI-assistent företag',
-    'automatisk kundservice',
-    'AI samtalshantering',
-    'digital receptionist',
-    'smart telefonhantering',
+    'AI chat frontdesk',
+    'AI frontdesk Sverige',
+    'AI receptionist',
+    'AI chattbot företag',
+    'chatbot för företag',
+    'automatiserad kundservice',
+    'mötesbokning med AI',
+    'leadkvalificering AI',
+    'telefonhantering AI',
+    'kundtjänst 24/7',
+    'Maja AI',
+    'Agenter Group',
   ],
   alternates: { canonical: '/' },
   openGraph: {
-    title: 'AI-Receptionist Sverige | Missa Aldrig Ett Samtal | Agenter Group',
+    title: 'AI Chat Frontdesk för företag | Maja svarar 24/7',
     description:
-      'AI-receptionist som aldrig missar ett samtal. Intelligenta AI-agenter för automatisk telefonhantering, mötesbokning 24/7 och kundservice. Perfekt för företag som vill öka tillgängligheten.',
+      'Få fler bokade möten och färre missade affärer med Maja AI Frontdesk. Starta chatten och se hur snabbt ni kan komma igång.',
     url: '/',
     siteName: 'Agenter Group',
     locale: 'sv_SE',
     type: 'website',
+    images: [
+      {
+        url: ogImage,
+        width: 1200,
+        height: 630,
+        alt: 'Agenter Group AI Frontdesk Maja',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'AI Chat Frontdesk för företag | Maja svarar 24/7',
+    description:
+      'Maja AI Frontdesk svarar direkt, bokar möten och konverterar fler leads. Starta chatten och boka demo.',
+    images: [ogImage],
   },
   robots: {
     index: true,
@@ -79,14 +93,14 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: 'your-google-verification-code', // Replace with actual verification code
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
   },
-};
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="sv" className="scroll-smooth" data-scroll-behavior="smooth" suppressHydrationWarning>
@@ -94,15 +108,13 @@ export default function RootLayout({
         <StructuredData />
       </head>
       <body className={`${inter.variable} ${poppins.variable} antialiased font-sans`} suppressHydrationWarning>
-        <SmoothScrollWrapper>
-          {children}
-        </SmoothScrollWrapper>
+        <SmoothScrollWrapper>{children}</SmoothScrollWrapper>
         <Script
           src="https://widget.agentergroup.com/loader.js"
           data-id="c6cfe1ca-a018-4b03-86f7-c06093b9614d"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
       </body>
     </html>
-  );
+  )
 }

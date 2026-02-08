@@ -1,19 +1,26 @@
-import { FlatCompat } from '@eslint/eslintrc'
+import nextVitals from 'eslint-config-next/core-web-vitals'
+import nextTypescript from 'eslint-config-next/typescript'
 
-const compat = new FlatCompat({
-  baseDirectory: import.meta.dirname,
-})
-
-export default [
+const config = [
+  ...nextVitals,
+  ...nextTypescript,
+  {
+    rules: {
+      '@next/next/no-img-element': 'off',
+      'react/no-unescaped-entities': 'off',
+    },
+  },
+  {
+    files: ['tailwind.config.js'],
+    rules: {
+      '@typescript-eslint/no-require-imports': 'off',
+    },
+  },
   {
     ignores: [
-      'node_modules/**',
-      '.next/**',
-      'out/**',
-      'build/**',
-      'next-env.d.ts',
       'src/_archive/**',
     ],
   },
-  ...compat.extends('next/core-web-vitals'),
 ]
+
+export default config

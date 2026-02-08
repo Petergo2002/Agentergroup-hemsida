@@ -1,5 +1,8 @@
 'use client'
-import { motion } from 'framer-motion'
+import { useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
+import useShouldReduceMotion from './useShouldReduceMotion'
+import usePageVisibility from './usePageVisibility'
 
 
 const integrations = [
@@ -14,8 +17,47 @@ const integrations = [
 ]
 
 export default function IntegrationShowcase() {
+    const shouldReduceMotion = useShouldReduceMotion()
+    const isPageVisible = usePageVisibility()
+    const containerRef = useRef<HTMLElement | null>(null)
+    const isInView = useInView(containerRef, { margin: '0px 0px -160px 0px' })
+    const shouldAnimate = !shouldReduceMotion && isPageVisible && isInView
+
+    if (shouldReduceMotion) {
+        return (
+            <section className="py-16 overflow-hidden bg-black relative" ref={containerRef}>
+                <div className="container mx-auto text-center mb-10">
+                    <p className="text-white/40 text-sm font-mono tracking-widest uppercase mb-4">Integrera med ditt ekosystem</p>
+                    <h2 className="text-3xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-white/40">
+                        Maja works where you work.
+                    </h2>
+                </div>
+
+                <div className="container mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-3">
+                    {integrations.slice(0, 8).map((item) => (
+                        <div
+                            key={item.name}
+                            className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 border border-white/10"
+                        >
+                            <img
+                                src={item.logo}
+                                alt={item.name}
+                                className="w-7 h-7 object-contain"
+                                loading="lazy"
+                                decoding="async"
+                                width="28"
+                                height="28"
+                            />
+                            <span className="text-white text-sm font-medium">{item.name}</span>
+                        </div>
+                    ))}
+                </div>
+            </section>
+        )
+    }
+
     return (
-        <section className="py-24 overflow-hidden bg-black relative">
+        <section className="py-24 overflow-hidden bg-black relative" ref={containerRef}>
             {/* Gradient Fade Edges */}
             <div className="absolute left-0 top-0 bottom-0 w-20 md:w-40 bg-gradient-to-r from-black to-transparent z-20 pointer-events-none" />
             <div className="absolute right-0 top-0 bottom-0 w-20 md:w-40 bg-gradient-to-l from-black to-transparent z-20 pointer-events-none" />
@@ -31,11 +73,11 @@ export default function IntegrationShowcase() {
             <div className="flex relative">
                 <motion.div
                     className="flex gap-4 md:gap-8 px-4"
-                    animate={{ x: "-50%" }}
+                    animate={shouldAnimate ? { x: '-50%' } : { x: 0 }}
                     transition={{
-                        duration: 30,
-                        ease: "linear",
-                        repeat: Infinity
+                        duration: shouldAnimate ? 30 : 0.01,
+                        ease: 'linear',
+                        repeat: shouldAnimate ? Infinity : 0
                     }}
                     style={{ width: "fit-content" }}
                 >
@@ -45,7 +87,15 @@ export default function IntegrationShowcase() {
                             key={index}
                             className="flex items-center gap-3 px-6 py-4 rounded-xl glass-panel border border-white/5 hover:border-[#FF5D00]/40 transition-colors min-w-[200px]"
                         >
-                            <img src={item.logo} alt={item.name} className="w-8 h-8 object-contain" />
+                            <img
+                                src={item.logo}
+                                alt={item.name}
+                                className="w-8 h-8 object-contain"
+                                loading="lazy"
+                                decoding="async"
+                                width="32"
+                                height="32"
+                            />
                             <span className="text-white font-medium">{item.name}</span>
                         </div>
                     ))}

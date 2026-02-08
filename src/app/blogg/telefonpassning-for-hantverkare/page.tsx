@@ -1,63 +1,14 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { blogPostsBySlug } from '@/content/blog-posts'
+import { createArticleJsonLd, createArticleMetadata } from '@/lib/seo'
 
-const title = 'Telefonpassning för hantverkare: Missa aldrig ett jobb igen | Agenter Group'
-const description =
-  'Är du hantverkare och trött på att missa samtal när du jobbar? Lär dig varför en AI-receptionist är en bättre och mer kostnadseffektiv lösning än traditionell telefonpassning.'
-const url = '/blogg/telefonpassning-for-hantverkare'
-
-export const metadata: Metadata = {
-  title,
-  description,
-  keywords: [
-    'telefonpassning hantverkare',
-    'svarsservice hantverkare',
-    'missade samtal byggföretag',
-    'AI receptionist',
-    'bokningssystem hantverkare',
-    'Agenter Group',
-    'telefonservice bygg'
-  ],
-  alternates: { canonical: url },
-  openGraph: {
-    title,
-    description,
-    type: 'article',
-    url,
-    tags: ['Hantverkare', 'Telefonpassning', 'AI-lösningar', 'Effektivisering']
-  }
-}
-
-const PUBLISHED = '2025-01-23'
-const UPDATED = '2025-01-23'
+const post = blogPostsBySlug['telefonpassning-for-hantverkare']
+export const metadata: Metadata = createArticleMetadata(post)
 
 function JsonLd() {
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: title,
-    description,
-    datePublished: PUBLISHED,
-    dateModified: UPDATED,
-    author: {
-      '@type': 'Organization',
-      name: 'Agenter Group AB'
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'Agenter Group AB'
-    },
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': `https://www.agentergroup.se${url}`
-    }
-  }
-
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-    />
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(createArticleJsonLd(post)) }} />
   )
 }
 
@@ -99,8 +50,8 @@ export default function BlogPost() {
                 Telefonpassning
               </span>
             </div>
-            <time className="text-sm text-white/50" dateTime={PUBLISHED}>
-              Publicerad: {new Date(PUBLISHED).toLocaleDateString('sv-SE', {
+            <time className="text-sm text-white/50" dateTime={post.published}>
+              Publicerad: {new Date(post.published).toLocaleDateString('sv-SE', {
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric'
@@ -110,7 +61,7 @@ export default function BlogPost() {
 
           {/* Title */}
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-            Telefonpassning för hantverkare: Missa aldrig ett jobb igen
+            {post.title}
           </h1>
 
           {/* Lead */}
@@ -244,10 +195,10 @@ export default function BlogPost() {
                 Vill du slippa jaga telefonen och fokusera på hantverket? Boka en demo så visar vi hur vi kan hjälpa just ditt företag.
               </p>
               <Link
-                href="/#demo"
+                href="/#booking-cta"
                 className="inline-flex items-center gap-2 px-8 py-4 bg-brand-500 hover:bg-brand-600 text-white font-semibold rounded-lg transition-colors duration-200"
               >
-                Boka Demo
+                Starta chatten
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
@@ -265,8 +216,8 @@ export default function BlogPost() {
               </div>
               <div className="text-right">
                 <p className="text-sm text-white/50">Senast uppdaterad</p>
-                <time className="text-white font-medium" dateTime={UPDATED}>
-                  {new Date(UPDATED).toLocaleDateString('sv-SE', {
+                <time className="text-white font-medium" dateTime={post.updated}>
+                  {new Date(post.updated).toLocaleDateString('sv-SE', {
                     year: 'numeric',
                     month: 'long',
                     day: 'numeric'

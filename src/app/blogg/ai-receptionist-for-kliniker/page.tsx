@@ -1,65 +1,14 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { blogPostsBySlug } from '@/content/blog-posts'
+import { createArticleJsonLd, createArticleMetadata } from '@/lib/seo'
 
-const title = 'AI-receptionist för kliniker: Maximera patienttid och minimera admin | Agenter Group'
-const description =
-  'Driver du klinik? Lär dig hur en AI-receptionist kan hantera tidsbokning, avbokningar och frågor dygnet runt – så att du kan fokusera 100% på patienterna.'
-const url = '/blogg/ai-receptionist-for-kliniker'
-
-export const metadata: Metadata = {
-  title,
-  description,
-  keywords: [
-    'AI receptionist tandläkare',
-    'telefonpassning klinik',
-    'bokningssystem vård',
-    'AI kundtjänst sjukvård',
-    'automatisk tidsbokning',
-    'Agenter Group',
-    'effektivisering klinik'
-  ],
-  alternates: { canonical: url },
-  openGraph: {
-    title,
-    description,
-    type: 'article',
-    url,
-    tags: ['Klinik', 'Hälso- och sjukvård', 'Effektivisering', 'AI-lösningar']
-  }
-}
-
-const PUBLISHED = '2025-01-24'
-const UPDATED = '2025-01-24'
+const post = blogPostsBySlug['ai-receptionist-for-kliniker']
+export const metadata: Metadata = createArticleMetadata(post)
 
 function JsonLd() {
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: title,
-    description,
-    datePublished: PUBLISHED,
-    dateModified: UPDATED,
-    author: {
-      '@type': 'Organization',
-      name: 'Agenter Group AB'
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'Agenter Group AB'
-    },
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': `https://www.agentergroup.se${url}`
-    }
-  }
-
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-    </>
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(createArticleJsonLd(post)) }} />
   )
 }
 
@@ -88,17 +37,17 @@ export default function BlogPost() {
             Klinik & Hälsa
           </span>
           <h1 className="mt-4 font-display text-4xl md:text-6xl font-bold leading-[1.05] tracking-tight">
-            AI-receptionist för kliniker: Maximera patienttid och minimera admin
+            {post.title}
           </h1>
           <p className="mt-4 text-white/80 max-w-2xl">
             Slipp avbryta behandlingar för att svara i telefon. Låt AI hantera bokningar och frågor dygnet runt, säkert och GDPR-anpassat.
           </p>
           <div className="mt-6 flex gap-3">
             <Link href="/" className="btn btn-secondary">Hem</Link>
-            <Link href="/#demo" className="btn btn-primary">Boka demo</Link>
+            <Link href="/#booking-cta" className="btn btn-primary">Starta chatten</Link>
           </div>
           <div className="mt-4 text-xs text-white/50">
-            Publicerad {new Date(PUBLISHED).toLocaleDateString('sv-SE')} · Uppdaterad {new Date(UPDATED).toLocaleDateString('sv-SE')}
+            Publicerad {new Date(post.published).toLocaleDateString('sv-SE')} · Uppdaterad {new Date(post.updated).toLocaleDateString('sv-SE')}
           </div>
         </div>
       </section>
@@ -229,7 +178,7 @@ export default function BlogPost() {
               <p className="text-white/80 mt-1">
                 Boka en kostnadsfri demo så visar vi hur vi kan koppla en AI-receptionist till just ditt bokningssystem.
               </p>
-              <Link href="/#demo" className="btn btn-primary mt-4">Boka demo</Link>
+              <Link href="/#booking-cta" className="btn btn-primary mt-4">Starta chatten</Link>
             </div>
           </article>
 
@@ -266,7 +215,7 @@ export default function BlogPost() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/#demo" className="hover:text-white flex items-center gap-2">
+                  <Link href="/#booking-cta" className="hover:text-white flex items-center gap-2">
                     <span>→</span> Boka demo
                   </Link>
                 </li>

@@ -5,7 +5,7 @@ import Threads from './Threads'
 export default function Hero() {
   
   const handleDemoClick = () => {
-    const element = document.querySelector('#demo')
+    const element = document.querySelector('#booking-cta')
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
@@ -72,7 +72,7 @@ export default function Hero() {
               onClick={handleDemoClick}
               className="inline-flex items-center gap-2 px-8 sm:px-9 py-4 sm:py-4.5 rounded-full bg-gradient-to-r from-[#FD6D4B] to-[#FF6E00] hover:from-[#ff7b62] hover:to-[#ff8a1a] text-white font-semibold text-lg sm:text-xl transition-colors shadow-lg shadow-[rgba(253,109,75,0.3)] hover:shadow-[rgba(253,109,75,0.45)]"
             >
-              Boka demo
+              Starta chatten
             </button>
             <a 
               href="#funktioner" 

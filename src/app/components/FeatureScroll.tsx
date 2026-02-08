@@ -2,7 +2,6 @@
 
 import { useRef, useState, useEffect, ReactNode } from 'react'
 import { motion, useInView } from 'framer-motion'
-import KnowledgeBaseShowcase from './KnowledgeBaseShowcase'
 
 interface Feature {
     title: string

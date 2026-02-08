@@ -4,7 +4,8 @@ import { motion } from 'framer-motion'
 import NavBar from '../components/NavBar'
 import Footer from '../components/Footer'
 import OrangeVeil from '../components/OrangeVeil'
-import { Sparkles, ArrowRight, CheckCircle2, Globe, Zap, Calendar } from 'lucide-react'
+import { Sparkles, ArrowRight, Globe, Zap, Calendar } from 'lucide-react'
+import { openMajaWidget } from '@/lib/maja-widget'
 
 export default function HemsidorClient() {
   return (
@@ -168,9 +169,12 @@ export default function HemsidorClient() {
                 </div>
 
                 <div className="mt-10 flex flex-wrap gap-4">
-                  <a href="#demo" className="px-8 py-4 bg-[#FF5D00] hover:bg-[#FF7A33] text-black font-bold rounded-full transition-all hover:scale-105">
-                    Få Offert
-                  </a>
+                  <button
+                    onClick={openMajaWidget}
+                    className="px-8 py-4 bg-[#FF5D00] hover:bg-[#FF7A33] text-black font-bold rounded-full transition-all hover:scale-105"
+                  >
+                    Starta chatten
+                  </button>
                 </div>
               </motion.div>
 
@@ -270,18 +274,13 @@ export default function HemsidorClient() {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <button
-                onClick={() => {
-                  // Försök trigga widgeten om den har ett API
-                  if (typeof window !== 'undefined' && (window as any).majaWidget) {
-                    (window as any).majaWidget.open();
-                  }
-                }}
+                onClick={openMajaWidget}
                 className="px-10 py-5 bg-[#FF5D00] hover:bg-[#FF7A33] text-black text-xl font-bold rounded-full transition-all hover:scale-105 shadow-[0_0_30px_rgba(255,93,0,0.4)]"
               >
-                Prata med Maja
+                Starta chatten med Maja
               </button>
               <span className="text-white/30 text-sm font-mono mt-4 sm:mt-0">
-                        // Maja sköter bokningen.
+                {'// Maja sköter bokningen.'}
               </span>
             </div>
           </div>

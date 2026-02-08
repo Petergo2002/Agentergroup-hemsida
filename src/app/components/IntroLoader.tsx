@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, AnimatePresence } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 interface IntroLoaderProps {
     onComplete: () => void
@@ -10,26 +10,41 @@ interface IntroLoaderProps {
 export default function IntroLoader({ onComplete }: IntroLoaderProps) {
     // We use internal state to control the exit animation timing
     const [isVisible, setIsVisible] = useState(true)
+    const hasCompletedRef = useRef(false)
+
+    const completeOnce = useCallback(() => {
+        if (hasCompletedRef.current) return
+        hasCompletedRef.current = true
+        onComplete()
+    }, [onComplete])
 
     useEffect(() => {
-        // Hold the black screen for 0.5s, then trigger exit
+        // Hold the black screen briefly, then trigger exit animation.
         const timer = setTimeout(() => {
             setIsVisible(false)
-        }, 500)
+        }, 450)
 
-        return () => clearTimeout(timer)
-    }, [])
+        // Safety net: avoid getting stuck on a black overlay if animation callbacks fail.
+        const safetyTimer = setTimeout(() => {
+            completeOnce()
+        }, 1700)
+
+        return () => {
+            clearTimeout(timer)
+            clearTimeout(safetyTimer)
+        }
+    }, [completeOnce])
 
     return (
         <AnimatePresence
             onExitComplete={() => {
                 // Signal to parent that loader is fully gone
-                onComplete()
+                completeOnce()
             }}
         >
             {isVisible && (
                 <motion.div
-                    className="fixed inset-0 z-[60] bg-black flex items-center justify-center"
+                    className="fixed inset-0 z-[60] bg-black flex items-center justify-center pointer-events-none"
                     initial={{ opacity: 1 }}
                     exit={{
                         opacity: 0,

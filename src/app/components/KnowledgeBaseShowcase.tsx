@@ -2,7 +2,9 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence, useAnimation, useInView } from 'framer-motion'
-import { UploadCloud, FileText, Globe, CheckCircle2, BrainCircuit, Search, Link as LinkIcon, File, PlugZap } from 'lucide-react'
+import { UploadCloud, FileText, Globe, BrainCircuit, Link as LinkIcon, PlugZap } from 'lucide-react'
+import useShouldReduceMotion from './useShouldReduceMotion'
+import usePageVisibility from './usePageVisibility'
 
 // Mock Data for "Inlärda källor"
 const initialSources = [
@@ -12,6 +14,8 @@ const initialSources = [
 ]
 
 export default function KnowledgeBaseShowcase() {
+    const shouldReduceMotion = useShouldReduceMotion()
+    const isPageVisible = usePageVisibility()
     const [sources, setSources] = useState(initialSources)
     const [typingText, setTypingText] = useState('')
     const [isScraping, setIsScraping] = useState(false)
@@ -23,7 +27,8 @@ export default function KnowledgeBaseShowcase() {
 
     // Animation Loop
     useEffect(() => {
-        if (!isInView) return;
+        if (shouldReduceMotion) return;
+        if (!isInView || !isPageVisible) return;
 
         let isMounted = true
         const loop = async () => {
@@ -85,7 +90,7 @@ export default function KnowledgeBaseShowcase() {
             isMounted = false
             clearInterval(interval)
         }
-    }, [cursorControls, isInView])
+    }, [cursorControls, isInView, isPageVisible, shouldReduceMotion])
 
     return (
         <div ref={containerRef} className="w-full h-full flex items-center justify-center p-4 font-inter text-white">

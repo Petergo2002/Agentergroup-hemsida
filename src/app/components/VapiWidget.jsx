@@ -1,20 +1,21 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Phone, X, Mic, MicOff } from 'lucide-react'
-import Vapi from '@vapi-ai/web'
 
 export default function VapiWidget() {
   const [isOpen, setIsOpen] = useState(false)
   const [isConnected, setIsConnected] = useState(false)
   const [showTerms, setShowTerms] = useState(false)
-  const [hasAcceptedTerms, setHasAcceptedTerms] = useState(false)
+  const [hasAcceptedTerms, setHasAcceptedTerms] = useState(() => {
+    if (typeof window === 'undefined') return false
+    return localStorage.getItem('vapi_terms_accepted') === 'true'
+  })
   const [vapi, setVapi] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
-  const [isVisible, setIsVisible] = useState(true)
 
-  const handleStartCall = async () => {
+  const handleStartCall = useCallback(async () => {
     if (!hasAcceptedTerms) {
       setShowTerms(true)
       return
@@ -40,25 +41,16 @@ export default function VapiWidget() {
     try {
       await vapi.start(assistantId)
       setIsOpen(true)
-    } catch (error) {
-      setError('Failed to start call: ' + (error.message || 'Unknown error'))
+    } catch (err) {
+      setError('Failed to start call: ' + (err?.message || 'Unknown error'))
       setIsLoading(false)
       setIsConnected(false)
     }
-  }
+  }, [hasAcceptedTerms, vapi])
 
   useEffect(() => {
-    setIsVisible(true)
-  }, [])
+    let isMounted = true
 
-  useEffect(() => {
-    // Check if user has previously accepted terms
-    const acceptedTerms = localStorage.getItem('vapi_terms_accepted')
-    if (acceptedTerms === 'true') {
-      setHasAcceptedTerms(true)
-    }
-
-    // Initialize Vapi directly via npm package
     const setup = async () => {
       try {
         const publicKey = process.env.NEXT_PUBLIC_VAPI_PUBLIC_KEY
@@ -66,6 +58,9 @@ export default function VapiWidget() {
           setError('Missing API key')
           return
         }
+
+        const { default: Vapi } = await import('@vapi-ai/web')
+        if (!isMounted) return
 
         const vapiInstance = new Vapi(publicKey)
 
@@ -86,36 +81,35 @@ export default function VapiWidget() {
           setIsConnected(false)
         })
 
-        setVapi(vapiInstance)
-      } catch (error) {
+        if (isMounted) setVapi(vapiInstance)
+      } catch {
         setError('Failed to initialize voice assistant')
       }
     }
 
     setup()
 
-    // Listen for custom event to open widget
-    const handleOpenWidget = () => {
-      if (vapi) {
-        handleStartCall()
-      } else {
-        // If Vapi isn't ready yet, show the widget with loading state
-        setIsOpen(true)
-      }
-    }
-
-    if (typeof window !== 'undefined') {
-      window.addEventListener('openVapiWidget', handleOpenWidget)
-    }
-
     return () => {
-      if (typeof window !== 'undefined') {
-        window.removeEventListener('openVapiWidget', handleOpenWidget)
-      }
+      isMounted = false
     }
   }, [])
 
-  const handleEndCall = async () => {
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+
+    const handleOpenWidget = () => {
+      if (vapi) {
+        void handleStartCall()
+        return
+      }
+      setIsOpen(true)
+    }
+
+    window.addEventListener('openVapiWidget', handleOpenWidget)
+    return () => window.removeEventListener('openVapiWidget', handleOpenWidget)
+  }, [handleStartCall, vapi])
+
+  const handleEndCall = useCallback(async () => {
     if (vapi) {
       try {
         await vapi.stop()
@@ -124,14 +118,16 @@ export default function VapiWidget() {
       } catch {
       }
     }
-  }
+  }, [vapi])
 
-  const acceptTerms = () => {
+  const acceptTerms = useCallback(() => {
     setHasAcceptedTerms(true)
-    localStorage.setItem('vapi_terms_accepted', 'true')
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('vapi_terms_accepted', 'true')
+    }
     setShowTerms(false)
-    handleStartCall()
-  }
+    void handleStartCall()
+  }, [handleStartCall])
 
   return (
     <>
@@ -152,7 +148,7 @@ export default function VapiWidget() {
             >
               <h3 className="text-xl font-bold text-white mb-4">Villkor och samtycke</h3>
               <p className="text-slate-300 text-sm mb-6">
-                Genom att klicka "Godkänn" och varje gång jag interagerar med denna AI-assistent, 
+                Genom att klicka &quot;Godkänn&quot; och varje gång jag interagerar med denna AI-assistent,
                 samtycker jag till inspelning, lagring och delning av min kommunikation med 
                 tredjepartsleverantörer, och enligt våra användarvillkor.
               </p>
@@ -177,14 +173,13 @@ export default function VapiWidget() {
 
       {/* Widget */}
       <AnimatePresence>
-        {isVisible && (
-          <motion.div 
-            className="fixed bottom-6 right-6 z-50"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20 }}
-            transition={{ duration: 0.3 }}
-          >
+        <motion.div 
+          className="fixed bottom-6 right-6 z-50"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 20 }}
+          transition={{ duration: 0.3 }}
+        >
         <AnimatePresence>
           {isOpen && (
             <motion.div
@@ -236,7 +231,7 @@ export default function VapiWidget() {
                     Prata med vår AI-assistent för att få hjälp med dina frågor.
                   </p>
                   <button
-                    onClick={handleStartCall}
+                    onClick={() => void handleStartCall()}
                     disabled={isLoading || !vapi}
                     className="w-full px-4 py-2 rounded-lg bg-gradient-to-r from-[#FD6D4B] to-[#FF6E00] hover:from-[#ff7b62] hover:to-[#ff8a1a] text-white font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   >
@@ -260,7 +255,13 @@ export default function VapiWidget() {
           transition={{ duration: 0.3 }}
         >
           <motion.button
-            onClick={() => isConnected ? handleEndCall() : handleStartCall()}
+            onClick={() => {
+              if (isConnected) {
+                void handleEndCall()
+                return
+              }
+              void handleStartCall()
+            }}
             className={`flex items-center gap-2 rounded-full shadow-lg px-5 py-3 transition-all ${
               isConnected 
                 ? 'bg-red-600 hover:bg-red-700' 
@@ -282,8 +283,7 @@ export default function VapiWidget() {
             )}
           </motion.button>
         </motion.div>
-          </motion.div>
-        )}
+        </motion.div>
       </AnimatePresence>
     </>
   )

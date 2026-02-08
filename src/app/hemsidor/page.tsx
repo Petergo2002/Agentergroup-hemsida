@@ -1,50 +1,25 @@
 import type { Metadata } from 'next'
-import HemsidorClient from './HemsidorClient'
 
-export const metadata: Metadata = {
-  title: 'Hemsidor med AI-Integration | Moderna Webbplatser – Agenter Group',
+import HemsidorClient from './HemsidorClient'
+import { createPageMetadata } from '@/lib/seo'
+
+export const metadata: Metadata = createPageMetadata({
+  title: 'Hemsida med AI Chat Frontdesk | Fler leads från dag 1',
   description:
-    'Professionella hemsidor med sömlös AI-receptionist integration. Modern design, SEO-optimering och snabb leverans på 1 vecka. Komplett digital närvaro för ditt företag.',
+    'Få en modern hemsida med inbyggd AI chat frontdesk. Maja svarar direkt, fångar leads och bokar möten automatiskt. Starta chatten och boka kostnadsfri konsultation.',
+  canonicalPath: '/hemsidor/',
   keywords: [
-    'hemsida med AI',
-    'AI-integration hemsida',
-    'modern webbdesign Sverige',
-    'hemsida AI-receptionist',
-    'professionell hemsida',
-    'webbplats med AI',
-    'hemsida snabb leverans',
+    'hemsida med AI chat',
+    'AI chat frontdesk hemsida',
+    'hemsida med AI receptionist',
+    'konverterande företagshemsida',
+    'responsiv webbdesign Sverige',
     'SEO-optimerad hemsida',
-    'responsiv webbdesign',
-    'AI kundservice hemsida',
-    'webbplats mötesbokning',
-    'digital närvaro företag',
-    'hemsida paketlösning',
-    'Agenter Group hemsidor'
+    'webbplats med mötesbokning',
+    'Agenter Group',
   ],
-  alternates: { canonical: '/hemsidor/' },
-  openGraph: {
-    title: 'Hemsidor med AI-Integration | Moderna Webbplatser – Agenter Group',
-    description:
-      'Professionella hemsidor med sömlös AI-receptionist integration. Modern design, SEO-optimering och snabb leverans på 1 vecka.',
-    url: '/hemsidor/',
-    type: 'website',
-    images: [
-      {
-        url: '/logo/logo.png',
-        width: 1200,
-        height: 630,
-        alt: 'Agenter Group - Hemsidor med AI-Integration'
-      }
-    ]
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Hemsidor med AI-Integration | Moderna Webbplatser',
-    description:
-      'Professionella hemsidor med sömlös AI-receptionist integration. Modern design och snabb leverans.',
-    images: ['/logo/logo.png']
-  }
-}
+  ogImageAlt: 'Agenter Group - Hemsidor med AI-Integration',
+})
 
 export default function HemsidorPage() {
   return <HemsidorClient />

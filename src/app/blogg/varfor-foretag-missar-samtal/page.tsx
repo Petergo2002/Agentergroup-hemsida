@@ -1,66 +1,16 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import BlogCTA from '../../components/BlogCTA'
-
-
 import { Calendar, Clock, ArrowLeft, CheckCircle2 } from 'lucide-react'
+import BlogCTA from '../../components/BlogCTA'
+import { blogPostsBySlug } from '@/content/blog-posts'
+import { createArticleJsonLd, createArticleMetadata } from '@/lib/seo'
 
-const title = 'Varför Företag Missar 34% av Jobbmöjligheter – och Hur AI Kan Hjälpa | Agenter Group'
-const description =
-  'Upptäck varför 34% av jobbmöjligheter försvinner när kandidater missar första samtalet. Lär dig hur AI-receptionister säkerställer att ditt företag aldrig missar ett viktigt samtal igen.'
-const url = '/blogg/varfor-foretag-missar-samtal/'
-
-export const metadata: Metadata = {
-  title,
-  description,
-  keywords: [
-    'missa aldrig ett samtal',
-    'AI receptionist',
-    'missade samtal företag',
-    'automatisk telefonhantering',
-    'AI agenter',
-    'kundservice 24/7',
-    'Agenter Group'
-  ],
-  alternates: { canonical: url },
-  openGraph: {
-    title,
-    description,
-    type: 'article',
-    url
-  }
-}
-
-const PUBLISHED = '2025-01-21'
-const UPDATED = '2025-01-21'
+const post = blogPostsBySlug['varfor-foretag-missar-samtal']
+export const metadata: Metadata = createArticleMetadata(post)
 
 function JsonLd() {
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: title,
-    description,
-    datePublished: PUBLISHED,
-    dateModified: UPDATED,
-    author: {
-      '@type': 'Organization',
-      name: 'Agenter Group AB'
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'Agenter Group AB'
-    },
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': `https://www.agentergroup.se${url}`
-    }
-  }
-
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-    />
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(createArticleJsonLd(post)) }} />
   )
 }
 
@@ -86,9 +36,9 @@ export default function BlogPost() {
                 <ArrowLeft size={16} />
                 Tillbaka till bloggen
               </Link>
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tighter max-w-4xl">
+              <p className="text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tighter max-w-4xl">
                 Missade samtal <span className="text-[#FF5D00]">är</span> förlorade affärer.
-              </h1>
+              </p>
             </div>
           </div>
         </section>
@@ -107,7 +57,7 @@ export default function BlogPost() {
             <div className="flex items-center gap-4 text-sm text-white/40 font-mono">
               <div className="flex items-center gap-1.5">
                 <Calendar size={14} className="text-[#FF5D00]" />
-                {PUBLISHED}
+                {post.published}
               </div>
               <div className="flex items-center gap-1.5">
                 <Clock size={14} className="text-[#FF5D00]" />
@@ -117,7 +67,7 @@ export default function BlogPost() {
           </div>
 
           <h1 className="text-4xl md:text-5xl font-bold mb-8 leading-tight tracking-tight">
-            Varför Företag Missar 34% av Jobbmöjligheter – och Hur AI Kan Hjälpa
+            {post.title}
           </h1>
 
           <p className="text-xl md:text-2xl text-white/60 mb-12 leading-relaxed border-l-4 border-[#FF5D00] pl-6 italic">

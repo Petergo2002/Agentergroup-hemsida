@@ -1,16 +1,20 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import useShouldReduceMotion from './useShouldReduceMotion'
 
 export default function OrangeVeil() {
-    const [mounted, setMounted] = useState(false)
+    const shouldReduceMotion = useShouldReduceMotion()
 
-    useEffect(() => {
-        setMounted(true)
-    }, [])
-
-    if (!mounted) return null
+    if (shouldReduceMotion) {
+        return (
+            <div className="absolute inset-0 overflow-hidden bg-black pointer-events-none">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(255,93,0,0.25)_0%,transparent_55%)]" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_70%,rgba(255,93,0,0.16)_0%,transparent_50%)]" />
+                <div className="absolute inset-0 bg-black/55 z-10" />
+            </div>
+        )
+    }
 
     return (
         <div className="absolute inset-0 overflow-hidden bg-black pointer-events-none">
@@ -27,7 +31,7 @@ export default function OrangeVeil() {
                     repeat: Infinity,
                     ease: "easeInOut"
                 }}
-                className="absolute top-[-20%] left-[-10%] w-[800px] h-[800px] bg-[#FF5D00] rounded-full blur-[120px] mix-blend-screen opacity-40"
+                className="absolute top-[-20%] left-[-10%] w-[800px] h-[800px] bg-[#FF5D00] rounded-full blur-[60px] md:blur-[120px] mix-blend-normal md:mix-blend-screen opacity-40"
             />
 
             {/* Secondary Orange Glow - Bottom Right */}
@@ -44,7 +48,7 @@ export default function OrangeVeil() {
                     ease: "easeInOut",
                     delay: 2
                 }}
-                className="absolute bottom-[-20%] right-[-10%] w-[600px] h-[600px] bg-[#FF5D00] rounded-full blur-[100px] mix-blend-screen opacity-30"
+                className="absolute bottom-[-20%] right-[-10%] w-[600px] h-[600px] bg-[#FF5D00] rounded-full blur-[50px] md:blur-[100px] mix-blend-normal md:mix-blend-screen opacity-30"
             />
 
             {/* Accent Glow - Center/Moving */}
@@ -60,7 +64,7 @@ export default function OrangeVeil() {
                     repeat: Infinity,
                     ease: "linear"
                 }}
-                className="absolute top-[30%] left-[30%] w-[500px] h-[500px] bg-[#FF8C00] rounded-full blur-[120px] mix-blend-screen opacity-20"
+                className="absolute top-[30%] left-[30%] w-[500px] h-[500px] bg-[#FF8C00] rounded-full blur-[60px] md:blur-[120px] mix-blend-normal md:mix-blend-screen opacity-20"
             />
 
             {/* Noise Texture Overlay for "Grit" */}

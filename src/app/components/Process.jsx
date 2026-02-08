@@ -1,5 +1,6 @@
 'use client'
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 
 export default function Process() {
   const steps = [
@@ -116,12 +117,12 @@ export default function Process() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <a 
-            href="/#demo" 
+          <Link
+            href="/#booking-cta"
             className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-[#FD6D4B] to-[#FF6E00] hover:from-[#ff7b62] hover:to-[#ff8a1a] text-white font-medium text-lg transition-colors shadow-lg shadow-[rgba(253,109,75,0.3)] hover:shadow-[rgba(253,109,75,0.45)]"
           >
             Boka kostnadsfri demo
-          </a>
+          </Link>
         </motion.div>
       </div>
     </section>

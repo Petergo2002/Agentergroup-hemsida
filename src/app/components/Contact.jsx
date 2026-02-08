@@ -2,24 +2,27 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Send, CheckCircle2 } from 'lucide-react'
+import Link from 'next/link'
 
 const initial = { name: '', phone: '', email: '', message: '' }
 
 export default function Contact() {
   const [values, setValues] = useState(initial)
   const [errors, setErrors] = useState({})
-  const [submitted, setSubmitted] = useState(false)
-  const [redirectUrl, setRedirectUrl] = useState('')
+  const [submitted, setSubmitted] = useState(() => {
+    if (typeof window === 'undefined') return false
+    const urlParams = new URLSearchParams(window.location.search)
+    return urlParams.get('submitted') === 'true'
+  })
+  const [redirectUrl] = useState(() => {
+    if (typeof window === 'undefined') return ''
+    return `${window.location.origin}${window.location.pathname}?submitted=true#demo`
+  })
 
   useEffect(() => {
-    // Set redirect URL on client side
-    setRedirectUrl(`${window.location.origin}${window.location.pathname}?submitted=true#demo`)
-    
-    // Check if user was redirected back from FormSubmit
+    if (typeof window === 'undefined') return
     const urlParams = new URLSearchParams(window.location.search)
     if (urlParams.get('submitted') === 'true') {
-      setSubmitted(true)
-      // Clean up URL
       window.history.replaceState({}, '', window.location.pathname + '#demo')
     }
   }, [])
@@ -190,12 +193,9 @@ export default function Contact() {
               >
                 Skicka nytt meddelande
               </button>
-              <a 
-                href="/" 
-                className="btn btn-primary"
-              >
+              <Link href="/" className="btn btn-primary">
                 Återgå till hemsidan
-              </a>
+              </Link>
             </motion.div>
             )}
           </div>

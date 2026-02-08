@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { ReactNode } from 'react'
 import { Check } from 'lucide-react'
+import useShouldReduceMotion from './useShouldReduceMotion'
 
 interface FeatureSectionProps {
     title: string
@@ -21,6 +22,8 @@ export default function FeatureSection({
     component,
     align = 'center'
 }: FeatureSectionProps) {
+    const shouldReduceMotion = useShouldReduceMotion()
+
     return (
         <section className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
@@ -28,8 +31,8 @@ export default function FeatureSection({
                 {/* Text Content */}
                 <div className={`max-w-3xl ${align === 'center' ? 'mx-auto text-center' : ''} mb-12 md:mb-16 lg:mb-24`}>
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
+                        initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+                        whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.5 }}
                     >
@@ -63,14 +66,16 @@ export default function FeatureSection({
 
                 {/* Visual Component */}
                 <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
+                    initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.95 }}
+                    whileInView={shouldReduceMotion ? undefined : { opacity: 1, scale: 1 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.7, ease: "easeOut" }}
                     className="relative w-full"
                 >
                     {/* Glow Effect */}
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-[#FF5D00]/5 blur-[120px] rounded-full pointer-events-none" />
+                    {!shouldReduceMotion && (
+                        <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-[#FF5D00]/5 blur-[120px] rounded-full pointer-events-none" />
+                    )}
 
                     {/* Component Wrapper - Frameless */}
                     <div className="relative z-10 w-full">

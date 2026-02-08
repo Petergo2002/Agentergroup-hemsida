@@ -1,10 +1,13 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ArrowDownRight, ArrowRight } from 'lucide-react'
+import { ArrowDownRight } from 'lucide-react'
 import { useState } from 'react'
+import useShouldReduceMotion from './useShouldReduceMotion'
+import { openMajaWidget } from '@/lib/maja-widget'
 
 export default function BookingCTA() {
+    const shouldReduceMotion = useShouldReduceMotion()
     const [showPopup, setShowPopup] = useState(false)
 
     return (
@@ -12,8 +15,8 @@ export default function BookingCTA() {
             {/* Viewport Detection for Popup */}
             <motion.div
                 className="absolute inset-0 pointer-events-none"
-                onViewportEnter={() => setShowPopup(true)}
-                onViewportLeave={() => setShowPopup(false)}
+                onViewportEnter={() => !shouldReduceMotion && setShowPopup(true)}
+                onViewportLeave={() => !shouldReduceMotion && setShowPopup(false)}
                 viewport={{ amount: 0.3 }}
             />
 
@@ -77,35 +80,34 @@ export default function BookingCTA() {
             </div>
 
             {/* Contextual Popup */}
-            <motion.div
-                initial={{ opacity: 0, y: 20, scale: 0.9 }}
-                animate={showPopup ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 20, scale: 0.9 }}
-                transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                className="fixed bottom-24 right-4 md:right-8 z-50 cursor-pointer"
-                onClick={() => {
-                    const widgetTrigger = document.querySelector('[data-widget-trigger]') as HTMLElement;
-                    if (widgetTrigger) widgetTrigger.click();
-                }}
-            >
-                <div className="bg-white text-black px-6 py-4 rounded-2xl rounded-br-sm shadow-[0_8px_30px_rgb(0,0,0,0.2)] flex items-center gap-4 relative group hover:scale-105 transition-transform">
+            {!shouldReduceMotion && (
+                <motion.div
+                    initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                    animate={showPopup ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 20, scale: 0.9 }}
+                    transition={{ type: "spring", stiffness: 200, damping: 20 }}
+                    className="fixed bottom-24 right-4 md:right-8 z-50 cursor-pointer"
+                    onClick={openMajaWidget}
+                >
+                    <div className="bg-white text-black px-6 py-4 rounded-2xl rounded-br-sm shadow-[0_8px_30px_rgb(0,0,0,0.2)] flex items-center gap-4 relative group hover:scale-105 transition-transform">
 
-                    {/* Floating Arrow (Bottom Right, pointing to widget) */}
-                    <div className="absolute -bottom-6 -right-2 transform rotate-12">
-                        <ArrowDownRight className="w-8 h-8 text-[#FF5D00] animate-bounce" strokeWidth={2.5} />
-                    </div>
+                        {/* Floating Arrow (Bottom Right, pointing to widget) */}
+                        <div className="absolute -bottom-6 -right-2 transform rotate-12">
+                            <ArrowDownRight className="w-8 h-8 text-[#FF5D00] animate-bounce" strokeWidth={2.5} />
+                        </div>
 
 
-                    <div className="flex flex-col">
-                        <span className="font-bold text-lg leading-tight">Hur kan vi hjälpa dig?</span>
-                        <span className="text-xs text-black/60 font-medium">Vi svarar direkt</span>
+                        <div className="flex flex-col">
+                            <span className="font-bold text-lg leading-tight">Hur kan vi hjälpa dig?</span>
+                            <span className="text-xs text-black/60 font-medium">Vi svarar direkt</span>
+                        </div>
+                        {/* Pulsing Dot */}
+                        <div className="relative flex h-3 w-3">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00C455] opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-3 w-3 bg-[#00C455]"></span>
+                        </div>
                     </div>
-                    {/* Pulsing Dot */}
-                    <div className="relative flex h-3 w-3">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00C455] opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-3 w-3 bg-[#00C455]"></span>
-                    </div>
-                </div>
-            </motion.div>
+                </motion.div>
+            )}
         </section>
     )
 }

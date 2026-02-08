@@ -221,7 +221,7 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
    */
 
   // Hook into global lenis scroll events
-  useLenis(({ scroll }) => {
+  useLenis(() => {
     if (useWindowScroll) {
       handleScroll();
     }

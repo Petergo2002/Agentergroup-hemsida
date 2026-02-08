@@ -3,6 +3,8 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence, useAnimation, useInView } from 'framer-motion'
 import { Check, Search, Plus, PlugZap } from 'lucide-react'
+import useShouldReduceMotion from './useShouldReduceMotion'
+import usePageVisibility from './usePageVisibility'
 
 const apps = [
     { name: 'HubSpot', logo: 'https://cdn.worldvectorlogo.com/logos/hubspot-1.svg', color: '#FF7A59' },
@@ -14,6 +16,8 @@ const apps = [
 ]
 
 export default function AppConnectShowcase() {
+    const shouldReduceMotion = useShouldReduceMotion()
+    const isPageVisible = usePageVisibility()
     const [step, setStep] = useState<0 | 1 | 2>(0)
     const [connected, setConnected] = useState(false)
     const [activeApp, setActiveApp] = useState<string | null>(null)
@@ -25,7 +29,8 @@ export default function AppConnectShowcase() {
 
     // Simulation loop
     useEffect(() => {
-        if (!isInView) return;
+        if (shouldReduceMotion) return;
+        if (!isInView || !isPageVisible) return;
 
         let isMounted = true
 
@@ -86,7 +91,7 @@ export default function AppConnectShowcase() {
             isMounted = false
             clearInterval(interval)
         }
-    }, [cursorControls, isInView])
+    }, [cursorControls, isInView, isPageVisible, shouldReduceMotion])
 
     return (
         <div ref={containerRef} className="w-full h-full flex items-center justify-center p-4">
@@ -167,7 +172,17 @@ export default function AppConnectShowcase() {
                                                 >
                                                     {/* App Logo Placeholder */}
                                                     <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center overflow-hidden p-1">
-                                                        {app.logo && <img src={app.logo} alt={app.name} className="w-full h-full object-contain" />}
+                                                        {app.logo && (
+                                                            <img
+                                                                src={app.logo}
+                                                                alt={app.name}
+                                                                className="w-full h-full object-contain"
+                                                                loading="lazy"
+                                                                decoding="async"
+                                                                width="40"
+                                                                height="40"
+                                                            />
+                                                        )}
                                                     </div>
                                                     <span className="text-xs text-white/70">{app.name}</span>
 
