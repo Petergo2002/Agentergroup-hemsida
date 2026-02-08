@@ -18,53 +18,37 @@ export default function OrangeVeil() {
 
     return (
         <div className="absolute inset-0 overflow-hidden bg-black pointer-events-none">
-            {/* Primary Orange Glow - Top Left */}
+            {/* Primary Orange Glow - Top Left - Optimized */}
             <motion.div
                 animate={{
-                    x: [0, 50, -50, 0],
-                    y: [0, 30, -30, 0],
-                    scale: [1, 1.2, 0.9, 1],
-                    opacity: [0.4, 0.6, 0.4]
+                    x: [0, 40, 0],
+                    y: [0, 25, 0],
+                    scale: [1, 1.1, 1],
+                }}
+                transition={{
+                    duration: 12,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                }}
+                className="absolute top-[-20%] left-[-10%] w-[700px] h-[700px] bg-[#FF5D00] rounded-full blur-[80px] mix-blend-screen opacity-35"
+                style={{ willChange: 'transform' }}
+            />
+
+            {/* Secondary Orange Glow - Bottom Right - Optimized */}
+            <motion.div
+                animate={{
+                    x: [0, -25, 0],
+                    y: [0, -40, 0],
+                    scale: [1, 1.05, 1],
                 }}
                 transition={{
                     duration: 15,
                     repeat: Infinity,
-                    ease: "easeInOut"
-                }}
-                className="absolute top-[-20%] left-[-10%] w-[800px] h-[800px] bg-[#FF5D00] rounded-full blur-[60px] md:blur-[120px] mix-blend-normal md:mix-blend-screen opacity-40"
-            />
-
-            {/* Secondary Orange Glow - Bottom Right */}
-            <motion.div
-                animate={{
-                    x: [0, -30, 30, 0],
-                    y: [0, -50, 50, 0],
-                    scale: [1, 1.1, 0.9, 1],
-                    opacity: [0.3, 0.5, 0.3]
-                }}
-                transition={{
-                    duration: 18,
-                    repeat: Infinity,
                     ease: "easeInOut",
-                    delay: 2
+                    delay: 1.5
                 }}
-                className="absolute bottom-[-20%] right-[-10%] w-[600px] h-[600px] bg-[#FF5D00] rounded-full blur-[50px] md:blur-[100px] mix-blend-normal md:mix-blend-screen opacity-30"
-            />
-
-            {/* Accent Glow - Center/Moving */}
-            <motion.div
-                animate={{
-                    x: [-100, 100, -50, 100, -100],
-                    y: [-50, 50, 100, -100, -50],
-                    scale: [1, 1.3, 0.8, 1.1, 1],
-                    opacity: [0.2, 0.4, 0.2]
-                }}
-                transition={{
-                    duration: 25,
-                    repeat: Infinity,
-                    ease: "linear"
-                }}
-                className="absolute top-[30%] left-[30%] w-[500px] h-[500px] bg-[#FF8C00] rounded-full blur-[60px] md:blur-[120px] mix-blend-normal md:mix-blend-screen opacity-20"
+                className="absolute bottom-[-20%] right-[-10%] w-[550px] h-[550px] bg-[#FF5D00] rounded-full blur-[70px] mix-blend-screen opacity-28"
+                style={{ willChange: 'transform' }}
             />
 
             {/* Noise Texture Overlay for "Grit" */}

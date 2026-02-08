@@ -145,39 +145,39 @@ export default function KnowledgeBaseShowcase() {
             {/* The Dashboard Container */}
             <div className="relative w-full bg-[#090909] rounded-2xl border border-white/10 shadow-2xl overflow-hidden flex flex-col font-sans min-h-[620px] md:min-h-[760px]">
 
-                {/* Top Nav (Mock) */}
-                <div className="flex items-center justify-between px-6 py-4 border-b border-white/5 bg-[#0C0C0C]">
-                    <div className="flex gap-8">
-                        <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/5 text-white/90">
+                {/* Top Nav (Mock) - Mobile Optimized */}
+                <div className="flex items-center justify-between px-4 md:px-6 py-3 md:py-4 border-b border-white/5 bg-[#0C0C0C]">
+                    <div className="flex gap-2 md:gap-8 overflow-x-auto scrollbar-hide">
+                        <div className="flex items-center gap-2 px-3 md:px-4 py-1.5 rounded-full bg-white/5 border border-white/5 text-white/90 whitespace-nowrap">
                             <BrainCircuit size={16} className="text-[#FF5D00]" />
                             <span className="text-sm font-medium">Hjärnan</span>
                         </div>
-                        <div className="flex items-center gap-2 text-white/40 font-medium text-sm">
+                        <div className="hidden md:flex items-center gap-2 text-white/40 font-medium text-sm whitespace-nowrap">
                             <PlugZap size={16} /> <span>Jobbet</span>
                         </div>
-                        <div className="flex items-center gap-2 text-white/40 font-medium text-sm">
+                        <div className="hidden md:flex items-center gap-2 text-white/40 font-medium text-sm whitespace-nowrap">
                             <span>Regler</span>
                         </div>
                     </div>
-                    <div className="flex items-center gap-3 text-white/40 text-sm">
+                    <div className="hidden md:flex items-center gap-3 text-white/40 text-sm">
                         <span>Widget</span>
                     </div>
                 </div>
 
-                {/* Content Area */}
-                <div className="p-8 flex-1 flex flex-col gap-8 bg-[#090909]">
+                {/* Content Area - Mobile Optimized */}
+                <div className="p-4 md:p-6 lg:p-8 flex-1 flex flex-col gap-6 md:gap-8 bg-[#090909]">
 
                     {/* Header Text */}
                     <div>
-                        <h3 className="text-lg font-medium text-white mb-1">Kunskapskällor</h3>
-                        <p className="text-white/40 text-sm">Ladda upp filer eller läs in en hemsida så att Maja kan svara korrekt på frågor.</p>
+                        <h3 className="text-base md:text-lg font-medium text-white mb-1">Kunskapskällor</h3>
+                        <p className="text-sm md:text-sm text-white/40 leading-relaxed">Ladda upp filer eller läs in en hemsida så att Maja kan svara korrekt på frågor.</p>
                     </div>
 
-                    {/* Cards Row */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    {/* Cards Row - Mobile Optimized Grid */}
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
 
-                        {/* Card 1: Upload (Inactive) */}
-                        <div className="p-6 rounded-xl border border-white/5 bg-[#0F0F0F] hover:bg-[#141414] transition-colors flex flex-col gap-4 text-center items-center justify-center min-h-[200px] border-dashed">
+                        {/* Card 1: Upload (Inactive) - Mobile Optimized */}
+                        <div className="p-6 md:p-8 rounded-xl border border-white/5 bg-[#0F0F0F] hover:bg-[#141414] transition-colors flex flex-col gap-4 text-center items-center justify-center min-h-[200px] border-dashed">
                             <div className="w-12 h-12 rounded-full bg-[#FF5D00]/10 flex items-center justify-center mb-2">
                                 <UploadCloud size={24} className="text-[#FF5D00]" />
                             </div>
@@ -185,26 +185,26 @@ export default function KnowledgeBaseShowcase() {
                                 <h4 className="text-sm font-medium text-white">Ladda upp filer</h4>
                                 <p className="text-xs text-white/40">PDF, DOCX eller TXT</p>
                             </div>
-                            <button className="mt-2 px-4 py-2 rounded-lg bg-white/5 text-xs font-medium hover:bg-white/10 transition-colors">Välj filer</button>
+                            <button className="mt-2 px-6 py-3 md:px-4 md:py-2 h-11 md:h-auto rounded-lg bg-white/5 text-sm md:text-xs font-medium hover:bg-white/10 transition-colors">Välj filer</button>
                         </div>
 
-                        {/* Card 2: Paste Text (Inactive) */}
-                        <div className="p-6 rounded-xl border border-white/5 bg-[#0F0F0F] flex flex-col gap-3 min-h-[200px]">
+                        {/* Card 2: Paste Text (Inactive) - Mobile Optimized */}
+                        <div className="p-6 md:p-8 rounded-xl border border-white/5 bg-[#0F0F0F] flex flex-col gap-3 min-h-[200px]">
                             <div className="flex items-center gap-2 mb-2">
                                 <FileText size={16} className="text-white/40" />
                                 <h4 className="text-sm font-medium text-white">Klistra in text</h4>
                             </div>
-                            <div className="w-full bg-[#1A1A1A] rounded-lg border border-white/5 h-8 px-3 flex items-center">
-                                <span className="text-xs text-white/30">Titel (valfritt)</span>
+                            <div className="w-full bg-[#1A1A1A] rounded-lg border border-white/5 h-11 md:h-8 px-3 flex items-center">
+                                <span className="text-sm md:text-xs text-white/30">Titel (valfritt)</span>
                             </div>
-                            <div className="flex-1 bg-[#1A1A1A] rounded-lg border border-white/5 p-3">
-                                <span className="text-xs text-white/30">Skriv eller klistra in text här...</span>
+                            <div className="flex-1 bg-[#1A1A1A] rounded-lg border border-white/5 p-3 min-h-[80px]">
+                                <span className="text-sm md:text-xs text-white/30">Skriv eller klistra in text här...</span>
                             </div>
-                            <button className="self-start px-4 py-1.5 rounded-lg bg-[#FF5D00]/20 text-[#FF5D00] text-xs font-medium">Spara text</button>
+                            <button className="self-start px-6 py-3 md:px-4 md:py-1.5 h-11 md:h-auto rounded-lg bg-[#FF5D00]/20 text-[#FF5D00] text-sm md:text-xs font-medium">Svara text</button>
                         </div>
 
-                        {/* Card 3: Website (Active Animation Target) */}
-                        <div className="relative p-6 rounded-xl border border-white/10 bg-[#0F0F0F] flex flex-col gap-4 min-h-[200px] overflow-hidden group">
+                        {/* Card 3: Website (Active Animation Target) - Mobile Optimized */}
+                        <div className="relative p-6 md:p-8 rounded-xl border border-white/10 bg-[#0F0F0F] flex flex-col gap-4 min-h-[200px] overflow-hidden group">
                             {/* Glow Effect */}
                             <div className="absolute inset-0 bg-[#FF5D00]/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
 
@@ -214,19 +214,19 @@ export default function KnowledgeBaseShowcase() {
                             </div>
                             <p className="text-xs text-white/40 mb-2">Klistra in en länk till din hemsida</p>
 
-                            {/* Animated Input */}
-                            <div className="relative w-full bg-[#1A1A1A] rounded-lg border border-white/10 h-10 px-3 flex items-center overflow-hidden">
+                            {/* Animated Input - Mobile Optimized */}
+                            <div className="relative w-full bg-[#1A1A1A] rounded-lg border border-white/10 h-11 md:h-10 px-3 flex items-center overflow-hidden">
                                 <LinkIcon size={14} className="text-white/20 mr-2 flex-shrink-0" />
-                                <span className="text-xs text-white/90 whitespace-nowrap">
+                                <span className="text-sm md:text-xs text-white/90 whitespace-nowrap">
                                     {displayTypingText}<span className="animate-pulse">|</span>
                                 </span>
                                 {/* Cursor Simulation Anchor */}
                                 <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#1A1A1A] to-transparent pointer-events-none" />
                             </div>
 
-                            {/* Button */}
+                            {/* Button - Mobile Optimized */}
                             <button className={`
-                                mt-auto self-start px-4 py-2 rounded-lg text-xs font-medium flex items-center gap-2 transition-all
+                                mt-auto self-start px-6 py-3 md:px-4 md:py-2 h-11 md:h-auto rounded-lg text-sm md:text-xs font-medium flex items-center gap-2 transition-all
                                 ${displayIsScraping ? 'bg-white/10 text-white/50' : 'bg-[#FF5D00] text-black hover:bg-[#FF7A33]'}
                             `}>
                                 {displayIsScraping ? (
@@ -249,57 +249,89 @@ export default function KnowledgeBaseShowcase() {
                         </div>
                     </div>
 
-                    {/* List Section */}
+                    {/* List Section - Mobile Optimized */}
                     <div className="flex-1 flex flex-col gap-4">
                         <div className="flex items-center justify-between">
-                            <h4 className="text-xs font-medium text-white/60 uppercase tracking-wider">Inlärda källor</h4>
+                            <h4 className="text-xs md:text-xs font-medium text-white/60 uppercase tracking-wider">Inlärda källor</h4>
                             <span className="text-xs text-white/30">{displaySources.length} källor</span>
                         </div>
 
-                        {/* List Header */}
-                        <div className="grid grid-cols-12 gap-4 px-4 text-xs text-white/30 pb-2 border-b border-white/5">
-                            <div className="col-span-6">Källa</div>
-                            <div className="col-span-2 text-center">Typ</div>
-                            <div className="col-span-2">Storlek</div>
-                            <div className="col-span-2">Status</div>
-                        </div>
-
-                        {/* Rows */}
-                        <div className="space-y-1">
+                        {/* MOBILE: Card Layout (< md) */}
+                        <div className="md:hidden space-y-3">
                             <AnimatePresence>
                                 {displaySources.map((source, i) => (
                                     <motion.div
                                         key={source.name + i}
                                         initial={{ opacity: 0, y: -10, height: 0 }}
                                         animate={{ opacity: 1, y: 0, height: 'auto' }}
-                                        className="grid grid-cols-12 gap-4 items-center p-3 rounded-lg bg-white/5 border border-white/5 hover:bg-white/10 transition-colors group"
+                                        className="p-4 rounded-lg bg-white/5 border border-white/5 hover:bg-white/10 transition-colors"
                                     >
-                                        <div className="col-span-6 flex items-center gap-3 overflow-hidden">
-                                            <div className="p-2 rounded bg-white/5 text-[#FF5D00]">
-                                                {source.type === 'file' ? <FileText size={14} /> : <Globe size={14} />}
+                                        <div className="flex items-start justify-between gap-3">
+                                            <div className="flex items-center gap-3 flex-1 min-w-0">
+                                                <div className="p-2 rounded bg-white/5 text-[#FF5D00] flex-shrink-0">
+                                                    {source.type === 'file' ? <FileText size={16} /> : <Globe size={16} />}
+                                                </div>
+                                                <div className="flex flex-col min-w-0 flex-1">
+                                                    <span className="text-sm text-white/90 font-medium truncate">{source.name}</span>
+                                                    <span className="text-xs text-white/30">Uppladdad {source.date}</span>
+                                                </div>
                                             </div>
-                                            <div className="flex flex-col min-w-0">
-                                                <span className="text-sm text-white/90 truncate font-medium">{source.name}</span>
-                                                <span className="text-xs text-white/30">Uppladdad {source.date}</span>
-                                            </div>
-                                        </div>
-
-                                        <div className="col-span-2 flex justify-center">
-                                            <span className="text-[10px] uppercase font-bold text-white/20 bg-white/5 px-2 py-0.5 rounded-full">
-                                                {source.type === 'file' ? 'FIL' : 'LÄNK'}
-                                            </span>
-                                        </div>
-
-                                        <div className="col-span-2 text-xs text-white/50">{source.size}</div>
-
-                                        <div className="col-span-2">
-                                            <span className="inline-flex items-center gap-1 text-[10px] text-[#FF5D00] bg-[#FF5D00]/10 px-2 py-1 rounded-full border border-[#FF5D00]/20">
+                                            <span className="inline-flex items-center gap-1 text-[10px] text-[#FF5D00] bg-[#FF5D00]/10 px-2 py-1 rounded-full border border-[#FF5D00]/20 whitespace-nowrap flex-shrink-0">
                                                 {source.status}
                                             </span>
                                         </div>
                                     </motion.div>
                                 ))}
                             </AnimatePresence>
+                        </div>
+
+                        {/* DESKTOP: Table Layout (≥ md) */}
+                        <div className="hidden md:block">
+                            {/* List Header */}
+                            <div className="grid grid-cols-12 gap-4 px-4 text-xs text-white/30 pb-2 border-b border-white/5">
+                                <div className="col-span-6">Källa</div>
+                                <div className="col-span-2 text-center">Typ</div>
+                                <div className="col-span-2">Storlek</div>
+                                <div className="col-span-2">Status</div>
+                            </div>
+
+                            {/* Rows */}
+                            <div className="space-y-1">
+                                <AnimatePresence>
+                                    {displaySources.map((source, i) => (
+                                        <motion.div
+                                            key={source.name + i}
+                                            initial={{ opacity: 0, y: -10, height: 0 }}
+                                            animate={{ opacity: 1, y: 0, height: 'auto' }}
+                                            className="grid grid-cols-12 gap-4 items-center p-3 rounded-lg bg-white/5 border border-white/5 hover:bg-white/10 transition-colors group"
+                                        >
+                                            <div className="col-span-6 flex items-center gap-3 overflow-hidden">
+                                                <div className="p-2 rounded bg-white/5 text-[#FF5D00]">
+                                                    {source.type === 'file' ? <FileText size={14} /> : <Globe size={14} />}
+                                                </div>
+                                                <div className="flex flex-col min-w-0">
+                                                    <span className="text-sm text-white/90 truncate font-medium">{source.name}</span>
+                                                    <span className="text-xs text-white/30">Uppladdad {source.date}</span>
+                                                </div>
+                                            </div>
+
+                                            <div className="col-span-2 flex justify-center">
+                                                <span className="text-[10px] uppercase font-bold text-white/20 bg-white/5 px-2 py-0.5 rounded-full">
+                                                    {source.type === 'file' ? 'FIL' : 'LÄNK'}
+                                                </span>
+                                            </div>
+
+                                            <div className="col-span-2 text-xs text-white/50">{source.size}</div>
+
+                                            <div className="col-span-2">
+                                                <span className="inline-flex items-center gap-1 text-[10px] text-[#FF5D00] bg-[#FF5D00]/10 px-2 py-1 rounded-full border border-[#FF5D00]/20">
+                                                    {source.status}
+                                                </span>
+                                            </div>
+                                        </motion.div>
+                                    ))}
+                                </AnimatePresence>
+                            </div>
                         </div>
                     </div>
                 </div>

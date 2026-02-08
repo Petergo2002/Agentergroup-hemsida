@@ -75,11 +75,11 @@ export default function IntegrationShowcase() {
                     className="flex gap-4 md:gap-8 px-4"
                     animate={shouldAnimate ? { x: '-50%' } : { x: 0 }}
                     transition={{
-                        duration: shouldAnimate ? 30 : 0.01,
+                        duration: shouldAnimate ? 40 : 0.01,
                         ease: 'linear',
                         repeat: shouldAnimate ? Infinity : 0
                     }}
-                    style={{ width: "fit-content" }}
+                    style={{ width: "fit-content", willChange: shouldAnimate ? 'transform' : 'auto' }}
                 >
                     {/* Double the list for seamless loop */}
                     {[...integrations, ...integrations].map((item, index) => (

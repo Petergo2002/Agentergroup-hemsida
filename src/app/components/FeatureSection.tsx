@@ -72,9 +72,9 @@ export default function FeatureSection({
                     transition={{ duration: 0.7, ease: "easeOut" }}
                     className="relative w-full"
                 >
-                    {/* Glow Effect */}
+                    {/* Glow Effect - Optimized for Safari */}
                     {!shouldReduceMotion && (
-                        <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-[#FF5D00]/5 blur-[120px] rounded-full pointer-events-none" />
+                        <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-[#FF5D00]/5 blur-[60px] rounded-full pointer-events-none" style={{ willChange: 'opacity' }} />
                     )}
 
                     {/* Component Wrapper - Frameless */}

@@ -14,9 +14,8 @@ export default function HeroMaja({ startAnimation }: HeroMajaProps) {
 
     return (
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-32 md:pt-44">
-            {/* Background Ambient Glow */}
             {/* Background Ambient Glow - Optimized for Safari */}
-            <div className={`absolute inset-0 bg-glow-green pointer-events-none translate-z-0 will-change-transform ${shouldReduceMotion ? 'opacity-20' : 'opacity-40'}`} />
+            <div className={`absolute inset-0 bg-glow-green pointer-events-none ${shouldReduceMotion ? 'opacity-20' : 'opacity-30'}`} style={{ willChange: 'opacity' }} />
 
             <div className="container relative z-10 flex flex-col items-center text-center px-4">
 
@@ -67,17 +66,13 @@ export default function HeroMaja({ startAnimation }: HeroMajaProps) {
                     transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
                     className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
                 >
-                    <a
-                        href="https://widget.agentergroup.com/"
-                        onClick={(event) => {
-                            event.preventDefault()
-                            openMajaWidget()
-                        }}
+                    <button
+                        onClick={openMajaWidget}
                         className="px-8 py-4 rounded-full bg-[#FF5D00] text-black font-bold text-lg hover:bg-[#00C455] transition-all transform hover:scale-105 flex items-center justify-center gap-2"
                     >
                         Starta chatten
                         <ArrowRight size={20} />
-                    </a>
+                    </button>
                     <a
                         href="#booking-cta"
                         className="px-8 py-4 rounded-full glass-panel text-white font-medium text-lg hover:bg-white/10 transition-all flex items-center justify-center"
@@ -86,22 +81,20 @@ export default function HeroMaja({ startAnimation }: HeroMajaProps) {
                     </a>
                 </motion.div>
 
-                {/* Interactive Element / Visual - Dashboard Reveal (Polished 3D) */}
+                {/* Interactive Element / Visual - Dashboard Reveal (Optimized) */}
                 <motion.div
-                    initial={{ opacity: 0, scale: 0.9, y: 40, rotateX: 20 }}
-                    animate={startAnimation ? { opacity: 1, scale: 1, y: 0, rotateX: 10 } : { opacity: 0, scale: 0.9, y: 40, rotateX: 20 }}
-                    transition={{ duration: 1.2, delay: 0.6, ease: "circOut" }}
-                    style={{ perspective: "2000px" }}
+                    initial={{ opacity: 0, scale: 0.95, y: 30 }}
+                    animate={startAnimation ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.95, y: 30 }}
+                    transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
                     className="mt-16 w-full max-w-6xl relative z-10"
                 >
                     <motion.div
-                        className="relative group transition-all duration-700 ease-out will-change-transform"
-                        whileHover={shouldReduceMotion ? undefined : { scale: 1.02 }}
-                        style={{ transformStyle: 'preserve-3d' }}
+                        className="relative group transition-all duration-500 ease-out"
+                        whileHover={shouldReduceMotion ? undefined : { scale: 1.01 }}
+                        style={{ willChange: 'transform' }}
                     >
-                        {/* Ambient Bloom - Breathing Orange Aura */}
-                        {/* Ambient Bloom - Reduced blur for perf */}
-                        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[80%] bg-[#FF5D00] opacity-20 rounded-full -z-10 translate-z-0 ${shouldReduceMotion ? 'blur-[20px]' : 'blur-[60px] animate-pulse-slow'}`} />
+                        {/* Ambient Bloom - Optimized blur */}
+                        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[80%] bg-[#FF5D00] opacity-20 rounded-full -z-10 ${shouldReduceMotion ? 'blur-[20px]' : 'blur-[40px] animate-pulse-slow'}`} style={{ willChange: 'opacity' }} />
 
                         {/* High-End Luminous Glass Border */}
                         <div className="relative p-[1px] rounded-2xl bg-gradient-to-b from-white/40 via-white/10 to-transparent shadow-2xl shadow-black/50">
@@ -133,6 +126,6 @@ export default function HeroMaja({ startAnimation }: HeroMajaProps) {
                 </motion.div>
 
             </div>
-        </section>
+        </section >
     )
 }

@@ -20,10 +20,10 @@ export default function BookingCTA() {
                 viewport={{ amount: 0.3 }}
             />
 
-            {/* Background Effects */}
+            {/* Background Effects - Optimized for Safari */}
             <div className="absolute inset-0 pointer-events-none">
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(255,93,0,0.08)_0%,transparent_70%)]" />
-                <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[#FF5D00]/5 rounded-full blur-[120px]" />
+                <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[#FF5D00]/5 rounded-full blur-[60px]" style={{ willChange: 'opacity' }} />
             </div>
 
             <div className="container mx-auto px-4 relative z-10">

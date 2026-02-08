@@ -85,52 +85,50 @@ export default function AppConnectShowcase() {
             setActiveApp(null)
             safeSet({ opacity: 0, x: 100, y: 100 })
 
-            // Step 1: Open Dialog (Wait 1.5s)
-            await wait(1500)
+            // Step 1: Open Dialog (Wait longer for smoother experience)
+            await wait(2000)
             if (!isMounted) return
             setStep(1) // "Välj App"
             await waitForCursorMount()
             if (!isMounted) return
 
-            // Step 2: Show Cursor & Move to HubSpot
-            // Start moving cursor immediately when dialog opens
+            // Step 2: Show Cursor & Move to HubSpot (Slower, smoother)
             await safeStart({ opacity: 1, x: 150, y: 150, transition: { duration: 0 } })
 
-            // Move to HubSpot
-            await wait(500)
+            // Move to HubSpot (slower)
+            await wait(800)
             if (!isMounted) return
-            await safeStart({ x: 0, y: -40, transition: { duration: 1, ease: 'easeOut' } })
+            await safeStart({ x: 0, y: -40, transition: { duration: 1.2, ease: 'easeOut' } })
 
             // "Click" HubSpot
-            await safeStart({ scale: 0.8, transition: { duration: 0.1 } })
-            await safeStart({ scale: 1, transition: { duration: 0.1 } })
+            await safeStart({ scale: 0.85, transition: { duration: 0.15 } })
+            await safeStart({ scale: 1, transition: { duration: 0.15 } })
             if (!isMounted) return
             setActiveApp('HubSpot')
 
-            // Move to Connect Button
-            await wait(500)
-            await safeStart({ x: 120, y: 140, transition: { duration: 0.8, ease: 'easeInOut' } })
+            // Move to Connect Button (slower)
+            await wait(800)
+            await safeStart({ x: 120, y: 140, transition: { duration: 1, ease: 'easeInOut' } })
 
             // "Click" Connect
-            await safeStart({ scale: 0.8, transition: { duration: 0.1 } })
+            await safeStart({ scale: 0.85, transition: { duration: 0.15 } })
             if (!isMounted) return
             setConnected(true)
-            await safeStart({ scale: 1, transition: { duration: 0.1 } })
+            await safeStart({ scale: 1, transition: { duration: 0.15 } })
 
             // Fade out cursor
-            await wait(500)
-            await safeStart({ opacity: 0, transition: { duration: 0.5 } })
+            await wait(800)
+            await safeStart({ opacity: 0, transition: { duration: 0.6 } })
 
-            // Step 3: Wait for animation sequence completion
-            await wait(4000)
+            // Wait longer before reset
+            await wait(5000)
             if (!isMounted) return
             setStep(0)
 
-            // Step 4: Close/Reset
             // Loop restarts
         }
 
-        const LOOP_MS = 10000
+        const LOOP_MS = 13000 // Increased for better Safari performance
         const runLoop = async () => {
             while (isMounted) {
                 const startedAt = Date.now()

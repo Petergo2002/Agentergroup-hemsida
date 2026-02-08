@@ -55,11 +55,11 @@ export default function ScrollReveal() {
         <section ref={containerRef} className="h-[180vh] md:h-[200vh] relative bg-[#050505] font-sans">
             <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden">
 
-                {/* Very Subtle Background Glow - Barely visible to keep it clean */}
+                {/* Very Subtle Background Glow - Optimized for Safari */}
                 <div className="absolute inset-0 pointer-events-none">
                     <motion.div
-                        style={{ opacity: glowOpacity }}
-                        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] h-[70vw] md:w-[60vw] md:h-[60vw] bg-[#FF5D00] rounded-full blur-[40px] md:blur-[100px] translate-z-0 will-change-transform"
+                        style={{ opacity: glowOpacity, willChange: 'opacity' }}
+                        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] h-[70vw] md:w-[60vw] md:h-[60vw] bg-[#FF5D00] rounded-full blur-[30px] md:blur-[60px]"
                     />
                 </div>
 

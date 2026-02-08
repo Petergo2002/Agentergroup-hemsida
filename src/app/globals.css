@@ -119,3 +119,14 @@ html.lenis body {
 .animate-pulse-green {
   animation: pulse-green 3s infinite;
 }
+
+/* Utility: Hide Scrollbar */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari, Opera */
+}
+
