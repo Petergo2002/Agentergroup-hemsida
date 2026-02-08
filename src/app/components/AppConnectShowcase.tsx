@@ -7,12 +7,12 @@ import useShouldReduceMotion from './useShouldReduceMotion'
 import usePageVisibility from './usePageVisibility'
 
 const apps = [
-    { name: 'HubSpot', logo: 'https://cdn.worldvectorlogo.com/logos/hubspot-1.svg', color: '#FF7A59' },
-    { name: 'Salesforce', logo: 'https://cdn.worldvectorlogo.com/logos/salesforce-2.svg', color: '#00A1E0' },
-    { name: 'Pipedrive', logo: 'https://cdn.worldvectorlogo.com/logos/pipedrive.svg', color: '#26292C' },
-    { name: 'Slack', logo: 'https://cdn.worldvectorlogo.com/logos/slack-new-logo.svg', color: '#4A154B' },
-    { name: 'Zapier', logo: 'https://cdn.worldvectorlogo.com/logos/zapier.svg', color: '#FF4F00' },
-    { name: 'Google Cal', logo: 'https://cdn.worldvectorlogo.com/logos/google-calendar.svg', color: '#4285F4' },
+    { name: 'HubSpot', badge: 'HS', color: '#FF7A59' },
+    { name: 'Salesforce', badge: 'SF', color: '#00A1E0' },
+    { name: 'Pipedrive', badge: 'PD', color: '#26292C' },
+    { name: 'Slack', badge: 'SL', color: '#4A154B' },
+    { name: 'Zapier', badge: 'ZA', color: '#FF4F00' },
+    { name: 'Google Cal', badge: 'GC', color: '#4285F4' },
 ]
 
 export default function AppConnectShowcase() {
@@ -25,6 +25,7 @@ export default function AppConnectShowcase() {
 
     // Performance: Pause when not visible
     const containerRef = useRef(null)
+    const cursorRef = useRef<HTMLDivElement | null>(null)
     const isInView = useInView(containerRef, { margin: "0px 0px -200px 0px" })
 
     // Simulation loop
@@ -33,6 +34,34 @@ export default function AppConnectShowcase() {
         if (!isInView || !isPageVisible) return;
 
         let isMounted = true
+        const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
+        const waitForNextPaint = () =>
+            new Promise<void>((resolve) => {
+                requestAnimationFrame(() => resolve())
+            })
+        const waitForCursorMount = async () => {
+            let attempts = 0
+            while (isMounted && !cursorRef.current && attempts < 8) {
+                await waitForNextPaint()
+                attempts += 1
+            }
+        }
+        const safeSet = (definition: Parameters<typeof cursorControls.set>[0]) => {
+            if (!isMounted) return
+            try {
+                cursorControls.set(definition)
+            } catch {
+                // Ignore when controls are not mounted yet.
+            }
+        }
+        const safeStart = async (definition: Parameters<typeof cursorControls.start>[0]) => {
+            if (!isMounted) return
+            try {
+                await cursorControls.start(definition)
+            } catch {
+                // Ignore when controls are not mounted yet.
+            }
+        }
 
         const loop = async () => {
             if (!isMounted) return
@@ -41,55 +70,70 @@ export default function AppConnectShowcase() {
             setStep(0)
             setConnected(false)
             setActiveApp(null)
-            cursorControls.set({ opacity: 0, x: 100, y: 100 })
+            safeSet({ opacity: 0, x: 100, y: 100 })
 
             // Step 1: Open Dialog (Wait 1.5s)
-            await new Promise(r => setTimeout(r, 1500))
+            await wait(1500)
             if (!isMounted) return
             setStep(1) // "Välj App"
+            await waitForCursorMount()
+            if (!isMounted) return
 
             // Step 2: Show Cursor & Move to HubSpot
             // Start moving cursor immediately when dialog opens
-            await cursorControls.start({ opacity: 1, x: 150, y: 150, transition: { duration: 0 } })
+            await safeStart({ opacity: 1, x: 150, y: 150, transition: { duration: 0 } })
 
             // Move to HubSpot
-            await new Promise(r => setTimeout(r, 500))
+            await wait(500)
             if (!isMounted) return
-            await cursorControls.start({ x: 0, y: -40, transition: { duration: 1, ease: 'easeOut' } })
+            await safeStart({ x: 0, y: -40, transition: { duration: 1, ease: 'easeOut' } })
 
             // "Click" HubSpot
-            await cursorControls.start({ scale: 0.8, transition: { duration: 0.1 } })
-            await cursorControls.start({ scale: 1, transition: { duration: 0.1 } })
+            await safeStart({ scale: 0.8, transition: { duration: 0.1 } })
+            await safeStart({ scale: 1, transition: { duration: 0.1 } })
             if (!isMounted) return
             setActiveApp('HubSpot')
 
             // Move to Connect Button
-            await new Promise(r => setTimeout(r, 500))
-            await cursorControls.start({ x: 120, y: 140, transition: { duration: 0.8, ease: 'easeInOut' } })
+            await wait(500)
+            await safeStart({ x: 120, y: 140, transition: { duration: 0.8, ease: 'easeInOut' } })
 
             // "Click" Connect
-            await cursorControls.start({ scale: 0.8, transition: { duration: 0.1 } })
+            await safeStart({ scale: 0.8, transition: { duration: 0.1 } })
             if (!isMounted) return
             setConnected(true)
-            await cursorControls.start({ scale: 1, transition: { duration: 0.1 } })
+            await safeStart({ scale: 1, transition: { duration: 0.1 } })
 
             // Fade out cursor
-            await new Promise(r => setTimeout(r, 500))
-            cursorControls.start({ opacity: 0, transition: { duration: 0.5 } })
+            await wait(500)
+            await safeStart({ opacity: 0, transition: { duration: 0.5 } })
 
             // Step 3: Wait for animation sequence completion
-            await new Promise(r => setTimeout(r, 4000))
+            await wait(4000)
+            if (!isMounted) return
+            setStep(0)
 
             // Step 4: Close/Reset
             // Loop restarts
         }
 
-        const interval = setInterval(loop, 10000)
-        loop() // Start immediately
+        const LOOP_MS = 10000
+        const runLoop = async () => {
+            while (isMounted) {
+                const startedAt = Date.now()
+                await loop()
+                const elapsed = Date.now() - startedAt
+                const remaining = Math.max(0, LOOP_MS - elapsed)
+                if (remaining > 0) {
+                    await wait(remaining)
+                }
+            }
+        }
+
+        void runLoop()
 
         return () => {
             isMounted = false
-            clearInterval(interval)
         }
     }, [cursorControls, isInView, isPageVisible, shouldReduceMotion])
 
@@ -147,7 +191,7 @@ export default function AppConnectShowcase() {
                                 initial={{ opacity: 0, scale: 0.9, y: 20 }}
                                 animate={{ opacity: 1, scale: 1, y: 0 }}
                                 exit={{ opacity: 0, scale: 0.95 }}
-                                className="absolute inset-0 flex items-center justify-center z-20 bg-black/40 backdrop-blur-sm p-4"
+                                className="absolute inset-0 flex items-center justify-center z-20 bg-black/40 p-4"
                             >
                                 <div className="w-full max-w-md bg-[#1A1A1A] rounded-xl border border-white/10 shadow-2xl overflow-hidden flex flex-col">
                                     {/* Modal Header */}
@@ -171,18 +215,12 @@ export default function AppConnectShowcase() {
                             `}
                                                 >
                                                     {/* App Logo Placeholder */}
-                                                    <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center overflow-hidden p-1">
-                                                        {app.logo && (
-                                                            <img
-                                                                src={app.logo}
-                                                                alt={app.name}
-                                                                className="w-full h-full object-contain"
-                                                                loading="lazy"
-                                                                decoding="async"
-                                                                width="40"
-                                                                height="40"
-                                                            />
-                                                        )}
+                                                    <div
+                                                        className="w-10 h-10 rounded-full flex items-center justify-center overflow-hidden text-[10px] font-bold text-white"
+                                                        style={{ backgroundColor: app.color }}
+                                                        aria-hidden="true"
+                                                    >
+                                                        <span>{app.badge}</span>
                                                     </div>
                                                     <span className="text-xs text-white/70">{app.name}</span>
 
@@ -226,6 +264,7 @@ export default function AppConnectShowcase() {
 
                                 {/* --- MOUSE CURSOR SIMULATION --- */}
                                 <motion.div
+                                    ref={cursorRef}
                                     className="absolute pointer-events-none z-50 text-white drop-shadow-xl"
                                     animate={cursorControls}
                                     initial={{ opacity: 0, x: 100, y: 100 }}

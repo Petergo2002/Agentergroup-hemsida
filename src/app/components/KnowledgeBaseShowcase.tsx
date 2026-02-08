@@ -31,6 +31,27 @@ export default function KnowledgeBaseShowcase() {
         if (!isInView || !isPageVisible) return;
 
         let isMounted = true
+        const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
+        const waitForNextPaint = () =>
+            new Promise<void>((resolve) => {
+                requestAnimationFrame(() => resolve())
+            })
+        const safeSet = (definition: Parameters<typeof cursorControls.set>[0]) => {
+            if (!isMounted) return
+            try {
+                cursorControls.set(definition)
+            } catch {
+                // Ignore when controls are not mounted yet.
+            }
+        }
+        const safeStart = async (definition: Parameters<typeof cursorControls.start>[0]) => {
+            if (!isMounted) return
+            try {
+                await cursorControls.start(definition)
+            } catch {
+                // Ignore when controls are not mounted yet.
+            }
+        }
         const loop = async () => {
             if (!isMounted) return
 
@@ -38,34 +59,37 @@ export default function KnowledgeBaseShowcase() {
             setTypingText('')
             setIsScraping(false)
             setSources(initialSources)
-            cursorControls.set({ opacity: 0, x: 200, y: 300 })
+            safeSet({ opacity: 0, x: 200, y: 300 })
 
             // Wait start
-            await new Promise(r => setTimeout(r, 1000))
+            await wait(1000)
+            if (!isMounted) return
+            await waitForNextPaint()
+            if (!isMounted) return
 
             // 1. Move Cursor to URL Input
-            await cursorControls.start({ opacity: 1, x: 300, y: 250, transition: { duration: 0 } }) // Jump to general area
-            await cursorControls.start({ x: 50, y: -20, transition: { duration: 1, ease: 'easeOut' } }) // Relative move to input
+            await safeStart({ opacity: 1, x: 300, y: 250, transition: { duration: 0 } }) // Jump to general area
+            await safeStart({ x: 50, y: -20, transition: { duration: 1, ease: 'easeOut' } }) // Relative move to input
 
             // 2. Type URL
             const urlToType = 'https://agentergroup.com'
             for (let i = 0; i < urlToType.length; i++) {
                 if (!isMounted) return
                 setTypingText(prev => prev + urlToType[i])
-                await new Promise(r => setTimeout(r, 50 + Math.random() * 50))
+                await wait(50 + Math.random() * 50)
             }
 
             // 3. Move to "Läs in" button
-            await cursorControls.start({ x: 50, y: 60, transition: { duration: 0.6, ease: 'easeInOut' } })
+            await safeStart({ x: 50, y: 60, transition: { duration: 0.6, ease: 'easeInOut' } })
 
             // 4. Click
-            await cursorControls.start({ scale: 0.8, transition: { duration: 0.1 } })
-            await cursorControls.start({ scale: 1, transition: { duration: 0.1 } })
+            await safeStart({ scale: 0.8, transition: { duration: 0.1 } })
+            await safeStart({ scale: 1, transition: { duration: 0.1 } })
             if (!isMounted) return
             setIsScraping(true)
 
             // 5. Simulate Loading/Scraping
-            await new Promise(r => setTimeout(r, 800))
+            await wait(800)
 
             // 6. Add to list
             if (!isMounted) return
@@ -77,18 +101,29 @@ export default function KnowledgeBaseShowcase() {
             setTypingText('')
 
             // 7. Fade out cursor
-            cursorControls.start({ opacity: 0, transition: { duration: 0.5 } })
+            await safeStart({ opacity: 0, transition: { duration: 0.5 } })
 
             // Wait before restart
-            await new Promise(r => setTimeout(r, 4000))
+            await wait(4000)
         }
 
-        const interval = setInterval(loop, 9000)
-        loop()
+        const LOOP_MS = 9000
+        const runLoop = async () => {
+            while (isMounted) {
+                const startedAt = Date.now()
+                await loop()
+                const elapsed = Date.now() - startedAt
+                const remaining = Math.max(0, LOOP_MS - elapsed)
+                if (remaining > 0) {
+                    await wait(remaining)
+                }
+            }
+        }
+
+        void runLoop()
 
         return () => {
             isMounted = false
-            clearInterval(interval)
         }
     }, [cursorControls, isInView, isPageVisible, shouldReduceMotion])
 
