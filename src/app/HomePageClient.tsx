@@ -13,6 +13,7 @@ import BookingCTA from './components/BookingCTA'
 import Footer from './components/Footer'
 import IntroLoader from './components/IntroLoader'
 import useShouldReduceMotion from './components/useShouldReduceMotion'
+import PricingTiers from './components/PricingTiers'
 
 export default function HomePageClient() {
   const shouldReduceMotion = useShouldReduceMotion()
@@ -44,6 +45,8 @@ export default function HomePageClient() {
           features={["RAG-system", "GDPR-säkrad", "Självlärande", "Live-uppdatering"]}
           component={<KnowledgeBaseShowcase />}
         />
+
+        <PricingTiers />
 
         <BookingCTA />
       </main>

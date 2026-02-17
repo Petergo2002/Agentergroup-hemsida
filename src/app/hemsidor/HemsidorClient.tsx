@@ -300,7 +300,7 @@ export default function HemsidorClient() {
                   <ArrowDownRight className="w-8 h-8 text-[#FF5D00] animate-bounce" strokeWidth={2.5} />
                 </div>
                 <div className="flex flex-col">
-                  <span className="font-bold text-lg leading-tight">Hur kan vi hjälpa dig?</span>
+                  <span className="font-bold text-lg leading-tight">Prata med Maja här!</span>
                   <span className="text-xs text-black/60 font-medium">Vi svarar direkt</span>
                 </div>
                 <div className="relative flex h-3 w-3">
