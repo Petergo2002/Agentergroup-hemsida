@@ -8,7 +8,6 @@ import useShouldReduceMotion from './useShouldReduceMotion'
 const links = [
   { href: '/', label: 'AI Frontdesk' },
   { href: '/hemsidor', label: 'Hemsidor' },
-  { href: '/blogg', label: 'Blogg' },
 ]
 
 export default function NavBar() {
@@ -78,10 +77,10 @@ export default function NavBar() {
                 </Link>
               ))}
               <a
-                href="#booking-cta"
-                className="ml-2 px-5 py-2 rounded-full bg-[#FF5D00] text-black text-sm font-bold hover:bg-[#00C455] transition-transform hover:scale-105"
+                href="https://dashboard.agentergroup.com/auth/login"
+                className="ml-2 px-5 py-2 rounded-full text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 transition-all"
               >
-                Kom igång
+                Logga in
               </a>
             </div>
 
@@ -124,11 +123,11 @@ export default function NavBar() {
                 </Link>
               ))}
               <a
-                href="#booking-cta"
-                className="mt-4 px-8 py-4 rounded-full bg-[#FF5D00] text-black text-xl font-bold"
+                href="https://dashboard.agentergroup.com/auth/login"
+                className="text-2xl font-medium text-white hover:text-[#FF5D00] transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                Kom igång
+                Logga in
               </a>
             </div>
           </motion.div>
