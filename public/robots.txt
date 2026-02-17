@@ -1,14 +1,4 @@
-# robots.txt för Agenter Group
-
 User-agent: *
 Allow: /
-
-# Sitemap
+Disallow: /api/
 Sitemap: https://www.agentergroup.se/sitemap.xml
-
-# Crawl-delay (optional, för att inte överbelasta servern)
-Crawl-delay: 1
-
-# Blockera specifika filer/mappar om nödvändigt
-# Disallow: /admin/
-# Disallow: /api/

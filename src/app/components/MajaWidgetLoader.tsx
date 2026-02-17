@@ -7,15 +7,6 @@ const SCRIPT_SRC = 'https://widget.agentergroup.com/loader.js'
 const WIDGET_DATA_ID = 'c6cfe1ca-a018-4b03-86f7-c06093b9614d'
 const ENABLE_WIDGET_INLINE = process.env.NEXT_PUBLIC_ENABLE_MAJA_WIDGET === 'true'
 
-function isIOSDevice() {
-  if (typeof navigator === 'undefined') return false
-
-  const iosByUA = /iPad|iPhone|iPod/.test(navigator.userAgent)
-  const ipadOS = navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1
-
-  return iosByUA || ipadOS
-}
-
 export default function MajaWidgetLoader() {
   useEffect(() => {
     if (typeof document === 'undefined') return
@@ -27,10 +18,6 @@ export default function MajaWidgetLoader() {
         .forEach((node) => node.remove())
       return
     }
-
-    // iOS Safari has shown runtime instability with this external loader.
-    // We skip inline widget loading there and rely on CTA fallback URLs.
-    if (isIOSDevice()) return
 
     if (document.getElementById(SCRIPT_ID)) return
 

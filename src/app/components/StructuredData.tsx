@@ -1,13 +1,13 @@
-import { getSiteUrl } from '@/lib/seo'
+import { COMPANY_NAME, SITE_LANGUAGE, SITE_NAME, getSiteUrl } from '@/lib/seo'
 
 export default function StructuredData() {
   const siteUrl = getSiteUrl()
 
-  const structuredData = {
+  const organizationData = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'Agenter Group',
-    description: 'AI chat frontdesk som svarar direkt, bokar möten och kvalificerar leads dygnet runt.',
+    name: SITE_NAME,
+    description: 'AI chattbot och chat frontdesk för företag som svarar direkt, kvalificerar leads och bokar möten.',
     url: siteUrl,
     logo: `${siteUrl}/logo/logo.png`,
     contactPoint: {
@@ -17,17 +17,17 @@ export default function StructuredData() {
       availableLanguage: ['Swedish', 'English'],
     },
     sameAs: ['https://www.linkedin.com/company/agentergroup', 'https://www.instagram.com/agentergroup'],
-    offers: {
-      '@type': 'Offer',
-      itemOffered: {
-        '@type': 'Service',
-        name: 'AI Chat Frontdesk Maja',
-        description: 'AI-frontdesk som hanterar chat, mötesbokning och kunddialog 24/7 med snabb implementation.',
-        provider: {
-          '@type': 'Organization',
-          name: 'Agenter Group',
-        },
-      },
+  }
+
+  const websiteData = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: SITE_NAME,
+    url: siteUrl,
+    inLanguage: SITE_LANGUAGE,
+    publisher: {
+      '@type': 'Organization',
+      name: COMPANY_NAME,
     },
     potentialAction: {
       '@type': 'CommunicateAction',
@@ -36,12 +36,50 @@ export default function StructuredData() {
     },
   }
 
+  const serviceData = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'AI Chat Frontdesk Maja',
+    serviceType: 'AI chat frontdesk och AI chattbot för företag',
+    provider: {
+      '@type': 'Organization',
+      name: COMPANY_NAME,
+      url: siteUrl,
+    },
+    areaServed: {
+      '@type': 'Country',
+      name: 'Sweden',
+    },
+    availableLanguage: ['sv', 'en'],
+    description:
+      'AI chattbot som hanterar webbchat, kunddialog, leadkvalificering och mötesbokning 24/7 för svenska företag.',
+    offers: {
+      '@type': 'Offer',
+      availability: 'https://schema.org/InStock',
+      url: `${siteUrl}/#booking-cta`,
+    },
+  }
+
   return (
-    <script
-      id="ld-json-organization"
-      suppressHydrationWarning
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-    />
+    <>
+      <script
+        id="ld-json-organization"
+        suppressHydrationWarning
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationData) }}
+      />
+      <script
+        id="ld-json-website"
+        suppressHydrationWarning
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteData) }}
+      />
+      <script
+        id="ld-json-service"
+        suppressHydrationWarning
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceData) }}
+      />
+    </>
   )
 }

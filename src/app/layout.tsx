@@ -6,6 +6,7 @@ import StructuredData from './components/StructuredData'
 import SmoothScrollWrapper from './components/SmoothScrollWrapper'
 import MajaWidgetLoader from './components/MajaWidgetLoader'
 import { getSiteUrl } from '@/lib/seo'
+import { MAJA_CORE_KEYWORDS } from '@/lib/keyword-strategy'
 
 const brandFavicon = '/favicon/favicon-192x192.png'
 const siteUrl = getSiteUrl()
@@ -31,8 +32,16 @@ export const viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
+  manifest: '/site.webmanifest',
+  category: 'technology',
+  referrer: 'origin-when-cross-origin',
+  formatDetection: {
+    telephone: false,
+    email: false,
+    address: false,
+  },
   title: {
-    default: 'AI Chat Frontdesk för företag | Maja svarar 24/7 | Agenter Group',
+    default: 'AI Chat för företag | Maja AI Chat Frontdesk | Agenter Group',
     template: '%s | Agenter Group',
   },
   applicationName: 'Agenter Group',
@@ -41,26 +50,18 @@ export const metadata: Metadata = {
     apple: brandFavicon,
   },
   description:
-    'Maja är en AI chat frontdesk som svarar direkt, bokar möten och kvalificerar leads dygnet runt. Starta chatten och boka en kostnadsfri demo.',
-  keywords: [
-    'AI chat frontdesk',
-    'AI frontdesk Sverige',
-    'AI receptionist',
-    'AI chattbot företag',
-    'chatbot för företag',
-    'automatiserad kundservice',
-    'mötesbokning med AI',
-    'leadkvalificering AI',
-    'telefonhantering AI',
-    'kundtjänst 24/7',
-    'Maja AI',
-    'Agenter Group',
-  ],
-  alternates: { canonical: '/' },
+    'Maja är en AI chattbot och chat frontdesk för företag som svarar direkt, kvalificerar leads och bokar möten dygnet runt.',
+  keywords: MAJA_CORE_KEYWORDS,
+  alternates: {
+    canonical: '/',
+    languages: {
+      'sv-SE': '/',
+    },
+  },
   openGraph: {
-    title: 'AI Chat Frontdesk för företag | Maja svarar 24/7',
+    title: 'AI Chat för företag | Maja AI Chat Frontdesk',
     description:
-      'Få fler bokade möten och färre missade affärer med Maja AI Frontdesk. Starta chatten och se hur snabbt ni kan komma igång.',
+      'Få fler bokade möten med Maja, en AI chattbot för företag som hanterar kunddialog, kvalificerar leads och svarar 24/7.',
     url: '/',
     siteName: 'Agenter Group',
     locale: 'sv_SE',
@@ -76,9 +77,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AI Chat Frontdesk för företag | Maja svarar 24/7',
+    title: 'AI Chat för företag | Maja AI Chat Frontdesk',
     description:
-      'Maja AI Frontdesk svarar direkt, bokar möten och konverterar fler leads. Starta chatten och boka demo.',
+      'Maja AI chattbot svarar direkt, bokar möten och kvalificerar fler leads i chatten.',
     images: [ogImage],
   },
   robots: {

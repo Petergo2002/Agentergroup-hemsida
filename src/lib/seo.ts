@@ -2,8 +2,11 @@ import type { Metadata } from 'next'
 import type { BlogPost } from '@/content/blog-posts'
 
 export const SITE_NAME = 'Agenter Group'
+export const COMPANY_NAME = 'Agenter Group AB'
 export const DEFAULT_SITE_URL = 'https://www.agentergroup.se'
 export const DEFAULT_OG_IMAGE = '/logo/logo.png'
+export const SITE_LOCALE = 'sv_SE'
+export const SITE_LANGUAGE = 'sv-SE'
 
 export function getSiteUrl(): string {
   const raw = process.env.NEXT_PUBLIC_SITE_URL?.trim()
@@ -18,6 +21,18 @@ export function getSiteUrl(): string {
   return 'http://localhost:3000'
 }
 
+function normalizeCanonicalPath(path: string): string {
+  if (!path.startsWith('/')) {
+    return `/${path}`
+  }
+
+  return path
+}
+
+export function toAbsoluteUrl(path: string): string {
+  return `${getSiteUrl()}${normalizeCanonicalPath(path)}`
+}
+
 export function createPageMetadata(input: {
   title: string
   description: string
@@ -25,20 +40,29 @@ export function createPageMetadata(input: {
   keywords?: string[]
   ogImageAlt?: string
 }): Metadata {
+  const canonical = normalizeCanonicalPath(input.canonicalPath)
   const imageAlt = input.ogImageAlt ?? `${input.title} | ${SITE_NAME}`
 
   return {
     title: input.title,
     description: input.description,
     keywords: input.keywords,
-    alternates: { canonical: input.canonicalPath },
+    authors: [{ name: COMPANY_NAME }],
+    creator: COMPANY_NAME,
+    publisher: COMPANY_NAME,
+    alternates: {
+      canonical,
+      languages: {
+        [SITE_LANGUAGE]: canonical,
+      },
+    },
     openGraph: {
       title: input.title,
       description: input.description,
-      url: input.canonicalPath,
+      url: canonical,
       type: 'website',
       siteName: SITE_NAME,
-      locale: 'sv_SE',
+      locale: SITE_LOCALE,
       images: [
         {
           url: DEFAULT_OG_IMAGE,
@@ -64,14 +88,26 @@ export function createArticleMetadata(post: BlogPost): Metadata {
     title: post.title,
     description: post.description,
     keywords: post.keywords,
-    alternates: { canonical },
+    authors: [{ name: COMPANY_NAME }],
+    creator: COMPANY_NAME,
+    publisher: COMPANY_NAME,
+    category: post.category,
+    alternates: {
+      canonical,
+      languages: {
+        [SITE_LANGUAGE]: canonical,
+      },
+    },
     openGraph: {
       title: post.title,
       description: post.description,
       type: 'article',
       url: canonical,
       siteName: SITE_NAME,
-      locale: 'sv_SE',
+      locale: SITE_LOCALE,
+      publishedTime: post.published,
+      modifiedTime: post.updated,
+      tags: post.keywords,
       images: [
         {
           url: DEFAULT_OG_IMAGE,
@@ -92,23 +128,30 @@ export function createArticleMetadata(post: BlogPost): Metadata {
 
 export function createArticleJsonLd(post: BlogPost) {
   const canonical = `/blogg/${post.slug}/`
+  const canonicalUrl = toAbsoluteUrl(canonical)
   const siteUrl = getSiteUrl()
 
   return {
     '@context': 'https://schema.org',
-    '@type': 'Article',
+    '@type': 'BlogPosting',
     headline: post.title,
     description: post.description,
+    url: canonicalUrl,
     datePublished: post.published,
     dateModified: post.updated,
+    inLanguage: SITE_LANGUAGE,
+    articleSection: post.category,
+    keywords: post.keywords.join(', '),
+    isAccessibleForFree: true,
     image: [`${siteUrl}${DEFAULT_OG_IMAGE}`],
     author: {
       '@type': 'Organization',
-      name: 'Agenter Group AB',
+      name: COMPANY_NAME,
+      url: siteUrl,
     },
     publisher: {
       '@type': 'Organization',
-      name: 'Agenter Group AB',
+      name: COMPANY_NAME,
       logo: {
         '@type': 'ImageObject',
         url: `${siteUrl}${DEFAULT_OG_IMAGE}`,
@@ -116,7 +159,18 @@ export function createArticleJsonLd(post: BlogPost) {
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `${siteUrl}${canonical}`,
+      '@id': canonicalUrl,
     },
+    isPartOf: {
+      '@type': 'Blog',
+      name: `${SITE_NAME} Blogg`,
+      url: `${siteUrl}/blogg/`,
+    },
+    about: [
+      { '@type': 'Thing', name: 'AI chat frontdesk' },
+      { '@type': 'Thing', name: 'AI chattbot för företag' },
+      { '@type': 'Thing', name: 'Leadkvalificering i chatt' },
+      { '@type': 'Thing', name: 'Mötesbokning via chatt' },
+    ],
   }
 }
