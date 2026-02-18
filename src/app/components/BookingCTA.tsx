@@ -85,7 +85,7 @@ export default function BookingCTA() {
                     initial={{ opacity: 0, y: 20, scale: 0.9 }}
                     animate={showPopup ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 20, scale: 0.9 }}
                     transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                    className="fixed bottom-24 right-4 md:right-8 z-50"
+                    className={`fixed bottom-24 right-4 md:right-8 z-50 ${showPopup ? 'pointer-events-auto' : 'pointer-events-none'}`}
                 >
                     <div className="bg-white text-black px-6 py-4 rounded-2xl rounded-br-sm shadow-[0_8px_30px_rgb(0,0,0,0.2)] flex items-center gap-4 relative group hover:scale-105 transition-transform">
 
