@@ -1,13 +1,21 @@
 import type { Metadata } from 'next'
 import { blogPostsBySlug } from '@/content/blog-posts'
-import { createArticleJsonLd, createArticleMetadata } from '@/lib/seo'
+import { createArticleBreadcrumbJsonLd, createArticleJsonLd, createArticleMetadata } from '@/lib/seo'
 import BlogArticlePage from '../BlogArticlePage'
 
 const post = blogPostsBySlug['24-7-meeting-booking-guide-ai-scheduling']
 export const metadata: Metadata = createArticleMetadata(post)
 
 function JsonLd() {
-  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(createArticleJsonLd(post)) }} />
+  const articleData = createArticleJsonLd(post)
+  const breadcrumbData = createArticleBreadcrumbJsonLd(post)
+
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleData) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }} />
+    </>
+  )
 }
 
 export default function Page() {

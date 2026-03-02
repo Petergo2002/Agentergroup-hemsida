@@ -31,6 +31,7 @@ export default function HomePageClient() {
         <UseCaseShowcase />
 
         <FeatureSection
+          id="features"
           title="Complete Control in One Dashboard"
           subtitle="Visibility & Insights"
           description="Connect your favorite tools in one click. Maja integrates with HubSpot, Salesforce, Pipedrive, and more so your team can see every lead, chat, and booking in real time."

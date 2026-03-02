@@ -63,6 +63,7 @@ const tiers = [
       { name: 'Priority support', included: true },
       { name: 'External integrations', included: true },
       { name: 'Sales-led onboarding', included: true },
+      { name: 'Custom website included', included: true },
     ],
     highlight: false,
     cta: 'Contact sales',

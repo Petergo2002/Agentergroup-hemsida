@@ -8,6 +8,7 @@ import { useState } from 'react'
 import { indexableBlogPosts } from '@/content/blog-posts'
 import useShouldReduceMotion from '../components/useShouldReduceMotion'
 import { openMajaWidget } from '@/lib/maja-widget'
+import { trackSeoEvent } from '@/lib/analytics'
 
 const posts = [...indexableBlogPosts]
   .sort((a, b) => new Date(b.published).getTime() - new Date(a.published).getTime())
@@ -77,12 +78,35 @@ export default function BlogIndexClient() {
                     </div>
 
                     <h2 className="text-2xl font-bold text-white mb-4 group-hover:text-[#FF5D00] transition-colors leading-snug">
-                      <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+                      <Link
+                        href={`/blog/${post.slug}`}
+                        onClick={() =>
+                          trackSeoEvent('internal_cta_click', {
+                            source_page: 'blog-index',
+                            source_section: 'article-card',
+                            cta_type: 'link',
+                            keyword_cluster: post.title,
+                          })
+                        }
+                      >
+                        {post.title}
+                      </Link>
                     </h2>
 
                     <p className="text-white/50 mb-8 flex-grow leading-relaxed">{post.excerpt}</p>
 
-                    <Link href={`/blog/${post.slug}`} className="inline-flex items-center gap-2 text-white font-bold group/link">
+                    <Link
+                      href={`/blog/${post.slug}`}
+                      className="inline-flex items-center gap-2 text-white font-bold group/link"
+                      onClick={() =>
+                        trackSeoEvent('internal_cta_click', {
+                          source_page: 'blog-index',
+                          source_section: 'read-article',
+                          cta_type: 'link',
+                          keyword_cluster: post.title,
+                        })
+                      }
+                    >
                       Read article
                       <ArrowRight size={18} className="transform group-hover/link:translate-x-1 transition-transform text-[#FF5D00]" />
                     </Link>
@@ -115,7 +139,14 @@ export default function BlogIndexClient() {
               animate={showPopup ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 20, scale: 0.9 }}
               transition={{ type: 'spring', stiffness: 200, damping: 20 }}
               className={`fixed bottom-24 right-4 md:right-8 z-50 cursor-pointer ${showPopup ? 'pointer-events-auto' : 'pointer-events-none'}`}
-              onClick={openMajaWidget}
+              onClick={() =>
+                openMajaWidget({
+                  sourcePage: 'blog-index',
+                  sourceSection: 'floating-cta',
+                  ctaType: 'floating',
+                  keywordCluster: 'ai front desk blog',
+                })
+              }
             >
               <div className="bg-white text-black px-6 py-4 rounded-2xl rounded-br-sm shadow-[0_8px_30px_rgb(0,0,0,0.2)] flex items-center gap-4 relative group hover:scale-105 transition-transform">
                 <div className="absolute -bottom-6 -right-2 transform rotate-12">

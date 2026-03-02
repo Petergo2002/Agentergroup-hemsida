@@ -4,6 +4,11 @@ export type BlogSection = {
   bullets?: string[]
 }
 
+export type BlogFaqItem = {
+  q: string
+  a: string
+}
+
 export type BlogPost = {
   slug: string
   title: string
@@ -15,8 +20,12 @@ export type BlogPost = {
   readTimeMinutes: number
   ogAlt: string
   keywords: string[]
+  primaryKeyword: string
+  searchIntent: 'informational' | 'commercial' | 'comparative'
+  moneyPagePath: '/' | '/websites/'
   indexable: boolean
   sections: BlogSection[]
+  faq?: BlogFaqItem[]
   relatedSlugs: string[]
   ctaTitle: string
   ctaText: string
@@ -44,6 +53,9 @@ const posts: BlogPost[] = [
       'patient support chatbot',
       'agenter group',
     ],
+    primaryKeyword: 'ai receptionist for clinics',
+    searchIntent: 'commercial',
+    moneyPagePath: '/websites/',
     indexable: true,
     sections: [
       {
@@ -97,6 +109,9 @@ const posts: BlogPost[] = [
       'trade business customer support ai',
       'agenter group',
     ],
+    primaryKeyword: 'ai call answering for contractors',
+    searchIntent: 'commercial',
+    moneyPagePath: '/websites/',
     indexable: true,
     sections: [
       {
@@ -150,6 +165,9 @@ const posts: BlogPost[] = [
       'website ai meeting booking',
       'agenter group',
     ],
+    primaryKeyword: 'website with ai integration',
+    searchIntent: 'commercial',
+    moneyPagePath: '/websites/',
     indexable: true,
     sections: [
       {
@@ -203,6 +221,9 @@ const posts: BlogPost[] = [
       'ai appointment automation',
       'agenter group',
     ],
+    primaryKeyword: 'ai meeting booking',
+    searchIntent: 'informational',
+    moneyPagePath: '/',
     indexable: true,
     sections: [
       {
@@ -256,6 +277,9 @@ const posts: BlogPost[] = [
       'call routing ai',
       'agenter group',
     ],
+    primaryKeyword: 'automate call handling with ai',
+    searchIntent: 'informational',
+    moneyPagePath: '/',
     indexable: true,
     sections: [
       {
@@ -309,6 +333,9 @@ const posts: BlogPost[] = [
       'customer service ai vs human',
       'agenter group',
     ],
+    primaryKeyword: 'ai receptionist vs traditional receptionist',
+    searchIntent: 'comparative',
+    moneyPagePath: '/',
     indexable: true,
     sections: [
       {
@@ -361,6 +388,9 @@ const posts: BlogPost[] = [
       'customer service missed calls',
       'agenter group',
     ],
+    primaryKeyword: 'why businesses miss calls',
+    searchIntent: 'informational',
+    moneyPagePath: '/',
     indexable: true,
     sections: [
       {
@@ -414,6 +444,9 @@ const posts: BlogPost[] = [
       'ai support workflow kpis',
       'agenter group',
     ],
+    primaryKeyword: 'ai receptionist guide 2025',
+    searchIntent: 'informational',
+    moneyPagePath: '/',
     indexable: true,
     sections: [
       {
@@ -459,6 +492,9 @@ const posts: BlogPost[] = [
     readTimeMinutes: 0,
     ogAlt: 'AI receptionist 2025 complete guide',
     keywords: ['ai front desk', 'ai receptionist', 'customer support automation', 'agenter group'],
+    primaryKeyword: 'ai receptionist guide 2025',
+    searchIntent: 'informational',
+    moneyPagePath: '/',
     indexable: false,
     sections: [],
     relatedSlugs: [],

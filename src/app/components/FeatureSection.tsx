@@ -12,6 +12,7 @@ interface FeatureSectionProps {
     features: string[]
     component: ReactNode
     align?: 'center' | 'left'
+    id?: string
 }
 
 export default function FeatureSection({
@@ -20,12 +21,13 @@ export default function FeatureSection({
     description,
     features = [],
     component,
-    align = 'center'
+    align = 'center',
+    id
 }: FeatureSectionProps) {
     const shouldReduceMotion = useShouldReduceMotion(true)
 
     return (
-        <section className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
+        <section id={id} className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
 
                 {/* Text Content */}

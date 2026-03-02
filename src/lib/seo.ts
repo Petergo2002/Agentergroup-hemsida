@@ -7,14 +7,19 @@ export const DEFAULT_SITE_URL = 'https://www.agentergroup.com'
 export const DEFAULT_OG_IMAGE = '/logo/logo.png'
 export const SITE_LOCALE = 'en_US'
 export const SITE_LANGUAGE = 'en-US'
+const PRODUCTION_SITE_URL = 'https://www.agentergroup.com'
 
 export function getSiteUrl(): string {
   const raw = process.env.NEXT_PUBLIC_SITE_URL?.trim()
-  if (raw) {
-    return raw.replace(/\/$/, '')
+  const normalized = raw ? raw.replace(/\/$/, '') : DEFAULT_SITE_URL
+
+  if (process.env.NODE_ENV === 'production' && normalized !== PRODUCTION_SITE_URL) {
+    throw new Error(
+      `Invalid NEXT_PUBLIC_SITE_URL for production: "${normalized}". Expected "${PRODUCTION_SITE_URL}".`,
+    )
   }
 
-  return DEFAULT_SITE_URL
+  return normalized
 }
 
 function normalizeCanonicalPath(path: string): string {
@@ -167,6 +172,52 @@ export function createArticleJsonLd(post: BlogPost) {
       { '@type': 'Thing', name: 'AI chat for businesses' },
       { '@type': 'Thing', name: 'Lead qualification in chat' },
       { '@type': 'Thing', name: 'Automated meeting booking' },
+    ],
+  }
+}
+
+export function createFaqPageJsonLd(input: { pagePath: string; faqs: Array<{ q: string; a: string }> }) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    url: toAbsoluteUrl(input.pagePath),
+    inLanguage: SITE_LANGUAGE,
+    mainEntity: input.faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.q,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.a,
+      },
+    })),
+  }
+}
+
+export function createArticleBreadcrumbJsonLd(post: BlogPost) {
+  const canonicalPath = `/blog/${post.slug}/`
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: toAbsoluteUrl('/'),
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Blog',
+        item: toAbsoluteUrl('/blog/'),
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: post.title,
+        item: toAbsoluteUrl(canonicalPath),
+      },
     ],
   }
 }

@@ -1,7 +1,7 @@
 {
   "name": "Agenter Group",
   "short_name": "Agenter Group",
-  "description": "AI chat frontdesk för företag som vill svara direkt och boka fler möten",
+  "description": "AI front desk for businesses that respond instantly and book more meetings",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

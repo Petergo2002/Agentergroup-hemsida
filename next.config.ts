@@ -1,5 +1,13 @@
 import type { NextConfig } from 'next'
 
+const PROD_SITE_URL = 'https://www.agentergroup.com'
+if (process.env.NODE_ENV === 'production') {
+  const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim().replace(/\/$/, '') || PROD_SITE_URL
+  if (configuredSiteUrl !== PROD_SITE_URL) {
+    throw new Error(`NEXT_PUBLIC_SITE_URL must be "${PROD_SITE_URL}" in production, got "${configuredSiteUrl}".`)
+  }
+}
+
 const nextConfig: NextConfig = {
   images: {
     unoptimized: true,

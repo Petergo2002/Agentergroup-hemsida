@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter, Poppins } from 'next/font/google'
+import Script from 'next/script'
 
 import './globals.css'
 import StructuredData from './components/StructuredData'
@@ -11,6 +12,7 @@ import { MAJA_CORE_KEYWORDS } from '@/lib/keyword-strategy'
 const brandFavicon = '/favicon/favicon-192x192.png'
 const siteUrl = getSiteUrl()
 const ogImage = '/logo/logo.png'
+const gaMeasurementId = process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID
 
 const inter = Inter({
   variable: '--font-inter',
@@ -107,6 +109,20 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
         <StructuredData />
+        {gaMeasurementId ? (
+          <>
+            <Script src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`} strategy="afterInteractive" />
+            <Script id="ga4-init" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                window.gtag = gtag;
+                gtag('js', new Date());
+                gtag('config', '${gaMeasurementId}', { send_page_view: true });
+              `}
+            </Script>
+          </>
+        ) : null}
       </head>
       <body className={`${inter.variable} ${poppins.variable} antialiased font-sans`} suppressHydrationWarning>
         <SmoothScrollWrapper>{children}</SmoothScrollWrapper>

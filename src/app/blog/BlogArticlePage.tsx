@@ -61,8 +61,15 @@ export default function BlogArticlePage({ post }: { post: BlogPost }) {
           <section className="rounded-3xl border border-white/10 bg-[#0F0F0F] p-8 md:p-10 space-y-4">
             <h3 className="text-2xl font-bold">{post.ctaTitle}</h3>
             <p className="text-white/70 leading-relaxed">{post.ctaText}</p>
+            <p className="text-sm text-white/60">
+              Looking for implementation details?{' '}
+              <Link href={post.moneyPagePath} className="text-[#FF5D00] hover:text-[#FF7A33]">
+                Visit our service page
+              </Link>
+              .
+            </p>
             <div className="pt-2">
-              <BlogCTA />
+              <BlogCTA post={post} />
             </div>
           </section>
 

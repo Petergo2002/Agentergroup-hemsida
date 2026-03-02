@@ -7,6 +7,7 @@ import Footer from '../components/Footer'
 import OrangeVeil from '../components/OrangeVeil'
 import { Sparkles, ArrowRight, Globe, Zap, Calendar, ArrowDownRight } from 'lucide-react'
 import { openMajaWidget } from '@/lib/maja-widget'
+import { trackSeoEvent } from '@/lib/analytics'
 import useShouldReduceMotion from '../components/useShouldReduceMotion'
 
 export default function HemsidorClient() {
@@ -46,7 +47,15 @@ export default function HemsidorClient() {
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center px-4 sm:px-0">
                 <button
-                  onClick={() => document.getElementById('booking-cta')?.scrollIntoView({ behavior: 'smooth' })}
+                  onClick={() => {
+                    trackSeoEvent('internal_cta_click', {
+                      source_page: 'websites',
+                      source_section: 'hero',
+                      cta_type: 'button',
+                      keyword_cluster: 'business websites with ai chatbot',
+                    })
+                    document.getElementById('booking-cta')?.scrollIntoView({ behavior: 'smooth' })
+                  }}
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#FF5D00] hover:bg-[#FF7A33] text-black font-semibold rounded-lg transition-colors duration-200"
                 >
                   Book consultation
@@ -156,7 +165,15 @@ export default function HemsidorClient() {
 
                 <div className="mt-10 flex flex-wrap gap-4">
                   <button
-                    onClick={() => document.getElementById('booking-cta')?.scrollIntoView({ behavior: 'smooth' })}
+                    onClick={() => {
+                      trackSeoEvent('internal_cta_click', {
+                        source_page: 'websites',
+                        source_section: 'packages',
+                        cta_type: 'button',
+                        keyword_cluster: 'business websites with ai chatbot',
+                      })
+                      document.getElementById('booking-cta')?.scrollIntoView({ behavior: 'smooth' })
+                    }}
                     className="px-8 py-4 bg-[#FF5D00] hover:bg-[#FF7A33] text-black font-bold rounded-full transition-all hover:scale-105"
                   >
                     Book consultation
@@ -251,7 +268,14 @@ export default function HemsidorClient() {
               animate={showPopup ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 20, scale: 0.9 }}
               transition={{ type: 'spring', stiffness: 200, damping: 20 }}
               className={`fixed bottom-24 right-4 md:right-8 z-50 cursor-pointer ${showPopup ? 'pointer-events-auto' : 'pointer-events-none'}`}
-              onClick={openMajaWidget}
+              onClick={() =>
+                openMajaWidget({
+                  sourcePage: 'websites',
+                  sourceSection: 'floating-cta',
+                  ctaType: 'floating',
+                  keywordCluster: 'business websites with ai chatbot',
+                })
+              }
             >
               <div className="bg-white text-black px-6 py-4 rounded-2xl rounded-br-sm shadow-[0_8px_30px_rgb(0,0,0,0.2)] flex items-center gap-4 relative group hover:scale-105 transition-transform">
                 <div className="absolute -bottom-6 -right-2 transform rotate-12">

@@ -60,6 +60,30 @@ export default function StructuredData() {
     },
   }
 
+  const softwareApplicationData = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'Maja AI Front Desk',
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Web',
+    inLanguage: SITE_LANGUAGE,
+    url: siteUrl,
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+      availability: 'https://schema.org/InStock',
+      url: `${siteUrl}/#booking-cta`,
+    },
+    creator: {
+      '@type': 'Organization',
+      name: COMPANY_NAME,
+      url: siteUrl,
+    },
+    description:
+      'Maja is an AI front desk that helps businesses qualify leads, answer customer questions, and book meetings 24/7.',
+  }
+
   return (
     <>
       <script
@@ -79,6 +103,12 @@ export default function StructuredData() {
         suppressHydrationWarning
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceData) }}
+      />
+      <script
+        id="ld-json-software-application"
+        suppressHydrationWarning
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareApplicationData) }}
       />
     </>
   )

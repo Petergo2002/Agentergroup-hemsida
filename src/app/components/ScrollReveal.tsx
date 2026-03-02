@@ -29,7 +29,7 @@ export default function ScrollReveal() {
       <section className="relative bg-[#050505] py-24 md:py-32 font-sans">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight mb-4">Your AI Front Desk.</h2>
-          <h1 className="text-[4rem] md:text-[8rem] lg:text-[10rem] leading-[0.9] font-black text-[#FF5D00] tracking-tighter">MAJA</h1>
+          <p className="text-[4rem] md:text-[8rem] lg:text-[10rem] leading-[0.9] font-black text-[#FF5D00] tracking-tighter">MAJA</p>
           <p className="mt-10 text-lg md:text-2xl text-white/60 font-medium max-w-xl mx-auto leading-relaxed">
             Maja bridges the gap between your customers and your team.
           </p>
@@ -54,7 +54,7 @@ export default function ScrollReveal() {
           </motion.h2>
 
           <motion.div className="will-change-transform" style={{ opacity: majaOpacity, y: majaY }}>
-            <h1 className="text-[6rem] md:text-[10rem] lg:text-[14rem] leading-[0.85] font-black text-[#FF5D00] tracking-tighter">MAJA</h1>
+            <p className="text-[6rem] md:text-[10rem] lg:text-[14rem] leading-[0.85] font-black text-[#FF5D00] tracking-tighter">MAJA</p>
           </motion.div>
 
           <motion.p className="mt-16 text-lg md:text-2xl text-white/50 font-medium max-w-xl mx-auto leading-relaxed will-change-opacity" style={{ opacity: subtextOpacity }}>
