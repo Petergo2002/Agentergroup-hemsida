@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 const links = [
   { href: '/', label: 'AI-Receptionist' },
-  { href: '/blogg', label: 'Blogg' },
+  { href: '/blog', label: 'Blog' },
   { href: '/#booking-cta', label: 'Starta chatten' },
 ]
 

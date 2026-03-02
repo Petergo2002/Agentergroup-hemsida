@@ -4,7 +4,7 @@ import { blogPostsBySlug } from '@/content/blog-posts'
 import { createArticleMetadata } from '@/lib/seo'
 
 const post = blogPostsBySlug['energieffektiv-renovering-2025-komplett-guide']
-const target = post.redirectTo ?? '/blogg/ai-receptionist-2025-komplett-guide/'
+const target = post.redirectTo ?? '/blog/ai-receptionist-2025-complete-guide/'
 
 export const metadata: Metadata = {
   ...createArticleMetadata(post),
@@ -15,6 +15,6 @@ export const metadata: Metadata = {
   },
 }
 
-export default function ArticlePage() {
+export default function LegacyRedirectPage() {
   permanentRedirect(target)
 }

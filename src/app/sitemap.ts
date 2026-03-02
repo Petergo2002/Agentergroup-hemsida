@@ -12,8 +12,8 @@ const defaultLastModified = latestBlogUpdate ?? fallbackDate
 
 const routes = [
   { path: '/', changeFrequency: 'weekly', priority: 1.0, lastModified: defaultLastModified },
-  { path: '/blogg/', changeFrequency: 'weekly', priority: 0.9, lastModified: defaultLastModified },
-  { path: '/hemsidor/', changeFrequency: 'monthly', priority: 0.8, lastModified: defaultLastModified },
+  { path: '/blog/', changeFrequency: 'weekly', priority: 0.9, lastModified: defaultLastModified },
+  { path: '/websites/', changeFrequency: 'monthly', priority: 0.8, lastModified: defaultLastModified },
 ]
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -25,7 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: route.priority,
     })),
     ...indexableBlogPosts.map((post) => ({
-      url: `${baseUrl}/blogg/${post.slug}/`,
+      url: `${baseUrl}/blog/${post.slug}/`,
       lastModified: post.updated,
       changeFrequency: 'monthly' as MetadataRoute.Sitemap[0]['changeFrequency'],
       priority: 0.7,

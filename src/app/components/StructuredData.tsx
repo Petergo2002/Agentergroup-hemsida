@@ -7,14 +7,14 @@ export default function StructuredData() {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: SITE_NAME,
-    description: 'AI chattbot och chat frontdesk för företag som svarar direkt, kvalificerar leads och bokar möten.',
+    description: 'AI front desk software that responds instantly, qualifies leads, and books meetings for businesses.',
     url: siteUrl,
     logo: `${siteUrl}/logo/logo.png`,
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'Customer Service',
       email: 'info@agentergroup.com',
-      availableLanguage: ['Swedish', 'English'],
+      availableLanguage: ['English'],
     },
     sameAs: ['https://www.linkedin.com/company/agentergroup', 'https://www.instagram.com/agentergroup'],
   }
@@ -32,15 +32,15 @@ export default function StructuredData() {
     potentialAction: {
       '@type': 'CommunicateAction',
       target: `${siteUrl}/#booking-cta`,
-      name: 'Starta chatten med Maja',
+      name: 'Start a chat with Maja',
     },
   }
 
   const serviceData = {
     '@context': 'https://schema.org',
     '@type': 'Service',
-    name: 'AI Chat Frontdesk Maja',
-    serviceType: 'AI chat frontdesk och AI chattbot för företag',
+    name: 'Maja AI Front Desk',
+    serviceType: 'AI front desk and AI chatbot for businesses',
     provider: {
       '@type': 'Organization',
       name: COMPANY_NAME,
@@ -48,11 +48,11 @@ export default function StructuredData() {
     },
     areaServed: {
       '@type': 'Country',
-      name: 'Sweden',
+      name: 'United States',
     },
-    availableLanguage: ['sv', 'en'],
+    availableLanguage: ['en'],
     description:
-      'AI chattbot som hanterar webbchat, kunddialog, leadkvalificering och mötesbokning 24/7 för svenska företag.',
+      'AI chatbot for website conversations, customer support, lead qualification, and automated meeting booking 24/7.',
     offers: {
       '@type': 'Offer',
       availability: 'https://schema.org/InStock',

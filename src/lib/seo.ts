@@ -3,10 +3,10 @@ import type { BlogPost } from '@/content/blog-posts'
 
 export const SITE_NAME = 'Agenter Group'
 export const COMPANY_NAME = 'Agenter Group AB'
-export const DEFAULT_SITE_URL = 'https://www.agentergroup.se'
+export const DEFAULT_SITE_URL = 'https://www.agentergroup.com'
 export const DEFAULT_OG_IMAGE = '/logo/logo.png'
-export const SITE_LOCALE = 'sv_SE'
-export const SITE_LANGUAGE = 'sv-SE'
+export const SITE_LOCALE = 'en_US'
+export const SITE_LANGUAGE = 'en-US'
 
 export function getSiteUrl(): string {
   const raw = process.env.NEXT_PUBLIC_SITE_URL?.trim()
@@ -14,11 +14,7 @@ export function getSiteUrl(): string {
     return raw.replace(/\/$/, '')
   }
 
-  if (process.env.NODE_ENV === 'production') {
-    return DEFAULT_SITE_URL
-  }
-
-  return 'http://localhost:3000'
+  return DEFAULT_SITE_URL
 }
 
 function normalizeCanonicalPath(path: string): string {
@@ -82,7 +78,7 @@ export function createPageMetadata(input: {
 }
 
 export function createArticleMetadata(post: BlogPost): Metadata {
-  const canonical = `/blogg/${post.slug}/`
+  const canonical = `/blog/${post.slug}/`
 
   return {
     title: post.title,
@@ -127,7 +123,7 @@ export function createArticleMetadata(post: BlogPost): Metadata {
 }
 
 export function createArticleJsonLd(post: BlogPost) {
-  const canonical = `/blogg/${post.slug}/`
+  const canonical = `/blog/${post.slug}/`
   const canonicalUrl = toAbsoluteUrl(canonical)
   const siteUrl = getSiteUrl()
 
@@ -163,14 +159,14 @@ export function createArticleJsonLd(post: BlogPost) {
     },
     isPartOf: {
       '@type': 'Blog',
-      name: `${SITE_NAME} Blogg`,
-      url: `${siteUrl}/blogg/`,
+      name: `${SITE_NAME} Blog`,
+      url: `${siteUrl}/blog/`,
     },
     about: [
-      { '@type': 'Thing', name: 'AI chat frontdesk' },
-      { '@type': 'Thing', name: 'AI chattbot för företag' },
-      { '@type': 'Thing', name: 'Leadkvalificering i chatt' },
-      { '@type': 'Thing', name: 'Mötesbokning via chatt' },
+      { '@type': 'Thing', name: 'AI front desk' },
+      { '@type': 'Thing', name: 'AI chat for businesses' },
+      { '@type': 'Thing', name: 'Lead qualification in chat' },
+      { '@type': 'Thing', name: 'Automated meeting booking' },
     ],
   }
 }

@@ -31,18 +31,18 @@ export default function HomePageClient() {
         <UseCaseShowcase />
 
         <FeatureSection
-          title="Full Kontroll via Dashboard"
-          subtitle="Överblick & Insikt"
-          description="Koppla dina favoritverktyg med ett klick. Maja integrerar sömlöst med Hubspot, Salesforce, Pipedrive och över 500 andra system. Få en total överblick över alla inkommande samtal, leads och bokningar."
-          features={["1-klick-integration", "Realtidsöversikt", "Export till CRM", "Smart Analytics"]}
+          title="Complete Control in One Dashboard"
+          subtitle="Visibility & Insights"
+          description="Connect your favorite tools in one click. Maja integrates with HubSpot, Salesforce, Pipedrive, and more so your team can see every lead, chat, and booking in real time."
+          features={['1-click integrations', 'Real-time overview', 'CRM exports', 'Smart analytics']}
           component={<AppConnectShowcase />}
         />
 
         <FeatureSection
-          title="Bygg Din Egen Hjärna"
-          subtitle="Konfiguration & RAG"
-          description="Maja är en intelligent AI Frontdesk. Ladda upp era dokument, prislistor och FAQ:s. Maja lär sig allt om ert företag och svarar alltid korrekt."
-          features={["RAG-system", "GDPR-säkrad", "Självlärande", "Live-uppdatering"]}
+          title="Build Your AI Brain"
+          subtitle="Configuration & RAG"
+          description="Maja is a configurable AI front desk. Upload your docs, pricing sheets, and FAQs, and Maja will answer with brand-aligned, context-aware responses."
+          features={['RAG system', 'GDPR-ready', 'Continuous learning', 'Live updates']}
           component={<KnowledgeBaseShowcase />}
         />
 

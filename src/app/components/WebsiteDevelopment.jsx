@@ -90,7 +90,7 @@ export default function WebsiteDevelopment() {
               </p>
             </div>
             <a
-              href="/hemsidor"
+              href="/websites"
               className="flex-shrink-0 inline-flex items-center gap-2 px-6 py-3 bg-brand-500 hover:bg-brand-600 text-white font-medium rounded-lg transition-colors duration-200 group"
             >
               Läs mer

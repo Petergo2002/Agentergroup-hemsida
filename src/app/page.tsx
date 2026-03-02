@@ -4,16 +4,16 @@ import HomePageClient from './HomePageClient'
 import { createPageMetadata } from '@/lib/seo'
 import { MAJA_HOME_KEYWORDS } from '@/lib/keyword-strategy'
 
-const title = 'AI Chat för företag som bokar fler möten'
+const title = 'AI Front Desk for Businesses That Books More Meetings'
 const description =
-  'Maja är en AI chattbot för företag som svarar direkt, kvalificerar leads och bokar möten 24/7. Starta chatten och boka en kostnadsfri demo.'
+  'Maja is an AI front desk that answers instantly, qualifies leads, and books meetings 24/7. Start a chat and request a live demo.'
 
 export const metadata: Metadata = createPageMetadata({
   title,
   description,
   canonicalPath: '/',
   keywords: MAJA_HOME_KEYWORDS,
-  ogImageAlt: 'AI Chat Frontdesk Maja från Agenter Group',
+  ogImageAlt: 'Maja AI Front Desk by Agenter Group',
 })
 
 export default function HomePage() {

@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     address: false,
   },
   title: {
-    default: 'AI Chat för företag | Maja AI Chat Frontdesk | Agenter Group',
+    default: 'AI Front Desk for Businesses | Maja by Agenter Group',
     template: '%s | Agenter Group',
   },
   applicationName: 'Agenter Group',
@@ -50,36 +50,36 @@ export const metadata: Metadata = {
     apple: brandFavicon,
   },
   description:
-    'Maja är en AI chattbot och chat frontdesk för företag som svarar direkt, kvalificerar leads och bokar möten dygnet runt.',
+    'Maja is an AI front desk for businesses that answers instantly, qualifies leads, and books meetings around the clock.',
   keywords: MAJA_CORE_KEYWORDS,
   alternates: {
     canonical: '/',
     languages: {
-      'sv-SE': '/',
+      'en-US': '/',
     },
   },
   openGraph: {
-    title: 'AI Chat för företag | Maja AI Chat Frontdesk',
+    title: 'AI Front Desk for Businesses | Maja by Agenter Group',
     description:
-      'Få fler bokade möten med Maja, en AI chattbot för företag som hanterar kunddialog, kvalificerar leads och svarar 24/7.',
+      'Capture more qualified leads and booked meetings with Maja, an AI front desk built for fast-moving teams.',
     url: '/',
     siteName: 'Agenter Group',
-    locale: 'sv_SE',
+    locale: 'en_US',
     type: 'website',
     images: [
       {
         url: ogImage,
         width: 1200,
         height: 630,
-        alt: 'Agenter Group AI Frontdesk Maja',
+        alt: 'Maja AI Front Desk by Agenter Group',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AI Chat för företag | Maja AI Chat Frontdesk',
+    title: 'AI Front Desk for Businesses | Maja by Agenter Group',
     description:
-      'Maja AI chattbot svarar direkt, bokar möten och kvalificerar fler leads i chatten.',
+      'Maja answers instantly, qualifies leads, and books meetings for your team 24/7.',
     images: [ogImage],
   },
   robots: {
@@ -104,7 +104,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="sv" className="scroll-smooth" data-scroll-behavior="smooth" suppressHydrationWarning>
+    <html lang="en" className="scroll-smooth" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
         <StructuredData />
       </head>

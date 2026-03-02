@@ -16,7 +16,7 @@ const posts = [...indexableBlogPosts]
     slug: post.slug,
     category: post.category,
     excerpt: post.excerpt,
-    date: new Date(post.published).toLocaleDateString('sv-SE', {
+    date: new Date(post.published).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'short',
       day: 'numeric',
@@ -41,13 +41,13 @@ export default function BlogIndexClient() {
               className="max-w-4xl"
             >
               <span className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-medium bg-[#FF5D00]/10 text-[#FF5D00] rounded-full border border-[#FF5D00]/20 mb-6 uppercase tracking-widest">
-                Kunskapsbank
+                Knowledge Hub
               </span>
               <h1 className="text-5xl md:text-8xl font-bold mb-6 tracking-tighter">
-                Våra <span className="text-[#FF5D00]">Insikter.</span>
+                Our <span className="text-[#FF5D00]">Insights.</span>
               </h1>
               <p className="text-xl text-white/60 max-w-2xl leading-relaxed">
-                Håll dig uppdaterad om framtidens kundservice, AI-automation och hur du skalar ditt företag med smart teknik.
+                Stay ahead with practical insights on AI customer operations, automation strategy, and scalable growth systems.
               </p>
             </motion.div>
           </div>
@@ -77,13 +77,13 @@ export default function BlogIndexClient() {
                     </div>
 
                     <h2 className="text-2xl font-bold text-white mb-4 group-hover:text-[#FF5D00] transition-colors leading-snug">
-                      <Link href={`/blogg/${post.slug}`}>{post.title}</Link>
+                      <Link href={`/blog/${post.slug}`}>{post.title}</Link>
                     </h2>
 
                     <p className="text-white/50 mb-8 flex-grow leading-relaxed">{post.excerpt}</p>
 
-                    <Link href={`/blogg/${post.slug}`} className="inline-flex items-center gap-2 text-white font-bold group/link">
-                      Läs mer
+                    <Link href={`/blog/${post.slug}`} className="inline-flex items-center gap-2 text-white font-bold group/link">
+                      Read article
                       <ArrowRight size={18} className="transform group-hover/link:translate-x-1 transition-transform text-[#FF5D00]" />
                     </Link>
                   </div>
@@ -94,7 +94,6 @@ export default function BlogIndexClient() {
         </section>
 
         <section id="booking-cta" className="py-24 md:py-32 bg-black relative overflow-hidden border-t border-white/5">
-          {/* Viewport Detection for Popup */}
           <motion.div
             className="absolute inset-0 pointer-events-none"
             onViewportEnter={() => !shouldReduceMotion && setShowPopup(true)}
@@ -105,19 +104,16 @@ export default function BlogIndexClient() {
           <div className="absolute inset-0 bg-[#FF5D00]/5 opacity-20" />
           <div className="container relative px-4 mx-auto text-center max-w-4xl">
             <h2 className="text-5xl md:text-7xl font-bold text-white mb-8 tracking-tighter">
-              Redo för <span className="text-[#FF5D00]">AI-revolutionen?</span>
+              Ready for your <span className="text-[#FF5D00]">AI growth plan?</span>
             </h2>
-            <p className="text-xl text-white/60">
-              Tryck på vår widget nere i hörnet så hjälper Maja dig att boka in ett möte med oss.
-            </p>
+            <p className="text-xl text-white/60">Open the widget in the corner and Maja will help you book a strategy call with our team.</p>
           </div>
 
-          {/* Contextual Popup */}
           {!shouldReduceMotion && (
             <motion.div
               initial={{ opacity: 0, y: 20, scale: 0.9 }}
               animate={showPopup ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 20, scale: 0.9 }}
-              transition={{ type: "spring", stiffness: 200, damping: 20 }}
+              transition={{ type: 'spring', stiffness: 200, damping: 20 }}
               className={`fixed bottom-24 right-4 md:right-8 z-50 cursor-pointer ${showPopup ? 'pointer-events-auto' : 'pointer-events-none'}`}
               onClick={openMajaWidget}
             >
@@ -126,8 +122,8 @@ export default function BlogIndexClient() {
                   <ArrowDownRight className="w-8 h-8 text-[#FF5D00] animate-bounce" strokeWidth={2.5} />
                 </div>
                 <div className="flex flex-col">
-                  <span className="font-bold text-lg leading-tight">Prata med Maja här!</span>
-                  <span className="text-xs text-black/60 font-medium">Vi svarar direkt</span>
+                  <span className="font-bold text-lg leading-tight">Talk to Maja here!</span>
+                  <span className="text-xs text-black/60 font-medium">We answer instantly</span>
                 </div>
                 <div className="relative flex h-3 w-3">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00C455] opacity-75"></span>
