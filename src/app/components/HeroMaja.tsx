@@ -85,6 +85,15 @@ export default function HeroMaja({ startAnimation }: HeroMajaProps) {
           </a>
         </motion.div>
 
+        <motion.p
+          initial={{ opacity: 0, y: 30 }}
+          animate={startAnimation ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.8, delay: 0.7, ease: 'easeOut' }}
+          className="mt-6 text-sm text-white/50 font-medium"
+        >
+          7-day free trial &bull; Change or cancel anytime
+        </motion.p>
+
 
       </div>
     </section>

@@ -5,30 +5,14 @@ import Link from 'next/link'
 
 const tiers = [
   {
-    name: 'Maja Free',
-    price: '$0',
-    period: '/mo',
-    description: 'Free contact capture widget for your website. No AI included.',
-    features: [
-      { name: 'Widget contact form', included: true },
-      { name: 'Automatic lead capture', included: true },
-      { name: '1 user', included: true },
-      { name: 'AI chat', included: false },
-      { name: 'Cases', included: false },
-      { name: 'Team members', included: false },
-    ],
-    highlight: false,
-    cta: 'Choose Maja Free',
-    href: 'https://dashboard.agentergroup.com/auth/signup?plan=free',
-  },
-  {
     name: 'Maja Start',
     price: '$49',
-    period: '/mo',
-    description: 'For smaller teams that want to automate common customer questions.',
+    period: '/month',
+    description: '7-day free trial. For smaller teams that want to automate common customer questions.',
     features: [
-      { name: '200 AI conversations/month', included: true },
-      { name: '2 users', included: true },
+      { name: '200 AI calls/month', included: true },
+      { name: 'Lead capture', included: true },
+      { name: 'Tickets', included: true },
       { name: 'AI chat in widget', included: true },
       { name: 'External integrations', included: false },
     ],
@@ -39,11 +23,12 @@ const tiers = [
   {
     name: 'Maja Pro',
     price: '$99',
-    period: '/mo',
-    description: 'For growing teams with higher conversation volume and faster support needs.',
+    period: '/month',
+    description: '7-day free trial. For growing teams with higher volume and faster support.',
     features: [
-      { name: '600 AI conversations/month', included: true },
-      { name: '5 users', included: true },
+      { name: '600 AI calls/month', included: true },
+      { name: 'Lead capture', included: true },
+      { name: 'Tickets', included: true },
       { name: 'AI chat in widget', included: true },
       { name: 'Priority support', included: true },
       { name: 'External integrations', included: true },
@@ -56,17 +41,17 @@ const tiers = [
     name: 'Maja Scale',
     price: 'Custom',
     period: '',
-    description: 'For larger organizations with high volume and enterprise-grade requirements.',
+    description: 'For companies with larger volume and reliable operation at scale.',
     features: [
-      { name: '2,000 AI conversations/month', included: true },
-      { name: '15 users', included: true },
+      { name: '2,000 AI calls/month', included: true },
+      { name: 'Lead capture', included: true },
+      { name: 'Tickets', included: true },
       { name: 'Priority support', included: true },
       { name: 'External integrations', included: true },
       { name: 'Sales-led onboarding', included: true },
-      { name: 'Custom website included', included: true },
     ],
     highlight: false,
-    cta: 'Contact sales',
+    cta: 'Contact us',
     href: null,
     footerText: 'Use Maja to book a meeting',
   },
@@ -86,7 +71,7 @@ export default function PricingTiers() {
           <p className="text-white/60 text-lg max-w-2xl mx-auto">Pick what fits your team today. Upgrade or downgrade anytime.</p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid md:grid-cols-3 max-w-5xl mx-auto gap-6 lg:gap-8">
           {tiers.map((tier, index) => (
             <motion.div
               key={tier.name}
